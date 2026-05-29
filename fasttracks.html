@@ -7,7 +7,7 @@
   <title>Fasttracks Car Care | India's Biggest Car Modification Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── RESET & BASE ─────────────────────────────────────────────────── */
@@ -17,13 +17,13 @@
       --black:   #0A0A0A;
       --black2:  #111111;
       --black3:  #181818;
-      --red:     #E8000D;
-      --red-dim: #a00009;
+      --red:     #842E36;
+      --red-dim: #5a1f25;
       --silver:  #C0C0C0;
       --white:   #F5F5F5;
       --gray:    #888888;
       --bebas:   'Bebas Neue', cursive;
-      --inter:   'Inter', sans-serif;
+      --inter:   'Space Grotesk', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -133,10 +133,10 @@
       border-color: var(--red);
     }
     .btn-red:hover {
-      background: #ff1a24;
-      border-color: #ff1a24;
+      background: #9e3840;
+      border-color: #9e3840;
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(232,0,13,0.45);
+      box-shadow: 0 8px 30px rgba(132,46,54,0.45);
     }
 
     .btn-outline {
@@ -242,7 +242,7 @@
       letter-spacing: 1.5px !important;
     }
     .nav-cta::after { display: none !important; }
-    .nav-cta:hover { background: #ff1a24 !important; }
+    .nav-cta:hover { background: #9e3840 !important; }
 
     /* Hamburger */
     .hamburger {
@@ -298,74 +298,14 @@
       background: var(--black);
     }
 
-    /* Speed streak canvas background */
-    .hero-streaks {
+    /* Lamborghini airflow canvas */
+    .hero-canvas {
       position: absolute;
       inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .streak {
-      position: absolute;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--red), transparent);
-      opacity: 0;
-      animation: streak-move 3s linear infinite;
-    }
-    .streak:nth-child(1)  { top: 20%; width: 60%;  left: -60%; animation-delay: 0s;    animation-duration: 2.2s; opacity: 0.6; }
-    .streak:nth-child(2)  { top: 35%; width: 40%;  left: -40%; animation-delay: 0.4s;  animation-duration: 1.8s; opacity: 0.4; }
-    .streak:nth-child(3)  { top: 50%; width: 80%;  left: -80%; animation-delay: 0.8s;  animation-duration: 2.5s; opacity: 0.7; height: 2px; }
-    .streak:nth-child(4)  { top: 65%; width: 50%;  left: -50%; animation-delay: 1.2s;  animation-duration: 2.0s; opacity: 0.5; }
-    .streak:nth-child(5)  { top: 78%; width: 70%;  left: -70%; animation-delay: 0.2s;  animation-duration: 2.8s; opacity: 0.3; }
-    .streak:nth-child(6)  { top: 42%; width: 90%;  left: -90%; animation-delay: 1.6s;  animation-duration: 1.6s; opacity: 0.8; height: 2px; }
-    .streak:nth-child(7)  { top: 58%; width: 35%;  left: -35%; animation-delay: 2.0s;  animation-duration: 2.2s; opacity: 0.4; }
-    .streak:nth-child(8)  { top: 88%; width: 55%;  left: -55%; animation-delay: 0.6s;  animation-duration: 2.0s; opacity: 0.5; }
-    .streak:nth-child(9)  { top: 12%; width: 45%;  left: -45%; animation-delay: 1.0s;  animation-duration: 3.0s; opacity: 0.3; }
-    .streak:nth-child(10) { top: 70%; width: 65%;  left: -65%; animation-delay: 1.8s;  animation-duration: 1.9s; opacity: 0.6; }
-
-    @keyframes streak-move {
-      0%   { transform: translateX(0);      opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateX(200vw);  opacity: 0; }
-    }
-
-    /* Diagonal red glow line through hero */
-    .hero-glow-line {
-      position: absolute;
-      top: 50%; left: 0;
       width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, var(--red) 20%, rgba(232,0,13,0.6) 50%, var(--red) 80%, transparent 100%);
-      transform: rotate(-4deg) translateY(-50%);
-      filter: blur(1px);
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.3; filter: blur(1px); }
-      50%       { opacity: 0.8; filter: blur(0px) drop-shadow(0 0 8px var(--red)); }
-    }
-
-    /* Particle dots */
-    .hero-particles {
-      position: absolute;
-      inset: 0;
+      height: 100%;
       pointer-events: none;
-    }
-    .particle {
-      position: absolute;
-      width: 2px; height: 2px;
-      background: var(--red);
-      border-radius: 50%;
-      animation: particleDrift linear infinite;
-      opacity: 0;
-    }
-
-    @keyframes particleDrift {
-      0%   { transform: translate(0, 0) scale(0); opacity: 0; }
-      20%  { opacity: 1; }
-      80%  { opacity: 0.6; }
-      100% { transform: translate(var(--dx), var(--dy)) scale(1.5); opacity: 0; }
+      display: block;
     }
 
     /* Hero content */
@@ -402,7 +342,7 @@
       width: 100%;
       height: auto;
       filter: invert(1) hue-rotate(180deg) brightness(0.58) saturate(2.2) contrast(1.1)
-              drop-shadow(4px 6px 0 rgba(60,0,0,0.8)) drop-shadow(0 0 50px rgba(180,0,20,0.4));
+              drop-shadow(4px 6px 0 rgba(60,0,0,0.8)) drop-shadow(0 0 50px rgba(132,46,54,0.4));
     }
 
     .hero-sub {
@@ -556,7 +496,7 @@
     }
     .stat-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(232,0,13,0.15);
+      box-shadow: 0 12px 40px rgba(132,46,54,0.15);
     }
 
     .stat-number {
@@ -618,10 +558,10 @@
     }
     .service-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(232,0,13,0.18);
+      box-shadow: 0 20px 60px rgba(132,46,54,0.18);
       border-color: var(--red);
     }
-    .service-card:hover::before { border-color: rgba(232,0,13,0.3); }
+    .service-card:hover::before { border-color: rgba(132,46,54,0.3); }
 
     .service-icon {
       font-size: 36px;
@@ -677,11 +617,11 @@
     }
     #recliners::before {
       left: 0;
-      background: linear-gradient(90deg, rgba(232,0,13,0.12), transparent);
+      background: linear-gradient(90deg, rgba(132,46,54,0.12), transparent);
     }
     #recliners::after {
       right: 0;
-      background: linear-gradient(-90deg, rgba(232,0,13,0.12), transparent);
+      background: linear-gradient(-90deg, rgba(132,46,54,0.12), transparent);
     }
 
     .recliners-inner {
@@ -696,7 +636,7 @@
       color: var(--red);
       letter-spacing: 4px;
       line-height: 0.9;
-      text-shadow: 0 0 80px rgba(232,0,13,0.3);
+      text-shadow: 0 0 80px rgba(132,46,54,0.3);
     }
 
     .recliners-sub {
@@ -747,11 +687,11 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--red);
-      border: 1px solid rgba(232,0,13,0.35);
+      border: 1px solid rgba(132,46,54,0.35);
       border-radius: 3px;
       padding: 10px 20px;
       margin-bottom: 36px;
-      background: rgba(232,0,13,0.06);
+      background: rgba(132,46,54,0.06);
     }
     .recliners-note::before {
       content: '⚡';
@@ -769,19 +709,19 @@
       align-items: center;
       justify-content: center;
       font-size: 72px;
-      box-shadow: 0 0 60px rgba(232,0,13,0.25), inset 0 0 40px rgba(232,0,13,0.05);
+      box-shadow: 0 0 60px rgba(132,46,54,0.25), inset 0 0 40px rgba(132,46,54,0.05);
       animation: seatPulse 4s ease-in-out infinite;
     }
     @keyframes seatPulse {
-      0%, 100% { box-shadow: 0 0 60px rgba(232,0,13,0.25), inset 0 0 40px rgba(232,0,13,0.05); }
-      50%       { box-shadow: 0 0 100px rgba(232,0,13,0.45), inset 0 0 60px rgba(232,0,13,0.1); }
+      0%, 100% { box-shadow: 0 0 60px rgba(132,46,54,0.25), inset 0 0 40px rgba(132,46,54,0.05); }
+      50%       { box-shadow: 0 0 100px rgba(132,46,54,0.45), inset 0 0 60px rgba(132,46,54,0.1); }
     }
 
     /* ─── FEATURED CAROUSEL ─────────────────────────────────────────── */
     .feat-section {
       margin-top: 72px;
       padding-top: 56px;
-      border-top: 1px solid rgba(232,0,13,0.18);
+      border-top: 1px solid rgba(132,46,54,0.18);
       position: relative;
     }
 
@@ -855,7 +795,7 @@
     }
     .feat-card:hover {
       border-color: var(--red);
-      box-shadow: 0 12px 40px rgba(232,0,13,0.15);
+      box-shadow: 0 12px 40px rgba(132,46,54,0.15);
       transform: translateY(-4px);
     }
 
@@ -1012,7 +952,7 @@
       justify-content: center;
       margin: 0 auto 20px;
       position: relative;
-      box-shadow: 0 0 30px rgba(232,0,13,0.3);
+      box-shadow: 0 0 30px rgba(132,46,54,0.3);
     }
 
     .step-title {
@@ -1244,6 +1184,59 @@
       .founder-links { justify-content: center; }
     }
 
+    /* ─── LIGHT MODE ───────────────────────────────────────────────────── */
+    body.light-mode {
+      --black:  #F2EFEC;
+      --black2: #E8E4E0;
+      --black3: #DDD9D5;
+      --silver: #505050;
+      --white:  #181818;
+      --gray:   #707070;
+      background: var(--black);
+      color: var(--white);
+    }
+    body.light-mode #navbar.scrolled {
+      background: rgba(242,239,236,0.97);
+      border-bottom-color: var(--red);
+    }
+    body.light-mode .mobile-nav {
+      background: rgba(242,239,236,0.98);
+    }
+    body.light-mode #home { background: var(--black); }
+    body.light-mode .ft-logo-img {
+      filter: none;
+    }
+    body.light-mode .hero-logo .ft-logo-img {
+      filter: none;
+      mix-blend-mode: multiply;
+    }
+    body.light-mode .service-card,
+    body.light-mode .stat-card,
+    body.light-mode .recliner-card,
+    body.light-mode .founder-card {
+      border-color: #ccc;
+    }
+    body.light-mode ::selection { background: var(--red); color: #fff; }
+    body.light-mode ::-webkit-scrollbar-track { background: var(--black); }
+
+    /* ─── THEME TOGGLE BUTTON ─────────────────────────────────────────── */
+    .theme-toggle {
+      width: 34px; height: 34px;
+      border: none; background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--silver);
+      transition: color 0.3s, background 0.3s;
+      border-radius: 50%;
+      padding: 0; flex-shrink: 0;
+    }
+    .theme-toggle:hover { color: var(--white); }
+    .theme-toggle svg { width: 17px; height: 17px; }
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+    body.light-mode .icon-sun  { display: block; }
+    body.light-mode .icon-moon { display: none; }
+
     .footer-logo {
       margin: 0 auto 4px;
     }
@@ -1416,8 +1409,14 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://wa.me/917352525252" target="_blank" rel="noopener" class="nav-cta">Book Now</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMobile()">
-    <span></span><span></span><span></span>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
@@ -1425,25 +1424,8 @@
      SECTION 1 — HERO
 ════════════════════════════════════════════════════════════════════════ -->
 <section id="home">
-  <!-- Speed streaks background -->
-  <div class="hero-streaks" aria-hidden="true">
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-    <div class="streak"></div>
-  </div>
-
-  <!-- Glow line -->
-  <div class="hero-glow-line" aria-hidden="true"></div>
-
-  <!-- Particles -->
-  <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+  <!-- Lamborghini airflow canvas -->
+  <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
 
   <!-- Content -->
   <div class="hero-content">
@@ -1634,7 +1616,7 @@
       </div>
 
       <!-- YOU NAME IT -->
-      <div class="service-card service-card-wild reveal reveal-delay-1" style="grid-column: 1 / -1; background: linear-gradient(135deg, #130003 0%, #1a0004 40%, #0e0e0e 100%); border-top: 3px solid var(--red); border-left: 1px solid rgba(232,0,13,0.3); border-right: 1px solid rgba(232,0,13,0.3); border-bottom: 1px solid rgba(232,0,13,0.15); text-align: center; padding: 52px 40px;">
+      <div class="service-card service-card-wild reveal reveal-delay-1" style="grid-column: 1 / -1; background: linear-gradient(135deg, #130003 0%, #1a0004 40%, #0e0e0e 100%); border-top: 3px solid var(--red); border-left: 1px solid rgba(132,46,54,0.3); border-right: 1px solid rgba(132,46,54,0.3); border-bottom: 1px solid rgba(132,46,54,0.15); text-align: center; padding: 52px 40px;">
         <span class="service-icon" style="font-size:48px;">⚡</span>
         <div class="service-name" style="font-family:'Bebas Neue',cursive; font-size:clamp(28px,4vw,48px); letter-spacing:3px; color:var(--white); margin-bottom:16px;">
           You Name It — <span style="color:var(--red);">We Do It.</span>
@@ -1655,7 +1637,7 @@
           <span style="border:1px solid #333; color:var(--gray); padding:7px 18px; border-radius:100px; font-size:12px; letter-spacing:1px;">Spoilers & Aero Kits</span>
           <span style="border:1px solid #333; color:var(--gray); padding:7px 18px; border-radius:100px; font-size:12px; letter-spacing:1px;">Ceramic Coating</span>
           <span style="border:1px solid #333; color:var(--gray); padding:7px 18px; border-radius:100px; font-size:12px; letter-spacing:1px;">Dashcam & Parking Sensors</span>
-          <span style="border:1px solid rgba(232,0,13,0.5); color:var(--red); padding:7px 18px; border-radius:100px; font-size:12px; letter-spacing:1px; font-weight:700;">+ Much More</span>
+          <span style="border:1px solid rgba(132,46,54,0.5); color:var(--red); padding:7px 18px; border-radius:100px; font-size:12px; letter-spacing:1px; font-weight:700;">+ Much More</span>
         </div>
         <a href="https://wa.me/917352525252?text=Hi%2C%20I%20have%20a%20custom%20modification%20idea%20for%20my%20car" target="_blank" rel="noopener" class="btn btn-red" style="font-size:14px; padding:16px 44px; display:inline-flex;">
           Tell Us Your Idea →
@@ -1704,7 +1686,7 @@
         <span class="car-badge">Force Traveller</span>
         <span class="car-badge">Tempo Traveller</span>
         <span class="car-badge">Mini Buses</span>
-        <span class="car-badge" style="background:rgba(232,0,13,0.15); border-color:var(--red); color:var(--white); font-weight:700;">+ Any Vehicle on Request</span>
+        <span class="car-badge" style="background:rgba(132,46,54,0.15); border-color:var(--red); color:var(--white); font-weight:700;">+ Any Vehicle on Request</span>
       </div>
 
       <p class="recliners-note reveal">
@@ -1992,24 +1974,6 @@
      JAVASCRIPT
 ════════════════════════════════════════════════════════════════════════ -->
 <script>
-  /* ── PARTICLES ─────────────────────────────────────────────────────── */
-  (function spawnParticles() {
-    const container = document.getElementById('heroParticles');
-    const count = 30;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      const dx = (Math.random() - 0.5) * 300 + 'px';
-      const dy = (Math.random() - 0.5) * 300 + 'px';
-      const dur = (Math.random() * 4 + 3) + 's';
-      const delay = (Math.random() * 6) + 's';
-      p.style.cssText = `left:${x}%;top:${y}%;--dx:${dx};--dy:${dy};animation-duration:${dur};animation-delay:${delay};`;
-      container.appendChild(p);
-    }
-  })();
-
   /* ── STICKY NAV ────────────────────────────────────────────────────── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -2261,6 +2225,247 @@
     buildDots();
     updateArrows();
     resetAuto();
+  })();
+
+  // ─── THEME TOGGLE ────────────────────────────────────────────────────────
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('ft-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+  }
+  if (localStorage.getItem('ft-theme') === 'light') {
+    document.body.classList.add('light-mode');
+  }
+
+  // ─── HERO LAMBO AIRFLOW CANVAS ───────────────────────────────────────────
+  (function() {
+    'use strict';
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const M = '132,46,54';
+
+    let W, H, sc, ox, oy;
+    const CW = 1200, GROUND = 420;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
+      H = canvas.height = canvas.offsetHeight || window.innerHeight;
+      sc = Math.min(W / CW, H / 480) * 0.80;
+      ox = (W - CW * sc) / 2;
+      oy = (H - 480 * sc) / 2 + H * 0.05;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const px = x => ox + x * sc;
+    const py = y => oy + y * sc;
+    const ps = n => n * sc;
+
+    function lerp(a, b, t) { return a + (b - a) * Math.max(0, Math.min(1, t)); }
+
+    // Car outline Y in car-space at a given car-space X
+    function carTopY(carX) {
+      if (carX < 100)  return GROUND;
+      if (carX < 162)  return lerp(378, 302, (carX-100)/62);
+      if (carX < 392)  return lerp(302, 228, (carX-162)/230);
+      if (carX < 480)  return lerp(228, 204, (carX-392)/88);
+      if (carX < 640)  return lerp(204, 200, (carX-480)/160);
+      if (carX < 702)  return lerp(200, 208, (carX-640)/62);
+      if (carX < 790)  return lerp(208, 250, (carX-702)/88);
+      if (carX < 978)  return lerp(250, 352, (carX-790)/188);
+      if (carX < 1078) return lerp(352, 418, (carX-978)/100);
+      return GROUND;
+    }
+
+    // Bounds in screen-space at a given screen-X
+    function carBoundsAt(sx) {
+      const cx1 = px(100), cx2 = px(1078);
+      if (sx < cx1 || sx > cx2) return null;
+      const carX = 100 + ((sx - cx1) / (cx2 - cx1)) * 978;
+      return { top: py(carTopY(carX)), bot: py(GROUND) };
+    }
+
+    // ── Draw car sketch ──────────────────────────────────────────────────
+    let carAlpha = 0;
+
+    function drawCar(alpha) {
+      if (alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = `rgba(${M},1)`;
+      ctx.lineWidth = ps(1.3);
+      ctx.lineJoin = 'round';
+      ctx.lineCap  = 'round';
+      ctx.shadowColor = `rgb(${M})`;
+      ctx.shadowBlur  = ps(10);
+
+      // Main body silhouette
+      ctx.beginPath();
+      ctx.moveTo(px(100), py(GROUND));
+      ctx.lineTo(px(100), py(378));
+      ctx.bezierCurveTo(px(100),py(348), px(120),py(322), px(162),py(302));
+      ctx.bezierCurveTo(px(215),py(278), px(305),py(250), px(392),py(228));
+      ctx.bezierCurveTo(px(430),py(216), px(458),py(208), px(480),py(204));
+      ctx.bezierCurveTo(px(518),py(199), px(560),py(197), px(605),py(198));
+      ctx.bezierCurveTo(px(642),py(199), px(674),py(201), px(702),py(208));
+      ctx.bezierCurveTo(px(730),py(216), px(760),py(232), px(790),py(250));
+      ctx.bezierCurveTo(px(842),py(272), px(910),py(308), px(978),py(352));
+      ctx.bezierCurveTo(px(1020),py(377), px(1056),py(399), px(1075),py(416));
+      ctx.lineTo(px(1078), py(GROUND));
+      ctx.lineTo(px(100),  py(GROUND));
+      ctx.stroke();
+
+      // Windshield
+      ctx.lineWidth = ps(0.95);
+      ctx.beginPath();
+      ctx.moveTo(px(392), py(228));
+      ctx.bezierCurveTo(px(412),py(220), px(446),py(208), px(480),py(204));
+      ctx.bezierCurveTo(px(464),py(252), px(447),py(272), px(430),py(280));
+      ctx.bezierCurveTo(px(413),py(286), px(398),py(262), px(392),py(228));
+      ctx.stroke();
+
+      // Side + rear glass
+      ctx.beginPath();
+      ctx.moveTo(px(480), py(204));
+      ctx.bezierCurveTo(px(530),py(200), px(582),py(198), px(642),py(200));
+      ctx.bezierCurveTo(px(674),py(201), px(704),py(208), px(738),py(224));
+      ctx.bezierCurveTo(px(716),py(256), px(690),py(274), px(658),py(280));
+      ctx.bezierCurveTo(px(608),py(274), px(536),py(272), px(472),py(270));
+      ctx.closePath();
+      ctx.stroke();
+
+      // Door seam (dashed)
+      ctx.setLineDash([ps(3), ps(8)]);
+      ctx.lineWidth = ps(0.65);
+      ctx.beginPath();
+      ctx.moveTo(px(552), py(272));
+      ctx.lineTo(px(552), py(GROUND));
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Front intake slats
+      ctx.lineWidth = ps(0.65);
+      for (let i = 0; i < 3; i++) {
+        const bx = 168 + i * 14;
+        ctx.beginPath();
+        ctx.moveTo(px(bx), py(316 - i*4));
+        ctx.bezierCurveTo(px(bx-4),py(334), px(bx-5),py(352), px(bx-2),py(370));
+        ctx.stroke();
+      }
+
+      // FRONT WHEEL ─────────────────────────
+      ctx.lineWidth = ps(1.3);
+      const fwx = px(285), fwy = py(GROUND);
+      ctx.beginPath(); ctx.arc(fwx, fwy, ps(60), 0, Math.PI*2); ctx.stroke();
+      ctx.lineWidth = ps(0.85);
+      ctx.beginPath(); ctx.arc(fwx, fwy, ps(38), 0, Math.PI*2); ctx.stroke();
+      ctx.lineWidth = ps(0.5);
+      for (let i = 0; i < 5; i++) {
+        const a = i/5 * Math.PI*2 + 0.3;
+        ctx.beginPath();
+        ctx.moveTo(fwx + Math.cos(a)*ps(14), fwy + Math.sin(a)*ps(14));
+        ctx.lineTo(fwx + Math.cos(a)*ps(38), fwy + Math.sin(a)*ps(38));
+        ctx.stroke();
+      }
+
+      // REAR WHEEL ──────────────────────────
+      ctx.lineWidth = ps(1.3);
+      const rwx = px(875), rwy = py(GROUND);
+      ctx.beginPath(); ctx.arc(rwx, rwy, ps(64), 0, Math.PI*2); ctx.stroke();
+      ctx.lineWidth = ps(0.85);
+      ctx.beginPath(); ctx.arc(rwx, rwy, ps(41), 0, Math.PI*2); ctx.stroke();
+      ctx.lineWidth = ps(0.5);
+      for (let i = 0; i < 5; i++) {
+        const a = i/5 * Math.PI*2 + 0.3;
+        ctx.beginPath();
+        ctx.moveTo(rwx + Math.cos(a)*ps(15), rwy + Math.sin(a)*ps(15));
+        ctx.lineTo(rwx + Math.cos(a)*ps(41), rwy + Math.sin(a)*ps(41));
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    // ── Airflow particles ────────────────────────────────────────────────
+    const N = 75;
+
+    class FlowLine {
+      constructor(idx) {
+        this.trackRatio = idx / N;
+        this.trailLen   = 30 + Math.floor(Math.random() * 30);
+        this.trail      = [];
+        this.reset(true);
+      }
+      reset(init) {
+        this.x     = init ? Math.random() * W : -15 - Math.random() * 50;
+        this.baseY = this.trackRatio * H;
+        this.y     = this.baseY;
+        this.vx    = 2.2 + Math.random() * 2.8;
+        this.vy    = 0;
+        this.alpha = 0.04 + Math.random() * 0.24;
+        this.w     = 0.3 + Math.random() * 0.85;
+        if (init) {
+          for (let i = this.trailLen; i >= 0; i--)
+            this.trail.push({ x: this.x - i * this.vx * 1.4, y: this.y });
+        } else {
+          this.trail = [];
+        }
+      }
+      update() {
+        const b = carBoundsAt(this.x);
+        if (b) {
+          const margin = 22;
+          if (this.y > b.top - 90 && this.y < b.top + margin)
+            this.vy -= ((b.top + margin - this.y) / 112) * 0.9;
+          else if (this.y > b.bot - margin && this.y < b.bot + 90)
+            this.vy += ((this.y - (b.bot - margin)) / 112) * 0.9;
+          else if (this.y >= b.top + margin && this.y <= b.bot - margin) {
+            const mid = (b.top + b.bot) / 2;
+            this.vy += (this.y < mid ? -1.8 : 1.8);
+          }
+        } else {
+          this.vy += (this.baseY - this.y) * 0.035;
+        }
+        this.vy *= 0.80;
+        this.vy  = Math.max(-3.5, Math.min(3.5, this.vy));
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > this.trailLen) this.trail.shift();
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x > W + 25) { this.reset(false); this.y = this.baseY; }
+      }
+      draw() {
+        if (this.trail.length < 3) return;
+        const t0 = this.trail[0], t1 = this.trail[this.trail.length-1];
+        ctx.beginPath();
+        ctx.moveTo(t0.x, t0.y);
+        for (let i = 1; i < this.trail.length; i++)
+          ctx.lineTo(this.trail[i].x, this.trail[i].y);
+        let grad;
+        try {
+          grad = ctx.createLinearGradient(t0.x, t0.y, t1.x, t1.y);
+          grad.addColorStop(0,   `rgba(${M},0)`);
+          grad.addColorStop(0.5, `rgba(${M},${(this.alpha*0.55).toFixed(3)})`);
+          grad.addColorStop(1,   `rgba(${M},${this.alpha.toFixed(3)})`);
+          ctx.strokeStyle = grad;
+        } catch(e) { ctx.strokeStyle = `rgba(${M},${this.alpha})`; }
+        ctx.lineWidth = this.w;
+        ctx.stroke();
+      }
+    }
+
+    const lines = Array.from({ length: N }, (_, i) => new FlowLine(i));
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      if (carAlpha < 0.40) carAlpha += 0.0025;
+      ctx.save();
+      for (const l of lines) { l.update(); l.draw(); }
+      ctx.restore();
+      drawCar(carAlpha);
+      requestAnimationFrame(frame);
+    }
+    setTimeout(frame, 350);
   })();
 </script>
 
