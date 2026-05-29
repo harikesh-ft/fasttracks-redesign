@@ -2236,7 +2236,7 @@
     document.body.classList.add('light-mode');
   }
 
-  // ─── HERO LAMBO AIRFLOW CANVAS ───────────────────────────────────────────
+  // ─── HERO LAMBORGHINI VENENO DRAW ANIMATION ─────────────────────────────
   (function() {
     'use strict';
     const canvas = document.getElementById('heroCanvas');
@@ -2244,15 +2244,16 @@
     const ctx = canvas.getContext('2d');
     const M = '132,46,54';
 
+    // ── Setup ────────────────────────────────────────────────────────────
     let W, H, sc, ox, oy;
-    const CW = 1200, GROUND = 420;
+    const CW = 1600, CH = 560, GY = 500; // Veneno design space, ground y
 
     function resize() {
       W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
       H = canvas.height = canvas.offsetHeight || window.innerHeight;
-      sc = Math.min(W / CW, H / 480) * 0.80;
+      sc = Math.min(W / CW, H / (CH + 60)) * 0.90;
       ox = (W - CW * sc) / 2;
-      oy = (H - 480 * sc) / 2 + H * 0.05;
+      oy = (H - CH * sc) / 2 + H * 0.02;
     }
     resize();
     window.addEventListener('resize', resize);
@@ -2261,211 +2262,358 @@
     const py = y => oy + y * sc;
     const ps = n => n * sc;
 
-    function lerp(a, b, t) { return a + (b - a) * Math.max(0, Math.min(1, t)); }
+    // ── Lamborghini Veneno segments (draw-in order) ──────────────────────
+    // Each entry: { fn: drawFn, lw: lineWidthFactor }
+    const segs = [
 
-    // Car outline Y in car-space at a given car-space X
-    function carTopY(carX) {
-      if (carX < 100)  return GROUND;
-      if (carX < 162)  return lerp(378, 302, (carX-100)/62);
-      if (carX < 392)  return lerp(302, 228, (carX-162)/230);
-      if (carX < 480)  return lerp(228, 204, (carX-392)/88);
-      if (carX < 640)  return lerp(204, 200, (carX-480)/160);
-      if (carX < 702)  return lerp(200, 208, (carX-640)/62);
-      if (carX < 790)  return lerp(208, 250, (carX-702)/88);
-      if (carX < 978)  return lerp(250, 352, (carX-790)/188);
-      if (carX < 1078) return lerp(352, 418, (carX-978)/100);
-      return GROUND;
-    }
-
-    // Bounds in screen-space at a given screen-X
-    function carBoundsAt(sx) {
-      const cx1 = px(100), cx2 = px(1078);
-      if (sx < cx1 || sx > cx2) return null;
-      const carX = 100 + ((sx - cx1) / (cx2 - cx1)) * 978;
-      return { top: py(carTopY(carX)), bot: py(GROUND) };
-    }
-
-    // ── Draw car sketch ──────────────────────────────────────────────────
-    let carAlpha = 0;
-
-    function drawCar(alpha) {
-      if (alpha <= 0) return;
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.strokeStyle = `rgba(${M},1)`;
-      ctx.lineWidth = ps(1.3);
-      ctx.lineJoin = 'round';
-      ctx.lineCap  = 'round';
-      ctx.shadowColor = `rgb(${M})`;
-      ctx.shadowBlur  = ps(10);
-
-      // Main body silhouette
-      ctx.beginPath();
-      ctx.moveTo(px(100), py(GROUND));
-      ctx.lineTo(px(100), py(378));
-      ctx.bezierCurveTo(px(100),py(348), px(120),py(322), px(162),py(302));
-      ctx.bezierCurveTo(px(215),py(278), px(305),py(250), px(392),py(228));
-      ctx.bezierCurveTo(px(430),py(216), px(458),py(208), px(480),py(204));
-      ctx.bezierCurveTo(px(518),py(199), px(560),py(197), px(605),py(198));
-      ctx.bezierCurveTo(px(642),py(199), px(674),py(201), px(702),py(208));
-      ctx.bezierCurveTo(px(730),py(216), px(760),py(232), px(790),py(250));
-      ctx.bezierCurveTo(px(842),py(272), px(910),py(308), px(978),py(352));
-      ctx.bezierCurveTo(px(1020),py(377), px(1056),py(399), px(1075),py(416));
-      ctx.lineTo(px(1078), py(GROUND));
-      ctx.lineTo(px(100),  py(GROUND));
-      ctx.stroke();
-
-      // Windshield
-      ctx.lineWidth = ps(0.95);
-      ctx.beginPath();
-      ctx.moveTo(px(392), py(228));
-      ctx.bezierCurveTo(px(412),py(220), px(446),py(208), px(480),py(204));
-      ctx.bezierCurveTo(px(464),py(252), px(447),py(272), px(430),py(280));
-      ctx.bezierCurveTo(px(413),py(286), px(398),py(262), px(392),py(228));
-      ctx.stroke();
-
-      // Side + rear glass
-      ctx.beginPath();
-      ctx.moveTo(px(480), py(204));
-      ctx.bezierCurveTo(px(530),py(200), px(582),py(198), px(642),py(200));
-      ctx.bezierCurveTo(px(674),py(201), px(704),py(208), px(738),py(224));
-      ctx.bezierCurveTo(px(716),py(256), px(690),py(274), px(658),py(280));
-      ctx.bezierCurveTo(px(608),py(274), px(536),py(272), px(472),py(270));
-      ctx.closePath();
-      ctx.stroke();
-
-      // Door seam (dashed)
-      ctx.setLineDash([ps(3), ps(8)]);
-      ctx.lineWidth = ps(0.65);
-      ctx.beginPath();
-      ctx.moveTo(px(552), py(272));
-      ctx.lineTo(px(552), py(GROUND));
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Front intake slats
-      ctx.lineWidth = ps(0.65);
-      for (let i = 0; i < 3; i++) {
-        const bx = 168 + i * 14;
+      // 1. MAIN BODY UPPER OUTLINE
+      { lw:1.8, fn:() => {
         ctx.beginPath();
-        ctx.moveTo(px(bx), py(316 - i*4));
-        ctx.bezierCurveTo(px(bx-4),py(334), px(bx-5),py(352), px(bx-2),py(370));
-        ctx.stroke();
-      }
+        ctx.moveTo(px(15),py(GY));
+        ctx.lineTo(px(15),py(488));
+        ctx.lineTo(px(28),py(472));
+        ctx.lineTo(px(48),py(458));
+        ctx.bezierCurveTo(px(75),py(442), px(115),py(425), px(162),py(408));
+        ctx.bezierCurveTo(px(215),py(390), px(278),py(368), px(345),py(338));
+        ctx.bezierCurveTo(px(388),py(318), px(428),py(298), px(460),py(278));
+        ctx.bezierCurveTo(px(482),py(262), px(508),py(248), px(542),py(238));
+        ctx.bezierCurveTo(px(575),py(229), px(635),py(225), px(712),py(225));
+        ctx.bezierCurveTo(px(750),py(225), px(782),py(230), px(808),py(242));
+        ctx.bezierCurveTo(px(832),py(254), px(848),py(268), px(862),py(284));
+        ctx.bezierCurveTo(px(878),py(300), px(892),py(316), px(908),py(322));
+        ctx.lineTo(px(928),py(308));
+        ctx.lineTo(px(952),py(282));
+        ctx.lineTo(px(972),py(255));
+        ctx.lineTo(px(990),py(228));
+        ctx.lineTo(px(1010),py(208));
+        ctx.lineTo(px(1032),py(196));
+        ctx.lineTo(px(1058),py(192));
+        ctx.lineTo(px(1086),py(196));
+        ctx.lineTo(px(1108),py(208));
+        ctx.lineTo(px(1122),py(226));
+        ctx.lineTo(px(1128),py(250));
+        ctx.lineTo(px(1126),py(278));
+        ctx.lineTo(px(1120),py(306));
+        ctx.bezierCurveTo(px(1135),py(325), px(1158),py(355), px(1175),py(392));
+        ctx.bezierCurveTo(px(1188),py(425), px(1194),py(460), px(1192),py(488));
+        ctx.lineTo(px(1186),py(505));
+        ctx.lineTo(px(1172),py(515));
+        ctx.lineTo(px(1148),py(520));
+        ctx.lineTo(px(1110),py(GY));
+      }},
 
-      // FRONT WHEEL ─────────────────────────
-      ctx.lineWidth = ps(1.3);
-      const fwx = px(285), fwy = py(GROUND);
-      ctx.beginPath(); ctx.arc(fwx, fwy, ps(60), 0, Math.PI*2); ctx.stroke();
-      ctx.lineWidth = ps(0.85);
-      ctx.beginPath(); ctx.arc(fwx, fwy, ps(38), 0, Math.PI*2); ctx.stroke();
-      ctx.lineWidth = ps(0.5);
-      for (let i = 0; i < 5; i++) {
-        const a = i/5 * Math.PI*2 + 0.3;
+      // 2. BOTTOM / UNDERSIDE
+      { lw:1.8, fn:() => {
         ctx.beginPath();
-        ctx.moveTo(fwx + Math.cos(a)*ps(14), fwy + Math.sin(a)*ps(14));
-        ctx.lineTo(fwx + Math.cos(a)*ps(38), fwy + Math.sin(a)*ps(38));
-        ctx.stroke();
-      }
+        // rear diffuser connection
+        ctx.moveTo(px(1110),py(GY));
+        ctx.lineTo(px(1080),py(GY));
+        // rear wheel arch gap + underfloor
+        ctx.moveTo(px(860),py(GY));
+        ctx.lineTo(px(200),py(GY));
+        // front wheel arch gap + nose
+        ctx.moveTo(px(112),py(GY));
+        ctx.lineTo(px(55),py(GY));
+        ctx.lineTo(px(30),py(498));
+        ctx.lineTo(px(15),py(488));
+        ctx.lineTo(px(15),py(GY));
+      }},
 
-      // REAR WHEEL ──────────────────────────
-      ctx.lineWidth = ps(1.3);
-      const rwx = px(875), rwy = py(GROUND);
-      ctx.beginPath(); ctx.arc(rwx, rwy, ps(64), 0, Math.PI*2); ctx.stroke();
-      ctx.lineWidth = ps(0.85);
-      ctx.beginPath(); ctx.arc(rwx, rwy, ps(41), 0, Math.PI*2); ctx.stroke();
-      ctx.lineWidth = ps(0.5);
-      for (let i = 0; i < 5; i++) {
-        const a = i/5 * Math.PI*2 + 0.3;
+      // 3. WINDSHIELD GLASS PANE
+      { lw:1.4, fn:() => {
         ctx.beginPath();
-        ctx.moveTo(rwx + Math.cos(a)*ps(15), rwy + Math.sin(a)*ps(15));
-        ctx.lineTo(rwx + Math.cos(a)*ps(41), rwy + Math.sin(a)*ps(41));
-        ctx.stroke();
-      }
+        ctx.moveTo(px(405),py(308));
+        ctx.bezierCurveTo(px(428),py(295), px(455),py(278), px(460),py(278));
+        ctx.bezierCurveTo(px(478),py(264), px(506),py(250), px(542),py(238));
+        ctx.bezierCurveTo(px(528),py(282), px(512),py(310), px(494),py(325));
+        ctx.bezierCurveTo(px(476),py(338), px(456),py(326), px(438),py(316));
+        ctx.closePath();
+      }},
 
-      ctx.restore();
-    }
+      // 4. SIDE GLASS + REAR QUARTER WINDOW
+      { lw:1.4, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(542),py(238));
+        ctx.bezierCurveTo(px(600),py(228), px(668),py(224), px(742),py(225));
+        ctx.bezierCurveTo(px(778),py(225), px(808),py(232), px(828),py(248));
+        ctx.bezierCurveTo(px(848),py(264), px(858),py(285), px(860),py(305));
+        ctx.bezierCurveTo(px(832),py(322), px(798),py(335), px(758),py(340));
+        ctx.bezierCurveTo(px(706),py(346), px(645),py(347), px(590),py(344));
+        ctx.bezierCurveTo(px(560),py(342), px(532),py(336), px(510),py(326));
+        ctx.bezierCurveTo(px(500),py(320), px(494),py(325), px(494),py(325));
+      }},
 
-    // ── Airflow particles ────────────────────────────────────────────────
-    const N = 75;
+      // 5. DOOR LINE
+      { lw:1.1, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(638),py(342));
+        ctx.bezierCurveTo(px(635),py(388), px(635),py(428), px(638),py(462));
+        ctx.moveTo(px(638),py(342));
+        ctx.bezierCurveTo(px(665),py(337), px(715),py(334), px(758),py(338));
+        ctx.bezierCurveTo(px(790),py(341), px(815),py(348), px(832),py(355));
+      }},
 
-    class FlowLine {
-      constructor(idx) {
-        this.trackRatio = idx / N;
-        this.trailLen   = 30 + Math.floor(Math.random() * 30);
-        this.trail      = [];
-        this.reset(true);
-      }
-      reset(init) {
-        this.x     = init ? Math.random() * W : -15 - Math.random() * 50;
-        this.baseY = this.trackRatio * H;
-        this.y     = this.baseY;
-        this.vx    = 2.2 + Math.random() * 2.8;
-        this.vy    = 0;
-        this.alpha = 0.04 + Math.random() * 0.24;
-        this.w     = 0.3 + Math.random() * 0.85;
-        if (init) {
-          for (let i = this.trailLen; i >= 0; i--)
-            this.trail.push({ x: this.x - i * this.vx * 1.4, y: this.y });
-        } else {
-          this.trail = [];
+      // 6. SIDE SILL / SKIRT
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(200),py(GY));
+        ctx.bezierCurveTo(px(245),py(472), px(335),py(460), px(460),py(455));
+        ctx.bezierCurveTo(px(580),py(450), px(720),py(447), px(852),py(452));
+        ctx.bezierCurveTo(px(910),py(456), px(968),py(462), px(1020),py(468));
+        ctx.bezierCurveTo(px(1058),py(472), px(1085),py(478), px(1092),py(GY));
+      }},
+
+      // 7. HOOD CENTERLINE CREASE
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(162),py(408));
+        ctx.bezierCurveTo(px(228),py(385), px(310),py(355), px(398),py(322));
+        ctx.bezierCurveTo(px(428),py(310), px(450),py(300), px(462),py(292));
+        ctx.moveTo(px(235),py(388));
+        ctx.bezierCurveTo(px(302),py(368), px(372),py(342), px(418),py(318));
+      }},
+
+      // 8. FRONT HEADLIGHT
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(55),py(462));
+        ctx.bezierCurveTo(px(70),py(452), px(98),py(445), px(132),py(442));
+        ctx.bezierCurveTo(px(118),py(456), px(92),py(464), px(68),py(468));
+        ctx.closePath();
+        // DRL line
+        ctx.moveTo(px(62),py(454));
+        ctx.bezierCurveTo(px(80),py(448), px(108),py(444), px(138),py(442));
+      }},
+
+      // 9. FRONT SPLITTER / CANARDS
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(15),py(498));
+        ctx.lineTo(px(88),py(498));
+        ctx.moveTo(px(20),py(GY));
+        ctx.lineTo(px(15),py(498));
+        // Canard
+        ctx.moveTo(px(78),py(462));
+        ctx.lineTo(px(50),py(480));
+        ctx.lineTo(px(38),py(492));
+        ctx.moveTo(px(95),py(458));
+        ctx.lineTo(px(72),py(472));
+        ctx.lineTo(px(58),py(484));
+      }},
+
+      // 10. FRONT WHEEL ARCH (top half)
+      { lw:1.8, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(308),py(GY), ps(92), Math.PI*1.05, Math.PI*2.0, false);
+      }},
+      // 10b. FRONT WHEEL ARCH (bottom shown in ground line)
+      { lw:1.8, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(308),py(GY), ps(92), 0, Math.PI*0.95, false);
+      }},
+
+      // 11. FRONT OUTER TIRE
+      { lw:1.6, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(308),py(GY), ps(83), 0, Math.PI*2);
+      }},
+
+      // 12. FRONT RIM RING
+      { lw:1.4, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(308),py(GY), ps(60), 0, Math.PI*2);
+      }},
+
+      // 13. FRONT CENTER HUB
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(308),py(GY), ps(10), 0, Math.PI*2);
+      }},
+
+      // 14. FRONT SPOKES (18 like Veneno)
+      { lw:1.0, fn:() => {
+        ctx.beginPath();
+        const cx=px(308), cy=py(GY);
+        for(let i=0;i<18;i++){
+          const a=(i/18)*Math.PI*2;
+          ctx.moveTo(cx+Math.cos(a)*ps(11),cy+Math.sin(a)*ps(11));
+          ctx.lineTo(cx+Math.cos(a)*ps(60),cy+Math.sin(a)*ps(60));
         }
-      }
-      update() {
-        const b = carBoundsAt(this.x);
-        if (b) {
-          const margin = 22;
-          if (this.y > b.top - 90 && this.y < b.top + margin)
-            this.vy -= ((b.top + margin - this.y) / 112) * 0.9;
-          else if (this.y > b.bot - margin && this.y < b.bot + 90)
-            this.vy += ((this.y - (b.bot - margin)) / 112) * 0.9;
-          else if (this.y >= b.top + margin && this.y <= b.bot - margin) {
-            const mid = (b.top + b.bot) / 2;
-            this.vy += (this.y < mid ? -1.8 : 1.8);
-          }
-        } else {
-          this.vy += (this.baseY - this.y) * 0.035;
-        }
-        this.vy *= 0.80;
-        this.vy  = Math.max(-3.5, Math.min(3.5, this.vy));
-        this.trail.push({ x: this.x, y: this.y });
-        if (this.trail.length > this.trailLen) this.trail.shift();
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x > W + 25) { this.reset(false); this.y = this.baseY; }
-      }
-      draw() {
-        if (this.trail.length < 3) return;
-        const t0 = this.trail[0], t1 = this.trail[this.trail.length-1];
-        ctx.beginPath();
-        ctx.moveTo(t0.x, t0.y);
-        for (let i = 1; i < this.trail.length; i++)
-          ctx.lineTo(this.trail[i].x, this.trail[i].y);
-        let grad;
-        try {
-          grad = ctx.createLinearGradient(t0.x, t0.y, t1.x, t1.y);
-          grad.addColorStop(0,   `rgba(${M},0)`);
-          grad.addColorStop(0.5, `rgba(${M},${(this.alpha*0.55).toFixed(3)})`);
-          grad.addColorStop(1,   `rgba(${M},${this.alpha.toFixed(3)})`);
-          ctx.strokeStyle = grad;
-        } catch(e) { ctx.strokeStyle = `rgba(${M},${this.alpha})`; }
-        ctx.lineWidth = this.w;
-        ctx.stroke();
-      }
-    }
+      }},
 
-    const lines = Array.from({ length: N }, (_, i) => new FlowLine(i));
+      // 15. REAR WHEEL ARCH (top half)
+      { lw:1.8, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(965),py(GY), ps(97), Math.PI*1.05, Math.PI*2.0, false);
+      }},
+      // 15b.
+      { lw:1.8, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(965),py(GY), ps(97), 0, Math.PI*0.95, false);
+      }},
+
+      // 16. REAR OUTER TIRE
+      { lw:1.6, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(965),py(GY), ps(87), 0, Math.PI*2);
+      }},
+
+      // 17. REAR RIM RING
+      { lw:1.4, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(965),py(GY), ps(63), 0, Math.PI*2);
+      }},
+
+      // 18. REAR CENTER HUB
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.arc(px(965),py(GY), ps(12), 0, Math.PI*2);
+      }},
+
+      // 19. REAR SPOKES (18)
+      { lw:1.0, fn:() => {
+        ctx.beginPath();
+        const cx=px(965), cy=py(GY);
+        for(let i=0;i<18;i++){
+          const a=(i/18)*Math.PI*2;
+          ctx.moveTo(cx+Math.cos(a)*ps(13),cy+Math.sin(a)*ps(13));
+          ctx.lineTo(cx+Math.cos(a)*ps(63),cy+Math.sin(a)*ps(63));
+        }
+      }},
+
+      // 20. REAR WING TOP SURFACE
+      { lw:1.5, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(962),py(196));
+        ctx.bezierCurveTo(px(988),py(186), px(1028),py(184), px(1068),py(186));
+        ctx.bezierCurveTo(px(1090),py(188), px(1108),py(194), px(1120),py(202));
+      }},
+
+      // 21. REAR WING UNDERSIDE
+      { lw:1.3, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(965),py(210));
+        ctx.bezierCurveTo(px(990),py(200), px(1030),py(198), px(1070),py(200));
+        ctx.bezierCurveTo(px(1092),py(202), px(1112),py(208), px(1124),py(218));
+      }},
+
+      // 22. WING LEFT ENDPLATE
+      { lw:1.3, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(948),py(300));
+        ctx.lineTo(px(952),py(258));
+        ctx.lineTo(px(960),py(218));
+        ctx.lineTo(px(968),py(196));
+        ctx.lineTo(px(982),py(192));
+        ctx.lineTo(px(982),py(208));
+        ctx.lineTo(px(975),py(258));
+        ctx.lineTo(px(972),py(300));
+        ctx.closePath();
+      }},
+
+      // 23. WING RIGHT ENDPLATE
+      { lw:1.3, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(1118),py(295));
+        ctx.lineTo(px(1122),py(255));
+        ctx.lineTo(px(1122),py(215));
+        ctx.lineTo(px(1115),py(196));
+        ctx.lineTo(px(1100),py(192));
+        ctx.lineTo(px(1100),py(208));
+        ctx.lineTo(px(1108),py(256));
+        ctx.lineTo(px(1112),py(295));
+        ctx.closePath();
+      }},
+
+      // 24. WING STRUTS
+      { lw:1.2, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(978),py(296));
+        ctx.lineTo(px(975),py(216));
+        ctx.moveTo(px(1108),py(290));
+        ctx.lineTo(px(1108),py(216));
+      }},
+
+      // 25. REAR DIFFUSER
+      { lw:1.4, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(1080),py(GY));
+        ctx.lineTo(px(1085),py(520));
+        ctx.lineTo(px(1125),py(520));
+        ctx.lineTo(px(1132),py(GY));
+        // diffuser fins
+        for(let i=0;i<6;i++){
+          const x=1086+i*8;
+          ctx.moveTo(px(x),py(GY));
+          ctx.lineTo(px(x),py(518));
+        }
+      }},
+
+      // 26. REAR BODY PANEL CREASE
+      { lw:1.1, fn:() => {
+        ctx.beginPath();
+        ctx.moveTo(px(862),py(284));
+        ctx.bezierCurveTo(px(882),py(318), px(895),py(368), px(890),py(415));
+        ctx.bezierCurveTo(px(885),py(448), px(872),py(468), px(855),py(GY));
+        // upper body crease
+        ctx.moveTo(px(345),py(338));
+        ctx.bezierCurveTo(px(470),py(322), px(605),py(318), px(738),py(325));
+        ctx.bezierCurveTo(px(802),py(330), px(848),py(340), px(895),py(350));
+      }},
+    ];
+
+    // ── Animation state machine ──────────────────────────────────────────
+    let segIdx  = 0;
+    let frameN  = 0;
+    let holdN   = 0;
+    let alpha   = 1.0;
+    let phase   = 'drawing'; // 'drawing' | 'holding' | 'fading'
+    const SEG_EVERY    = 3;   // reveal new segment every N frames
+    const HOLD_FRAMES  = 130; // frames to hold full drawing
+    const FADE_SPEED   = 0.016;
 
     function frame() {
       ctx.clearRect(0, 0, W, H);
-      if (carAlpha < 0.40) carAlpha += 0.0025;
+
+      // Draw all revealed segments
       ctx.save();
-      for (const l of lines) { l.update(); l.draw(); }
+      ctx.globalAlpha  = alpha;
+      ctx.lineJoin     = 'round';
+      ctx.lineCap      = 'round';
+      ctx.shadowColor  = `rgb(${M})`;
+      ctx.shadowBlur   = ps(4);
+
+      const drawTo = Math.min(segIdx, segs.length - 1);
+      for (let i = 0; i <= drawTo; i++) {
+        const seg = segs[i];
+        ctx.strokeStyle = `rgba(${M},0.60)`;
+        ctx.lineWidth   = ps(seg.lw);
+        seg.fn();
+        ctx.stroke();
+      }
       ctx.restore();
-      drawCar(carAlpha);
+
+      // State machine
+      frameN++;
+      if (phase === 'drawing') {
+        if (frameN % SEG_EVERY === 0) segIdx++;
+        if (segIdx >= segs.length) { phase = 'holding'; holdN = 0; }
+      } else if (phase === 'holding') {
+        holdN++;
+        if (holdN > HOLD_FRAMES) phase = 'fading';
+      } else {
+        alpha -= FADE_SPEED;
+        if (alpha <= 0) {
+          alpha  = 1.0;
+          segIdx = 0;
+          phase  = 'drawing';
+          frameN = 0;
+        }
+      }
+
       requestAnimationFrame(frame);
     }
-    setTimeout(frame, 350);
+    setTimeout(frame, 400);
   })();
 </script>
 
