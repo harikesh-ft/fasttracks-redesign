@@ -299,13 +299,73 @@
     }
 
     /* Lamborghini airflow canvas */
-    .hero-canvas {
+    /* Speed streak lines */
+    .hero-streaks {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      overflow: hidden;
       pointer-events: none;
-      display: block;
+    }
+    .streak {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      opacity: 0;
+      animation: streak-move 3s linear infinite;
+    }
+    .streak:nth-child(1)  { top: 20%; width: 60%;  left: -60%; animation-delay: 0s;    animation-duration: 2.2s; opacity: 0.6; }
+    .streak:nth-child(2)  { top: 35%; width: 40%;  left: -40%; animation-delay: 0.4s;  animation-duration: 1.8s; opacity: 0.4; }
+    .streak:nth-child(3)  { top: 50%; width: 80%;  left: -80%; animation-delay: 0.8s;  animation-duration: 2.5s; opacity: 0.7; height: 2px; }
+    .streak:nth-child(4)  { top: 65%; width: 50%;  left: -50%; animation-delay: 1.2s;  animation-duration: 2.0s; opacity: 0.5; }
+    .streak:nth-child(5)  { top: 78%; width: 70%;  left: -70%; animation-delay: 0.2s;  animation-duration: 2.8s; opacity: 0.3; }
+    .streak:nth-child(6)  { top: 42%; width: 90%;  left: -90%; animation-delay: 1.6s;  animation-duration: 1.6s; opacity: 0.8; height: 2px; }
+    .streak:nth-child(7)  { top: 58%; width: 35%;  left: -35%; animation-delay: 2.0s;  animation-duration: 2.2s; opacity: 0.4; }
+    .streak:nth-child(8)  { top: 88%; width: 55%;  left: -55%; animation-delay: 0.6s;  animation-duration: 2.0s; opacity: 0.5; }
+    .streak:nth-child(9)  { top: 12%; width: 45%;  left: -45%; animation-delay: 1.0s;  animation-duration: 3.0s; opacity: 0.3; }
+    .streak:nth-child(10) { top: 70%; width: 65%;  left: -65%; animation-delay: 1.8s;  animation-duration: 1.9s; opacity: 0.6; }
+
+    @keyframes streak-move {
+      0%   { transform: translateX(0);      opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateX(200vw);  opacity: 0; }
+    }
+
+    /* Diagonal red glow line through hero */
+    .hero-glow-line {
+      position: absolute;
+      top: 50%; left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--red) 20%, rgba(232,0,13,0.6) 50%, var(--red) 80%, transparent 100%);
+      transform: rotate(-4deg) translateY(-50%);
+      filter: blur(1px);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.3; filter: blur(1px); }
+      50%       { opacity: 0.8; filter: blur(0px) drop-shadow(0 0 8px var(--red)); }
+    }
+
+    /* Particle dots */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: particleDrift linear infinite;
+      opacity: 0;
+    }
+    @keyframes particleDrift {
+      0%   { transform: translate(0, 0) scale(0); opacity: 0; }
+      20%  { opacity: 1; }
+      80%  { opacity: 0.6; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1.5); opacity: 0; }
     }
 
     /* Hero content */
@@ -1424,8 +1484,25 @@
      SECTION 1 — HERO
 ════════════════════════════════════════════════════════════════════════ -->
 <section id="home">
-  <!-- Lamborghini airflow canvas -->
-  <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <!-- Speed streaks background -->
+  <div class="hero-streaks" aria-hidden="true">
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+    <div class="streak"></div>
+  </div>
+
+  <!-- Glow line -->
+  <div class="hero-glow-line" aria-hidden="true"></div>
+
+  <!-- Particles -->
+  <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
 
   <!-- Content -->
   <div class="hero-content">
@@ -2236,429 +2313,22 @@
     document.body.classList.add('light-mode');
   }
 
-  // ─── HERO LAMBORGHINI VENENO DRAW ANIMATION ─────────────────────────────
-  (function() {
-    'use strict';
-    const canvas = document.getElementById('heroCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const M = '232,0,13'; // site accent red
-
-    // ── Setup ────────────────────────────────────────────────────────────
-    let W, H, sc, ox, oy;
-    const CW = 1600, CH = 560, GY = 500; // Veneno design space, ground y
-
-    function resize() {
-      W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
-      H = canvas.height = canvas.offsetHeight || window.innerHeight;
-      sc = Math.min(W / CW, H / (CH + 90)) * 0.88;
-      ox = (W - CW * sc) / 2;
-      oy = (H - CH * sc) / 2 + H * 0.06;
+  /* ── PARTICLES ─────────────────────────────────────────────────────── */
+  (function spawnParticles() {
+    const container = document.getElementById('heroParticles');
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const dx = (Math.random() - 0.5) * 300 + 'px';
+      const dy = (Math.random() - 0.5) * 300 + 'px';
+      const dur = (Math.random() * 4 + 3) + 's';
+      const delay = (Math.random() * 6) + 's';
+      p.style.cssText = `left:${x}%;top:${y}%;--dx:${dx};--dy:${dy};animation-duration:${dur};animation-delay:${delay};`;
+      container.appendChild(p);
     }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const px = x => ox + x * sc;
-    const py = y => oy + y * sc;
-    const ps = n => n * sc;
-
-    // ── Lamborghini Veneno — 30 draw segments ─────────────────────────────
-    const segs = [
-
-      // 1. MAIN UPPER BODY OUTLINE (aggressive Veneno silhouette)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(22),py(GY));
-        ctx.lineTo(px(22),py(492));
-        ctx.lineTo(px(38),py(474));
-        ctx.lineTo(px(60),py(460));
-        ctx.bezierCurveTo(px(88),py(446),px(122),py(438),px(162),py(436));
-        ctx.bezierCurveTo(px(208),py(434),px(252),py(418),px(298),py(400));
-        ctx.bezierCurveTo(px(346),py(380),px(392),py(358),px(422),py(332));
-        ctx.bezierCurveTo(px(442),py(314),px(454),py(294),px(460),py(272));
-        ctx.bezierCurveTo(px(466),py(252),px(476),py(234),px(490),py(220));
-        ctx.bezierCurveTo(px(505),py(206),px(520),py(200),px(536),py(198));
-        ctx.bezierCurveTo(px(566),py(195),px(628),py(192),px(712),py(192));
-        ctx.bezierCurveTo(px(742),py(192),px(766),py(197),px(782),py(209));
-        ctx.bezierCurveTo(px(798),py(222),px(812),py(244),px(825),py(268));
-        ctx.bezierCurveTo(px(836),py(290),px(844),py(314),px(848),py(332));
-        ctx.bezierCurveTo(px(853),py(350),px(860),py(362),px(872),py(356));
-        ctx.lineTo(px(888),py(338));
-        ctx.lineTo(px(902),py(310));
-        ctx.bezierCurveTo(px(922),py(322),px(958),py(336),px(998),py(344));
-        ctx.bezierCurveTo(px(1038),py(352),px(1075),py(356),px(1108),py(364));
-        ctx.bezierCurveTo(px(1136),py(372),px(1155),py(390),px(1164),py(414));
-        ctx.bezierCurveTo(px(1173),py(438),px(1174),py(468),px(1168),py(490));
-        ctx.lineTo(px(1160),py(504));
-        ctx.lineTo(px(1144),py(514));
-        ctx.lineTo(px(1120),py(518));
-        ctx.lineTo(px(1092),py(GY));
-      }},
-
-      // 2. BOTTOM / UNDERSIDE
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(1092),py(GY));
-        ctx.lineTo(px(1068),py(GY));
-        // gap: rear wheel arch
-        ctx.moveTo(px(870),py(GY));
-        ctx.lineTo(px(222),py(GY));
-        // gap: front wheel arch
-        ctx.moveTo(px(112),py(GY));
-        ctx.lineTo(px(50),py(GY));
-        ctx.lineTo(px(36),py(493));
-        ctx.lineTo(px(22),py(492));
-      }},
-
-      // 3. WINDSHIELD PANE (closed shape)
-      { lw:1.5, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(422),py(332));
-        ctx.bezierCurveTo(px(442),py(314),px(454),py(294),px(460),py(272));
-        ctx.bezierCurveTo(px(466),py(252),px(476),py(234),px(490),py(220));
-        ctx.bezierCurveTo(px(505),py(206),px(520),py(200),px(536),py(198));
-        // Inner edge of windshield back to base
-        ctx.bezierCurveTo(px(520),py(205),px(506),py(213),px(494),py(228));
-        ctx.bezierCurveTo(px(480),py(244),px(470),py(264),px(463),py(285));
-        ctx.bezierCurveTo(px(456),py(306),px(444),py(323),px(422),py(332));
-        ctx.closePath();
-      }},
-
-      // 4. SIDE GLASS + REAR QUARTER WINDOW
-      { lw:1.5, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(536),py(198));
-        ctx.bezierCurveTo(px(566),py(195),px(628),py(192),px(712),py(192));
-        ctx.bezierCurveTo(px(742),py(192),px(766),py(197),px(782),py(209));
-        ctx.bezierCurveTo(px(798),py(222),px(812),py(244),px(825),py(268));
-        ctx.bezierCurveTo(px(836),py(290),px(844),py(314),px(848),py(332));
-        // beltline back to A-pillar
-        ctx.bezierCurveTo(px(815),py(348),px(774),py(356),px(726),py(360));
-        ctx.bezierCurveTo(px(670),py(364),px(602),py(364),px(545),py(360));
-        ctx.bezierCurveTo(px(514),py(357),px(486),py(348),px(462),py(334));
-        ctx.lineTo(px(422),py(332));
-      }},
-
-      // 5. DOOR SEAM + HEADER
-      { lw:1.2, fn:() => {
-        ctx.beginPath();
-        // vertical door seam
-        ctx.moveTo(px(655),py(360));
-        ctx.bezierCurveTo(px(652),py(400),px(650),py(440),px(652),py(470));
-        // door header
-        ctx.moveTo(px(655),py(360));
-        ctx.bezierCurveTo(px(688),py(354),px(738),py(350),px(786),py(354));
-        ctx.bezierCurveTo(px(820),py(358),px(843),py(366),px(854),py(378));
-      }},
-
-      // 6. HOOD VENTS + CREASE (Veneno has distinctive hood slats)
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        // primary crease
-        ctx.moveTo(px(162),py(436));
-        ctx.bezierCurveTo(px(232),py(414),px(315),py(388),px(400),py(355));
-        ctx.bezierCurveTo(px(430),py(342),px(450),py(326),px(458),py(308));
-        // parallel crease
-        ctx.moveTo(px(250),py(415));
-        ctx.bezierCurveTo(px(312),py(396),px(382),py(370),px(425),py(345));
-        // hood vent slats
-        ctx.moveTo(px(280),py(412)); ctx.lineTo(px(280),py(399));
-        ctx.moveTo(px(312),py(403)); ctx.lineTo(px(312),py(390));
-        ctx.moveTo(px(344),py(393)); ctx.lineTo(px(344),py(381));
-        ctx.moveTo(px(374),py(382)); ctx.lineTo(px(374),py(371));
-      }},
-
-      // 7. FRONT HEADLIGHT UNIT (sharp angular Veneno-style)
-      { lw:1.4, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(48),py(468));
-        ctx.lineTo(px(90),py(456));
-        ctx.lineTo(px(148),py(451));
-        ctx.lineTo(px(160),py(457));
-        ctx.lineTo(px(160),py(466));
-        ctx.lineTo(px(122),py(471));
-        ctx.lineTo(px(70),py(474));
-        ctx.closePath();
-        // DRL inner strip
-        ctx.moveTo(px(58),py(465));
-        ctx.lineTo(px(96),py(456));
-        ctx.lineTo(px(145),py(453));
-      }},
-
-      // 8. FRONT SPLITTER + FINS
-      { lw:1.4, fn:() => {
-        ctx.beginPath();
-        // splitter plate
-        ctx.moveTo(px(22),py(498));
-        ctx.lineTo(px(112),py(498));
-        ctx.lineTo(px(112),py(GY));
-        ctx.moveTo(px(22),py(GY));
-        ctx.lineTo(px(22),py(498));
-        // 4 fins
-        for(const fx of [37,54,72,90]) {
-          ctx.moveTo(px(fx),py(498));
-          ctx.lineTo(px(fx),py(GY));
-        }
-      }},
-
-      // 9. FRONT CANARDS
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(100),py(469));
-        ctx.bezierCurveTo(px(74),py(477),px(52),py(485),px(36),py(493));
-        ctx.moveTo(px(112),py(461));
-        ctx.bezierCurveTo(px(84),py(469),px(62),py(477),px(44),py(486));
-        ctx.moveTo(px(82),py(466));
-        ctx.lineTo(px(64),py(474));
-      }},
-
-      // 10. FRONT WHEEL ARCH (top arc)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(320),py(GY), ps(90), Math.PI*1.05, Math.PI*2.0, false);
-      }},
-      // 11. FRONT WHEEL ARCH (bottom arc)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(320),py(GY), ps(90), 0, Math.PI*0.95, false);
-      }},
-
-      // 12. FRONT TIRE
-      { lw:1.8, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(320),py(GY), ps(80), 0, Math.PI*2);
-      }},
-
-      // 13. FRONT RIM
-      { lw:1.5, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(320),py(GY), ps(58), 0, Math.PI*2);
-      }},
-
-      // 14. FRONT HUB
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(320),py(GY), ps(12), 0, Math.PI*2);
-      }},
-
-      // 15. FRONT SPOKES (20 spokes)
-      { lw:1.0, fn:() => {
-        ctx.beginPath();
-        const cx=px(320), cy=py(GY);
-        for(let i=0;i<20;i++){
-          const a=(i/20)*Math.PI*2;
-          ctx.moveTo(cx+Math.cos(a)*ps(13),cy+Math.sin(a)*ps(13));
-          ctx.lineTo(cx+Math.cos(a)*ps(58),cy+Math.sin(a)*ps(58));
-        }
-      }},
-
-      // 16. SIDE SILL / SKIRT
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(222),py(GY));
-        ctx.bezierCurveTo(px(268),py(480),px(362),py(467),px(468),py(461));
-        ctx.bezierCurveTo(px(576),py(455),px(698),py(452),px(825),py(458));
-        ctx.bezierCurveTo(px(888),py(461),px(945),py(466),px(998),py(473));
-        ctx.bezierCurveTo(px(1042),py(478),px(1065),py(484),px(1068),py(GY));
-      }},
-
-      // 17. SIDE AIR INTAKE (large angular Veneno-style duct)
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(852),py(378));
-        ctx.bezierCurveTo(px(862),py(368),px(875),py(364),px(888),py(366));
-        ctx.lineTo(px(894),py(378));
-        ctx.bezierCurveTo(px(894),py(406),px(890),py(434),px(878),py(458));
-        ctx.lineTo(px(863),py(462));
-        ctx.bezierCurveTo(px(854),py(450),px(850),py(424),px(850),py(395));
-        ctx.closePath();
-        // interior duct fins
-        ctx.moveTo(px(858),py(390)); ctx.lineTo(px(886),py(382));
-        ctx.moveTo(px(858),py(410)); ctx.lineTo(px(888),py(403));
-        ctx.moveTo(px(862),py(430)); ctx.lineTo(px(884),py(424));
-      }},
-
-      // 18. REAR WHEEL ARCH (top arc)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(975),py(GY), ps(94), Math.PI*1.05, Math.PI*2.0, false);
-      }},
-      // 19. REAR WHEEL ARCH (bottom arc)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(975),py(GY), ps(94), 0, Math.PI*0.95, false);
-      }},
-
-      // 20. REAR TIRE
-      { lw:1.8, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(975),py(GY), ps(84), 0, Math.PI*2);
-      }},
-
-      // 21. REAR RIM
-      { lw:1.5, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(975),py(GY), ps(62), 0, Math.PI*2);
-      }},
-
-      // 22. REAR HUB
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        ctx.arc(px(975),py(GY), ps(14), 0, Math.PI*2);
-      }},
-
-      // 23. REAR SPOKES (20)
-      { lw:1.0, fn:() => {
-        ctx.beginPath();
-        const cx=px(975), cy=py(GY);
-        for(let i=0;i<20;i++){
-          const a=(i/20)*Math.PI*2;
-          ctx.moveTo(cx+Math.cos(a)*ps(15),cy+Math.sin(a)*ps(15));
-          ctx.lineTo(cx+Math.cos(a)*ps(62),cy+Math.sin(a)*ps(62));
-        }
-      }},
-
-      // 24. REAR WING — MAIN PLANE (massive, elevated, closed shape)
-      { lw:2.0, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(858),py(142));
-        ctx.bezierCurveTo(px(900),py(128),px(968),py(124),px(1048),py(124));
-        ctx.bezierCurveTo(px(1102),py(124),px(1148),py(132),px(1170),py(144));
-        ctx.lineTo(px(1172),py(160));
-        ctx.bezierCurveTo(px(1148),py(150),px(1102),py(142),px(1048),py(142));
-        ctx.bezierCurveTo(px(968),py(142),px(900),py(146),px(858),py(158));
-        ctx.closePath();
-      }},
-
-      // 25. WING GURNEY FLAP (trailing edge tab)
-      { lw:1.2, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(1170),py(144)); ctx.lineTo(px(1178),py(144));
-        ctx.lineTo(px(1178),py(165)); ctx.lineTo(px(1170),py(165));
-        ctx.moveTo(px(858),py(142)); ctx.lineTo(px(850),py(142));
-        ctx.lineTo(px(850),py(162)); ctx.lineTo(px(858),py(162));
-      }},
-
-      // 26. LEFT WING ENDPLATE
-      { lw:1.4, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(845),py(310));
-        ctx.lineTo(px(848),py(252));
-        ctx.lineTo(px(850),py(195));
-        ctx.lineTo(px(855),py(162));
-        ctx.lineTo(px(858),py(142));
-        ctx.moveTo(px(858),py(158));
-        ctx.lineTo(px(872),py(158));
-        ctx.lineTo(px(875),py(308));
-        ctx.lineTo(px(845),py(310));
-      }},
-
-      // 27. RIGHT WING ENDPLATE
-      { lw:1.4, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(1162),py(305));
-        ctx.lineTo(px(1164),py(248));
-        ctx.lineTo(px(1167),py(192));
-        ctx.lineTo(px(1170),py(162));
-        ctx.lineTo(px(1170),py(144));
-        ctx.moveTo(px(1170),py(160));
-        ctx.lineTo(px(1182),py(160));
-        ctx.lineTo(px(1184),py(300));
-        ctx.lineTo(px(1162),py(305));
-      }},
-
-      // 28. WING STRUTS (twin rails each side — Veneno style)
-      { lw:1.3, fn:() => {
-        ctx.beginPath();
-        // left strut, front rail
-        ctx.moveTo(px(852),py(305));
-        ctx.bezierCurveTo(px(853),py(260),px(854),py(215),px(856),py(178));
-        ctx.lineTo(px(858),py(158));
-        // left strut, rear rail
-        ctx.moveTo(px(872),py(302));
-        ctx.bezierCurveTo(px(874),py(258),px(874),py(212),px(873),py(178));
-        ctx.lineTo(px(872),py(158));
-        // right strut, front rail
-        ctx.moveTo(px(1162),py(300));
-        ctx.bezierCurveTo(px(1162),py(255),px(1163),py(210),px(1163),py(176));
-        ctx.lineTo(px(1163),py(160));
-        // right strut, rear rail
-        ctx.moveTo(px(1175),py(295));
-        ctx.bezierCurveTo(px(1176),py(252),px(1177),py(208),px(1175),py(175));
-        ctx.lineTo(px(1174),py(160));
-      }},
-
-      // 29. REAR DIFFUSER
-      { lw:1.5, fn:() => {
-        ctx.beginPath();
-        ctx.moveTo(px(1068),py(GY));
-        ctx.bezierCurveTo(px(1072),py(510),px(1078),py(502),px(1086),py(498));
-        ctx.lineTo(px(1135),py(498));
-        ctx.bezierCurveTo(px(1142),py(503),px(1146),py(511),px(1148),py(GY));
-        ctx.moveTo(px(1092),py(GY)); ctx.lineTo(px(1092),py(498));
-        for(let i=0;i<5;i++){
-          const x=1096+i*9;
-          ctx.moveTo(px(x),py(GY)); ctx.lineTo(px(x),py(499));
-        }
-      }},
-
-      // 30. BODY CREASES + REAR DETAIL
-      { lw:1.2, fn:() => {
-        ctx.beginPath();
-        // long flank character line
-        ctx.moveTo(px(222),py(492));
-        ctx.bezierCurveTo(px(360),py(474),px(518),py(464),px(668),py(462));
-        ctx.bezierCurveTo(px(782),py(460),px(870),py(464),px(960),py(472));
-        ctx.bezierCurveTo(px(1012),py(477),px(1048),py(483),px(1062),py(490));
-        // vertical rear panel crease
-        ctx.moveTo(px(1095),py(364));
-        ctx.bezierCurveTo(px(1102),py(390),px(1105),py(422),px(1104),py(455));
-        ctx.bezierCurveTo(px(1103),py(477),px(1098),py(491),px(1092),py(498));
-        // tail light strip
-        ctx.moveTo(px(1135),py(385));
-        ctx.bezierCurveTo(px(1140),py(398),px(1142),py(416),px(1140),py(434));
-        ctx.moveTo(px(1148),py(394));
-        ctx.bezierCurveTo(px(1152),py(406),px(1154),py(422),px(1150),py(440));
-      }},
-    ];
-
-    // ── Animation state machine ──────────────────────────────────────────
-    let segIdx=0, frameN=0, holdN=0, alpha=1.0, phase='drawing';
-    const SEG_EVERY=3, HOLD_FRAMES=145, FADE_SPEED=0.014;
-
-    function frame() {
-      ctx.clearRect(0,0,W,H);
-      ctx.save();
-      ctx.globalAlpha  = alpha;
-      ctx.lineJoin     = 'round';
-      ctx.lineCap      = 'round';
-      ctx.shadowColor  = `rgba(${M},0.9)`;
-      ctx.shadowBlur   = ps(7);
-
-      const drawTo = Math.min(segIdx, segs.length-1);
-      for(let i=0; i<=drawTo; i++){
-        const seg=segs[i];
-        ctx.strokeStyle=`rgba(${M},0.82)`;
-        ctx.lineWidth=ps(seg.lw);
-        seg.fn();
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      frameN++;
-      if(phase==='drawing'){
-        if(frameN%SEG_EVERY===0) segIdx++;
-        if(segIdx>=segs.length){ phase='holding'; holdN=0; }
-      } else if(phase==='holding'){
-        holdN++;
-        if(holdN>HOLD_FRAMES) phase='fading';
-      } else {
-        alpha-=FADE_SPEED;
-        if(alpha<=0){ alpha=1.0; segIdx=0; phase='drawing'; frameN=0; }
-      }
-      requestAnimationFrame(frame);
-    }
-    setTimeout(frame,400);
   })();
 </script>
 
