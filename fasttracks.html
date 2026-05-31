@@ -1232,9 +1232,9 @@
     .founder-insta:hover, .founder-linkedin:hover { color: var(--white); }
     .founder-insta svg, .founder-linkedin svg { flex-shrink: 0; }
     @media (max-width: 600px) {
-      .founder-card { flex-direction: column; align-items: center; text-align: center; padding: 24px 20px; width: 100%; }
-      .founder-avatar { width: 100px; height: 132px; }
-      .founder-links { justify-content: center; }
+      .founder-card   { flex-direction: column; align-items: center; text-align: center; padding: 24px 20px; width: 100%; }
+      .founder-avatar { width: 120px; height: 160px; }
+      .founder-links  { justify-content: center; }
     }
 
     /* ─── LIGHT MODE ───────────────────────────────────────────────────── */
@@ -1370,47 +1370,133 @@
     }
 
     /* ════════════════════════════════════════════════════════════════════
-       RESPONSIVE
+       RESPONSIVE — full 7-breakpoint system
+       xl-desktop 1800+ | large-desktop 1400+ | desktop 1024-1399
+       tablet-land 769-1023 | tablet-port ≤768 | mobile ≤540 | xs ≤400
     ════════════════════════════════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; gap: 60px; }
-      .why-grid { grid-template-columns: 1fr; }
-      .why-item { border-right: none; border-bottom: 1px solid #1a1a1a; }
-      .why-item:last-child { border-bottom: none; }
+
+    /* ── XL / TV (1800px+) ───────────────────────────────────────────── */
+    @media (min-width: 1800px) {
+      .section-inner {
+        max-width: 1640px;
+        padding: 0 60px;
+      }
+      .hero-content  { max-width: 1680px; }
+      .hero-logo     { max-width: 1260px; }
+      .hero-eyebrow  { font-size: 16px; letter-spacing: 9px; }
+      .hero-sub      { letter-spacing: 22px; }
+      .hero-tagline  { font-size: 17px; margin-bottom: 60px; }
+
+      #about, #services, #recliners, #book, #contact { padding: 160px 0; }
+
+      .section-heading { font-size: 88px; }
+      .section-label   { font-size: 13px; letter-spacing: 5px; }
+
+      .about-text p    { font-size: 18px; line-height: 2; }
+      .stat-number     { font-size: 76px; }
+      .stat-label      { font-size: 13px; letter-spacing: 3px; }
+      .stat-card       { padding: 36px 28px; }
+
+      .services-grid { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+      .service-icon  { font-size: 44px; margin-bottom: 20px; }
+      .service-name  { font-size: 19px; }
+      .service-desc  { font-size: 14px; line-height: 1.8; }
+
+      .founder-card   { padding: 36px 40px; gap: 36px; }
+      .founder-avatar { width: 200px; min-height: 280px; }
+      .founder-name   { font-size: 28px; }
+      .founder-bio    { font-size: 16px; line-height: 2; }
+
+      .recliners-sub  { max-width: 860px; font-size: 19px; }
+      .wa-number      { font-size: 36px; }
+      .wa-big-text    { font-size: 34px; }
     }
 
+    /* ── Large Desktop (1400px – 1799px) ─────────────────────────────── */
+    @media (min-width: 1400px) and (max-width: 1799px) {
+      .section-inner { max-width: 1360px; padding: 0 40px; }
+      .hero-content  { max-width: 1400px; }
+      .hero-logo     { max-width: 1020px; }
+
+      .stat-number   { font-size: 64px; }
+      .stat-card     { padding: 32px 24px; }
+
+      .services-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+      .service-name  { font-size: 16px; }
+
+      .founder-avatar { width: 160px; min-height: 220px; }
+      .founder-name   { font-size: 24px; }
+    }
+
+    /* ── Tablet Landscape / Mid Desktop (769px – 1023px) ─────────────── */
+    @media (max-width: 1023px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid    { grid-template-columns: 1fr; gap: 56px; }
+      .why-grid      { grid-template-columns: 1fr; }
+      .why-item      { border-right: none; border-bottom: 1px solid #1a1a1a; }
+      .why-item:last-child { border-bottom: none; }
+      /* Stats go 4-across when about-grid is single column */
+      .stats-grid    { grid-template-columns: repeat(4, 1fr); }
+      .stat-number   { font-size: 48px; }
+    }
+
+    /* ── Tablet Portrait (max-width: 768px) ──────────────────────────── */
     @media (max-width: 768px) {
-      #navbar { padding: 16px 20px; }
+      #navbar        { padding: 16px 20px; }
       #navbar.scrolled { padding: 12px 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
+      .nav-links     { display: none; }
+      .hamburger     { display: flex; }
 
-      .services-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 60px; }
-      .steps-row { flex-direction: column; align-items: center; }
-      .step-arrow { transform: rotate(90deg); padding: 0; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .section-inner { padding: 0 22px; }
 
-      .hero-logo { letter-spacing: 2px; }
-      .hero-sub { letter-spacing: 6px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .contact-grid  { grid-template-columns: 1fr; gap: 48px; }
+      .steps-row     { flex-direction: column; align-items: center; }
+      .step-arrow    { transform: rotate(90deg); padding: 0; }
+      /* Stats back to 2×2 on portrait tablet */
+      .stats-grid    { grid-template-columns: 1fr 1fr; }
 
-      #about { padding: 80px 0; }
+      .hero-sub      { letter-spacing: 8px; }
+
+      #about    { padding: 80px 0; }
       #services { padding: 80px 0; }
       #recliners { padding: 80px 0; }
-      #book { padding: 80px 0; }
-      #contact { padding: 80px 0; }
-
-      .section-inner { padding: 0 20px; }
+      #book     { padding: 80px 0; }
+      #contact  { padding: 80px 0; }
 
       .car-badges { padding: 0 10px; }
     }
 
-    @media (max-width: 480px) {
-      .hero-buttons { flex-direction: column; align-items: center; }
-      .btn { width: 100%; max-width: 320px; justify-content: center; }
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .stat-number { font-size: 44px; }
+    /* ── Mobile (max-width: 540px) ───────────────────────────────────── */
+    @media (max-width: 540px) {
+      .services-grid { grid-template-columns: 1fr; gap: 14px; }
+      .stat-number   { font-size: 48px; }
+      .stats-grid    { gap: 14px; }
+      .hero-sub      { letter-spacing: 5px; font-size: clamp(14px, 4vw, 20px); }
+      .section-inner { padding: 0 18px; }
+      .service-card  { padding: 24px 22px; }
+    }
+
+    /* ── Small Mobile (max-width: 420px) ─────────────────────────────── */
+    @media (max-width: 420px) {
+      .hero-buttons  { flex-direction: column; align-items: center; }
+      .btn           { width: 100%; max-width: 300px; justify-content: center; }
+      .hero-logo     { max-width: 320px; }
+      .stat-number   { font-size: 40px; }
+      .stats-grid    { gap: 10px; }
+      .section-inner { padding: 0 16px; }
+      #navbar        { padding: 14px 16px; }
+      #navbar.scrolled { padding: 10px 16px; }
+      .founder-card  { padding: 20px 16px; gap: 16px; }
+    }
+
+    /* ── Tiny phones (max-width: 360px) ──────────────────────────────── */
+    @media (max-width: 360px) {
+      .hero-logo     { max-width: 280px; }
+      .hero-eyebrow  { font-size: 10px; letter-spacing: 3px; }
+      .hero-sub      { letter-spacing: 3px; font-size: 13px; }
+      .stat-number   { font-size: 36px; }
+      .service-card  { padding: 20px 16px; }
     }
   </style>
 </head>
