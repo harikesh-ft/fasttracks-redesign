@@ -2,11 +2,11 @@
   "routes": [
     {
       "route": "/",
-      "rewrite": "/fasttracks.html"
+      "rewrite": "/index.html"
     }
   ],
   "navigationFallback": {
-    "rewrite": "/fasttracks.html",
+    "rewrite": "/index.html",
     "exclude": ["/fasttracks_icon.png", "/fasttracks_wordmark.png"]
   },
   "globalHeaders": {
