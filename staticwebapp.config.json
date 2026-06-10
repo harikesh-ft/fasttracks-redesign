@@ -7,7 +7,7 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/fasttracks_icon.png", "/fasttracks_wordmark.png"]
+    "exclude": ["/fasttracks_icon.png", "/fasttracks_wordmark.png", "/rakesh.jpg", "/*.png", "/*.jpg", "/*.jpeg", "/*.gif", "/*.svg", "/*.ico", "/*.webp"]
   },
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",
