@@ -141,21 +141,97 @@ body.light .icon-sun{display:block}
   position:relative;display:flex;
   align-items:center;justify-content:center;
   text-align:center;
+  background:#000;
+  overflow:hidden;
 }
-.hero-bg{
-  position:absolute;inset:0;
-  background:url('maserati.jpg') center 58% / cover no-repeat;
-  will-change:transform;
+/* gold spotlight glow */
+#home::before{
+  content:'';
+  position:absolute;
+  top:-10%;left:50%;
+  transform:translateX(-50%);
+  width:900px;height:700px;
+  background:radial-gradient(ellipse,rgba(201,151,63,.18) 0%,rgba(201,151,63,.06) 35%,transparent 70%);
+  pointer-events:none;z-index:1;
 }
-.hero-overlay{
+/* diagonal speed lines */
+#home::after{
+  content:'';
   position:absolute;inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(5,5,5,.55) 0%,
-    rgba(5,5,5,.35) 35%,
-    rgba(5,5,5,.65) 70%,
-    rgba(5,5,5,1) 100%
-  );
+  background:
+    linear-gradient(135deg,transparent 49%,rgba(201,151,63,.04) 49%,rgba(201,151,63,.04) 50%,transparent 50%),
+    linear-gradient(135deg,transparent 64%,rgba(201,151,63,.03) 64%,rgba(201,151,63,.03) 65%,transparent 65%),
+    linear-gradient(-45deg,transparent 55%,rgba(232,0,13,.03) 55%,rgba(232,0,13,.03) 56%,transparent 56%);
+  pointer-events:none;z-index:1;
+}
+.hero-bg{display:none}
+.hero-overlay{display:none}
+/* ghost text */
+.hero-ghost{
+  position:absolute;
+  bottom:-24px;left:50%;
+  transform:translateX(-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,22vw,240px);
+  color:rgba(201,151,63,.055);
+  letter-spacing:12px;white-space:nowrap;
+  z-index:1;pointer-events:none;user-select:none;
+  line-height:1;
+}
+/* corner brackets */
+.hero-corner{
+  position:absolute;width:50px;height:50px;z-index:2;
+}
+.hc-tl{top:80px;left:40px;border-top:1px solid rgba(201,151,63,.5);border-left:1px solid rgba(201,151,63,.5)}
+.hc-tr{top:80px;right:40px;border-top:1px solid rgba(201,151,63,.5);border-right:1px solid rgba(201,151,63,.5)}
+.hc-bl{bottom:60px;left:40px;border-bottom:1px solid rgba(201,151,63,.5);border-left:1px solid rgba(201,151,63,.5)}
+.hc-br{bottom:60px;right:40px;border-bottom:1px solid rgba(201,151,63,.5);border-right:1px solid rgba(201,151,63,.5)}
+/* car silhouette */
+.hero-car{
+  position:absolute;bottom:60px;left:50%;
+  transform:translateX(-50%);
+  width:min(900px,90vw);z-index:1;
+  opacity:.12;pointer-events:none;
+}
+/* feature strip */
+.feat-strip{
+  background:var(--bg2);
+  border-bottom:1px solid var(--line);
+}
+.feat-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:var(--max);margin:0 auto;
+}
+.feat-item{
+  padding:28px 24px;
+  display:flex;flex-direction:column;gap:10px;
+  border-right:1px solid var(--line);
+  position:relative;
+}
+.feat-item:last-child{border-right:none}
+.feat-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s;
+}
+.feat-item:hover::after{transform:scaleX(1)}
+.feat-ico{
+  width:24px;height:24px;color:var(--gold);
+}
+.feat-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:1px;color:var(--txt);
+}
+.feat-desc{
+  font-size:11px;color:var(--dim);
+  line-height:1.6;letter-spacing:.3px;
+}
+@media(max-width:768px){
+  .feat-inner{grid-template-columns:1fr 1fr}
+  .feat-item:nth-child(2){border-right:none}
+  .feat-item:nth-child(3){border-right:1px solid var(--line)}
+  .feat-item:nth-child(3),.feat-item:nth-child(4){border-top:1px solid var(--line)}
 }
 .hero-content{
   position:relative;z-index:2;
@@ -292,49 +368,64 @@ body.light .icon-sun{display:block}
   color:var(--mute);
 }
 /* Founder */
-.founder-card{
-  border:1px solid var(--line);overflow:hidden;
-}
-.founder-img{
-  aspect-ratio:3/4;overflow:hidden;
-  position:relative;
-}
-.founder-img img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center top;
-  filter:grayscale(15%);
-  transition:transform .6s;
-}
-.founder-card:hover .founder-img img{transform:scale(1.04)}
-.founder-img-grad{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(5,5,5,.8) 0%,transparent 50%);
-}
-.founder-body{
-  padding:24px 28px 28px;
+/* about badge — replaces founder photo card */
+.about-badge{
+  height:100%;min-height:400px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(201,151,63,.2);
+  position:relative;overflow:hidden;
   background:var(--bg2);
 }
-.founder-name{
+.about-badge::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,rgba(201,151,63,.1) 0%,transparent 65%);
+}
+/* corner micro-brackets */
+.about-badge::after{
+  content:'';position:absolute;
+  top:16px;left:16px;
+  width:24px;height:24px;
+  border-top:1px solid rgba(201,151,63,.4);
+  border-left:1px solid rgba(201,151,63,.4);
+}
+.badge-inner{
+  position:relative;z-index:1;
+  text-align:center;padding:48px 40px;
+}
+.badge-est{
   font-family:'Bebas Neue',sans-serif;
-  font-size:28px;letter-spacing:2px;
-  color:var(--txt);margin-bottom:4px;
+  font-size:14px;letter-spacing:8px;
+  color:var(--gold);opacity:.6;
+  margin-bottom:0;
 }
-.founder-role{
-  font-size:9px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;
-  color:var(--red);margin-bottom:12px;
+.badge-year{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,14vw,160px);
+  line-height:.85;color:var(--txt);
+  letter-spacing:-4px;
 }
-.founder-bio{
-  font-size:12px;line-height:1.9;
-  color:var(--dim);margin-bottom:16px;
+.badge-divider{
+  display:flex;align-items:center;gap:12px;
+  justify-content:center;
+  margin:20px 0;
 }
-.founder-ig{
-  font-size:11px;font-weight:600;
-  letter-spacing:1px;color:var(--gold);
-  display:inline-flex;align-items:center;gap:6px;
-  transition:color .2s;
+.badge-divider span{
+  flex:1;max-width:80px;
+  height:1px;background:rgba(201,151,63,.35);
 }
-.founder-ig:hover{color:var(--txt)}
+.badge-divider i{
+  font-style:normal;color:var(--gold);font-size:10px;
+}
+.badge-loc{
+  font-size:11px;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dim);
+  margin-bottom:12px;
+}
+.badge-tagline{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:4px;
+  color:var(--gold);opacity:.8;
+}
 
 /* ── SERVICES ────────────────────────────────── */
 #services{
@@ -964,8 +1055,15 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
 <section id="home">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
+  <!-- ghost text -->
+  <div class="hero-ghost" aria-hidden="true">FASTTRACKS</div>
+  <!-- corner brackets -->
+  <div class="hero-corner hc-tl" aria-hidden="true"></div>
+  <div class="hero-corner hc-tr" aria-hidden="true"></div>
+  <div class="hero-corner hc-bl" aria-hidden="true"></div>
+  <div class="hero-corner hc-br" aria-hidden="true"></div>
 
-  <div class="hero-content">
+  <div class="hero-content" style="position:relative;z-index:3">
     <span class="hero-eyebrow">Jubilee Hills · Hyderabad · Est. 1999</span>
     <div class="hero-gold-bar"><span></span><i>✦</i><span></span></div>
     <div class="hero-wm">
@@ -980,11 +1078,39 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
       <a href="#services" class="btn-ghost">Explore Services</a>
     </div>
   </div>
-  <div class="hero-scroll">
+  <div class="hero-scroll" style="position:relative;z-index:3">
     <div class="hero-scroll-line"></div>
     <span class="hero-scroll-txt">Scroll</span>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════
+     FEATURE STRIP
+═══════════════════════════════════════ -->
+<div class="feat-strip">
+  <div class="feat-inner">
+    <div class="feat-item reveal">
+      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <div class="feat-title">Instant Service</div>
+      <div class="feat-desc">Walk-in welcome, no appointment needed. Your car leaves the same day.</div>
+    </div>
+    <div class="feat-item reveal reveal-delay-1">
+      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <div class="feat-title">Premium Quality</div>
+      <div class="feat-desc">OEM-grade materials, factory-level fit &amp; finish — every time.</div>
+    </div>
+    <div class="feat-item reveal reveal-delay-2">
+      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/></svg>
+      <div class="feat-title">365 Days Open</div>
+      <div class="feat-desc">We work every single day — no holidays, no exceptions.</div>
+    </div>
+    <div class="feat-item reveal reveal-delay-3">
+      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <div class="feat-title">India's Largest Network</div>
+      <div class="feat-desc">Hyderabad's biggest vendor, supplier, and celebrity client base.</div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════
      ABOUT
@@ -1020,19 +1146,13 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
         </div>
       </div>
       <div class="about-right reveal reveal-delay-2">
-        <div class="founder-card">
-          <div class="founder-img">
-            <img src="rakesh.jpg" alt="Rakesh Kurapati" />
-            <div class="founder-img-grad"></div>
-          </div>
-          <div class="founder-body">
-            <div class="founder-name">Rakesh Kurapati</div>
-            <div class="founder-role">Founder &amp; CEO</div>
-            <p class="founder-bio">What started as a childhood obsession with cars became India's biggest instant car modification studio. Rakesh built Fasttracks brick by brick, car by car — driven by one belief: every vehicle deserves to be extraordinary.</p>
-            <a href="https://www.instagram.com/rakesh_knv" target="_blank" rel="noopener" class="founder-ig">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              @rakesh_knv
-            </a>
+        <div class="about-badge">
+          <div class="badge-inner">
+            <div class="badge-est">EST.</div>
+            <div class="badge-year">1999</div>
+            <div class="badge-divider"><span></span><i>◆</i><span></span></div>
+            <div class="badge-loc">Jubilee Hills · Hyderabad</div>
+            <div class="badge-tagline">PERFORMANCE &amp; PRESTIGE</div>
           </div>
         </div>
       </div>
