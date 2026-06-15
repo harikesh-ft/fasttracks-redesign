@@ -283,15 +283,62 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(-
 .ft-num{font-size:11px;color:var(--dim);transition:color .2s}
 .ft-num:hover{color:var(--gold)}
 
+/* ── GRAIN TEXTURE ──────────────────── */
+body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;opacity:.038;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── HERO EXTRAS ────────────────────── */
+.h-ghost{color:rgba(201,151,63,.07)}
+.h-stripe{position:absolute;left:clamp(16px,3.5vw,56px);top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent 8%,var(--red) 22%,var(--red) 78%,transparent 92%);z-index:2;opacity:.6}
+.h-year{position:absolute;right:clamp(16px,3.5vw,56px);bottom:48px;font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,128px);color:rgba(255,255,255,.032);letter-spacing:8px;line-height:1;z-index:2;pointer-events:none;user-select:none}
+
+/* ── STATS STRIP ────────────────────── */
+.stat-strip{background:var(--bg);border-bottom:1px solid var(--line);padding:80px 0}
+.st-row{display:flex;align-items:center;justify-content:space-around;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.st-item{text-align:center;flex:1}
+.st-n{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7.5vw,108px);line-height:1;letter-spacing:2px;color:var(--txt);display:flex;align-items:flex-start;justify-content:center;gap:4px}
+.st-u{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-top:8px}
+.st-l{font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.st-pl{font-family:'Bebas Neue',sans-serif;font-size:.52em;color:var(--red);margin-top:4px}
+.st-div{width:1px;height:72px;background:var(--line);flex-shrink:0}
+
+/* ── BRAND SHOWCASE — HORIZONTAL SCROLL ── */
+#brands{background:var(--bg2);padding:0}
+.br-intro-wrap{padding:110px 0 60px}
+.br-intro{text-align:center;margin-bottom:0}
+.br-intro .eyebrow{justify-content:center}
+.br-intro .s-sub{margin:20px auto 0;max-width:540px}
+.br-hscroll{height:calc(4 * 100vh)}
+.br-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.br-track{display:flex;width:400vw;height:100%;will-change:transform}
+.bp{position:relative;width:100vw;flex-shrink:0;height:100vh;overflow:hidden;cursor:none}
+.bp-bg{position:absolute;inset:0}
+.bp-in{position:absolute;inset:0;padding:clamp(28px,4vw,60px) clamp(28px,5vw,80px);display:flex;flex-direction:column;justify-content:space-between}
+.bp-cnt .n{font-size:clamp(56px,6vw,88px)}
+.bp-name{font-size:clamp(72px,9.5vw,144px);letter-spacing:2px;line-height:.88}
+.bp-idx{position:absolute;bottom:clamp(22px,3vw,46px);right:clamp(24px,3vw,52px);font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:rgba(255,255,255,.2)}
+.br-prog{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:10}
+.br-prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--red));width:0}
+.br-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.22);z-index:10;transition:opacity .5s;white-space:nowrap;animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.45}50%{opacity:1}}
+.br-cta-row{text-align:center;padding:48px 0;background:var(--bg2)}
+
 /* ── RESPONSIVE ─────────────────────── */
 @media(max-width:960px){
-  .br-panels{grid-template-columns:1fr}
-  .bp{height:420px}
+  .br-hscroll{height:auto}
+  .br-sticky{position:static;height:auto;overflow:visible}
+  .br-track{width:100%;flex-direction:column;transform:none !important}
+  .bp{width:100%;height:440px}
+  .bp-cnt .n{font-size:44px}
+  .bp-name{font-size:clamp(54px,8vw,86px)}
+  .br-prog,.br-hint,.bp-idx{display:none}
   .ab-grid,.rec-grid,.ct-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
   .why-grid{grid-template-columns:1fr 1fr}
   .book-steps{grid-template-columns:repeat(2,1fr)}
   .svc-hd{align-items:flex-start}
+  .st-row{flex-wrap:wrap;gap:40px}
+  .st-div{display:none}
+  .st-item{flex:0 0 45%;min-width:130px}
 }
 @media(max-width:600px){
   .nav-links,.n-cat{display:none}
@@ -303,6 +350,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(-
   .ft-top{flex-direction:column;align-items:flex-start}
   .ft-bot{flex-direction:column;align-items:flex-start}
   .h-ctas{flex-direction:column;align-items:center}
+  .h-stripe,.h-year{display:none}
+  .st-item{flex:0 0 100%}
 }
 </style>
 </head>
@@ -360,6 +409,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(-
   <canvas id="hero-c"></canvas>
   <div class="h-geo"></div>
   <div class="h-ghost">FASTTRACKS</div>
+  <div class="h-stripe"></div>
+  <div class="h-year">2009</div>
   <div class="hc hc-tl"></div><div class="hc hc-tr"></div>
   <div class="hc hc-bl"></div><div class="hc hc-br"></div>
   <div class="h-inner">
@@ -410,6 +461,32 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(-
     <div class="mq-item">Performance Exhausts<span class="mq-dot"></span></div>
   </div>
 </div>
+
+<!-- ═══ STATS STRIP ═══ -->
+<section class="stat-strip">
+  <div class="st-row">
+    <div class="st-item" data-rv="up">
+      <div class="st-n"><span data-count="50000">0</span></div>
+      <div class="st-u">Sq Ft</div>
+      <div class="st-l">Studio Space</div>
+    </div>
+    <div class="st-div"></div>
+    <div class="st-item" data-rv="up">
+      <div class="st-n"><span data-count="15">0</span><span class="st-pl">+</span></div>
+      <div class="st-l">Years Operating</div>
+    </div>
+    <div class="st-div"></div>
+    <div class="st-item" data-rv="up">
+      <div class="st-n"><span data-count="10000">0</span><span class="st-pl">+</span></div>
+      <div class="st-l">Cars Modified</div>
+    </div>
+    <div class="st-div"></div>
+    <div class="st-item" data-rv="up">
+      <div class="st-n"><span data-count="365">0</span></div>
+      <div class="st-l">Days a Year</div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ SERVICES ═══ -->
 <section id="services">
@@ -504,100 +581,112 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(-
 
 <!-- ═══ BRAND SHOWCASE ═══ -->
 <section id="brands">
-  <div class="wrap">
-    <div class="br-intro">
-      <div class="eyebrow" data-rv="up"><span class="ey-n">02</span><span class="ey-t">Browse By Marque</span></div>
-      <h2 class="s-head" data-rv="up">Select Your <span class="gold">Brand</span></h2>
-      <p class="s-sub" data-rv="up">116 premium kits across BMW, Mercedes-Benz, Audi, Range Rover and more. Browse, select, enquire — delivered on WhatsApp in seconds.</p>
+  <div class="br-intro-wrap">
+    <div class="wrap">
+      <div class="br-intro">
+        <div class="eyebrow" data-rv="up"><span class="ey-n">02</span><span class="ey-t">Browse By Marque</span></div>
+        <h2 class="s-head" data-rv="up">Select Your <span class="gold">Brand</span></h2>
+        <p class="s-sub" data-rv="up">116 premium kits across BMW, Mercedes-Benz, Audi and Range Rover. Scroll through each marque, then browse the full catalogue.</p>
+      </div>
     </div>
   </div>
-  <div class="br-panels">
+  <div class="br-hscroll" id="brHscroll">
+    <div class="br-sticky">
+      <div class="br-track" id="brTrack">
 
-    <!-- BMW -->
-    <div class="bp bp-bmw" data-rv="left">
-      <div class="bp-bg"></div>
-      <div class="bp-glow"></div>
-      <div class="bp-glare"></div>
-      <div class="bp-ov"></div>
-      <div class="bp-in">
-        <div class="bp-top">
-          <div class="bp-label">Bavarian Motor Works</div>
-          <div class="bp-cnt"><div class="n">50</div><div class="l">Body Kits</div></div>
+        <!-- BMW -->
+        <div class="bp bp-bmw">
+          <div class="bp-bg"></div>
+          <div class="bp-glow"></div>
+          <div class="bp-glare"></div>
+          <div class="bp-ov"></div>
+          <div class="bp-in">
+            <div class="bp-top">
+              <div class="bp-label">Bavarian Motor Works</div>
+              <div class="bp-cnt"><div class="n">50</div><div class="l">Body Kits</div></div>
+            </div>
+            <div class="bp-bot">
+              <div class="bp-name">BMW</div>
+              <div class="bp-type">Premium Body Kits</div>
+              <div class="bp-models">7 Series · 6 Series GT · 5 Series · 3 Series · X7 · X5 · X3 · X1</div>
+              <div class="bp-quote">"Bavarian precision,<br>redefined."</div>
+              <a href="catalogue.html?cat=body-kits&brand=BMW" class="bp-cta">Browse BMW Kits →</a>
+            </div>
+          </div>
+          <div class="bp-idx">01 / 04</div>
         </div>
-        <div class="bp-bot">
-          <div class="bp-name">BMW</div>
-          <div class="bp-type">Premium Body Kits</div>
-          <div class="bp-models">7 Series · 6 Series GT · 5 Series · 3 Series · X7 · X5 · X3 · X1</div>
-          <div class="bp-quote">"Bavarian precision,<br>redefined."</div>
-          <a href="catalogue.html" class="bp-cta">Browse BMW Kits →</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Mercedes-Benz -->
-    <div class="bp bp-merc" data-rv="right">
-      <div class="bp-bg"></div>
-      <div class="bp-glow"></div>
-      <div class="bp-glare"></div>
-      <div class="bp-ov"></div>
-      <div class="bp-in">
-        <div class="bp-top">
-          <div class="bp-label">Das Beste oder Nichts</div>
-          <div class="bp-cnt"><div class="n">31</div><div class="l">Body Kits</div></div>
+        <!-- Mercedes-Benz -->
+        <div class="bp bp-merc">
+          <div class="bp-bg"></div>
+          <div class="bp-glow"></div>
+          <div class="bp-glare"></div>
+          <div class="bp-ov"></div>
+          <div class="bp-in">
+            <div class="bp-top">
+              <div class="bp-label">Das Beste oder Nichts</div>
+              <div class="bp-cnt"><div class="n">31</div><div class="l">Body Kits</div></div>
+            </div>
+            <div class="bp-bot">
+              <div class="bp-name">Mercedes</div>
+              <div class="bp-type">Premium Body Kits</div>
+              <div class="bp-models">S Class · E Class · C Class · A Class · GLE · GLS · GLC · CLA · ML</div>
+              <div class="bp-quote">"Nothing but the best,<br>elevated."</div>
+              <a href="catalogue.html?cat=body-kits&brand=Mercedes-Benz" class="bp-cta">Browse Mercedes Kits →</a>
+            </div>
+          </div>
+          <div class="bp-idx">02 / 04</div>
         </div>
-        <div class="bp-bot">
-          <div class="bp-name">Mercedes</div>
-          <div class="bp-type">Premium Body Kits</div>
-          <div class="bp-models">S Class · E Class · C Class · A Class · GLE · GLS · GLC · CLA · ML</div>
-          <div class="bp-quote">"Nothing but the best,<br>elevated."</div>
-          <a href="catalogue.html" class="bp-cta">Browse Mercedes Kits →</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Audi -->
-    <div class="bp bp-audi" data-rv="left">
-      <div class="bp-bg"></div>
-      <div class="bp-glow"></div>
-      <div class="bp-glare"></div>
-      <div class="bp-ov"></div>
-      <div class="bp-in">
-        <div class="bp-top">
-          <div class="bp-label">Vorsprung Durch Technik</div>
-          <div class="bp-cnt"><div class="n">14</div><div class="l">Body Kits</div></div>
+        <!-- Audi -->
+        <div class="bp bp-audi">
+          <div class="bp-bg"></div>
+          <div class="bp-glow"></div>
+          <div class="bp-glare"></div>
+          <div class="bp-ov"></div>
+          <div class="bp-in">
+            <div class="bp-top">
+              <div class="bp-label">Vorsprung Durch Technik</div>
+              <div class="bp-cnt"><div class="n">14</div><div class="l">Body Kits</div></div>
+            </div>
+            <div class="bp-bot">
+              <div class="bp-name">Audi</div>
+              <div class="bp-type">Premium Body Kits</div>
+              <div class="bp-models">A3 · A4 · A5 · A6 · A7 · TT</div>
+              <div class="bp-quote">"Progress through<br>technology."</div>
+              <a href="catalogue.html?cat=body-kits&brand=Audi" class="bp-cta">Browse Audi Kits →</a>
+            </div>
+          </div>
+          <div class="bp-idx">03 / 04</div>
         </div>
-        <div class="bp-bot">
-          <div class="bp-name">Audi</div>
-          <div class="bp-type">Premium Body Kits</div>
-          <div class="bp-models">A3 · A4 · A5 · A6 · A7 · TT</div>
-          <div class="bp-quote">"Progress through<br>technology."</div>
-          <a href="catalogue.html" class="bp-cta">Browse Audi Kits →</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Range Rover -->
-    <div class="bp bp-rr" data-rv="right">
-      <div class="bp-bg"></div>
-      <div class="bp-glow"></div>
-      <div class="bp-glare"></div>
-      <div class="bp-ov"></div>
-      <div class="bp-in">
-        <div class="bp-top">
-          <div class="bp-label">Above &amp; Beyond</div>
-          <div class="bp-cnt"><div class="n">7</div><div class="l">Body Kits</div></div>
+        <!-- Range Rover -->
+        <div class="bp bp-rr">
+          <div class="bp-bg"></div>
+          <div class="bp-glow"></div>
+          <div class="bp-glare"></div>
+          <div class="bp-ov"></div>
+          <div class="bp-in">
+            <div class="bp-top">
+              <div class="bp-label">Above &amp; Beyond</div>
+              <div class="bp-cnt"><div class="n">7</div><div class="l">Body Kits</div></div>
+            </div>
+            <div class="bp-bot">
+              <div class="bp-name">Range Rover</div>
+              <div class="bp-type">Premium Body Kits</div>
+              <div class="bp-models">Defender · Defender 110 · Vogue · Sport · Velar · Discovery Sport</div>
+              <div class="bp-quote">"Commanding presence,<br>commanding roads."</div>
+              <a href="catalogue.html?cat=body-kits&brand=Range+Rover" class="bp-cta">Browse Range Rover Kits →</a>
+            </div>
+          </div>
+          <div class="bp-idx">04 / 04</div>
         </div>
-        <div class="bp-bot">
-          <div class="bp-name">Range Rover</div>
-          <div class="bp-type">Premium Body Kits</div>
-          <div class="bp-models">Defender · Defender 110 · Vogue · Sport · Velar · Discovery Sport</div>
-          <div class="bp-quote">"Commanding presence,<br>commanding roads."</div>
-          <a href="catalogue.html" class="bp-cta">Browse Range Rover Kits →</a>
-        </div>
-      </div>
-    </div>
 
-  </div>
+      </div><!-- /br-track -->
+      <div class="br-prog"><div class="br-prog-fill" id="brProgFill"></div></div>
+      <div class="br-hint" id="brHint">Scroll to explore brands &darr;</div>
+    </div><!-- /br-sticky -->
+  </div><!-- /br-hscroll -->
   <div class="br-cta-row">
     <a href="catalogue.html" class="btn-out" data-rv="up" style="margin:0 auto;display:inline-flex">View All 116 Kits →</a>
   </div>
@@ -908,6 +997,30 @@ document.querySelectorAll('.bp').forEach(p=>{
     p.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
   });
 });
+
+/* ── HORIZONTAL BRAND SCROLL ─────────── */
+(function(){
+  const hscroll=document.getElementById('brHscroll');
+  const track=document.getElementById('brTrack');
+  const fill=document.getElementById('brProgFill');
+  const hint=document.getElementById('brHint');
+  if(!hscroll||!track)return;
+  const panelCount=track.querySelectorAll('.bp').length;
+  function isMobile(){return window.innerWidth<960;}
+  function update(){
+    if(isMobile()){track.style.transform='';return;}
+    const rect=hscroll.getBoundingClientRect();
+    const maxScroll=hscroll.offsetHeight-window.innerHeight;
+    if(maxScroll<=0)return;
+    const progress=Math.max(0,Math.min(1,-rect.top/maxScroll));
+    track.style.transform=`translateX(${-progress*(panelCount-1)*100}vw)`;
+    if(fill)fill.style.width=(progress*100)+'%';
+    if(hint)hint.style.opacity=progress>.04?'0':'1';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update,{passive:true});
+  update();
+})();
 </script>
 </body>
 </html>
