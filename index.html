@@ -21,6 +21,7 @@
       --black3:  #181818;
       --red:     #E8000D;
       --red-dim: #a00009;
+      --gold:    #C9973F;
       --silver:  #C0C0C0;
       --white:   #F5F5F5;
       --gray:    #888888;
@@ -1498,6 +1499,342 @@
       .stat-number   { font-size: 36px; }
       .service-card  { padding: 20px 16px; }
     }
+
+    /* ════════════════════════════════════════════════════════════════════
+       CATALOGUE
+    ════════════════════════════════════════════════════════════════════ */
+    #catalogue {
+      padding: 120px 0;
+      background: var(--black2);
+      position: relative;
+    }
+    #catalogue::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    }
+
+    .cat-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .cat-header .section-label { color: var(--gold); }
+    .cat-sub {
+      font-size: 16px;
+      color: var(--silver);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* Tabs */
+    .cat-tabs {
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      margin-bottom: 40px;
+      border: 1px solid #222;
+      border-radius: 6px;
+      overflow: hidden;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cat-tab {
+      padding: 14px 36px;
+      font-family: var(--inter);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--black3);
+      color: var(--gray);
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      position: relative;
+    }
+    .cat-tab + .cat-tab { border-left: 1px solid #222; }
+    .cat-tab.active {
+      background: var(--gold);
+      color: #000;
+    }
+    .cat-tab:not(.active):hover {
+      background: #1e1e1e;
+      color: var(--white);
+    }
+
+    /* Brand filter */
+    .cat-brands-wrap {
+      margin-bottom: 28px;
+    }
+    .cat-brands-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .cat-brands {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cat-brand-btn {
+      padding: 10px 22px;
+      border: 1.5px solid #282828;
+      background: var(--black3);
+      color: var(--silver);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .cat-brand-btn:hover {
+      border-color: var(--gold);
+      color: var(--white);
+    }
+    .cat-brand-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* Model dropdown */
+    .cat-model-wrap {
+      margin-bottom: 36px;
+    }
+    .cat-model-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .cat-model-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--black3) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center;
+      border: 1.5px solid #282828;
+      color: var(--white);
+      font-family: var(--inter);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 44px 12px 16px;
+      border-radius: 4px;
+      min-width: 260px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .cat-model-select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .cat-model-select option {
+      background: #1a1a1a;
+      color: var(--white);
+    }
+
+    /* Results meta */
+    .cat-results-meta {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    /* Kit grid */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cat-card {
+      background: var(--black3);
+      border: 1px solid #1e1e1e;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      border-color: var(--gold);
+    }
+
+    /* Image */
+    .cat-card-img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: #0f0f0f;
+      overflow: hidden;
+    }
+    .cat-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .cat-card:hover .cat-card-img { transform: scale(1.04); }
+
+    /* Placeholder shown when image is missing */
+    .cat-card-img-wrap.no-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .cat-card-img-wrap.no-image::after {
+      content: attr(data-kit);
+      font-family: var(--bebas);
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      color: #2a2a2a;
+      text-align: center;
+      padding: 0 16px;
+      line-height: 1.3;
+    }
+    .cat-card-img-wrap.no-image .cat-ph-icon {
+      font-size: 32px;
+      opacity: 0.2;
+    }
+
+    /* Body */
+    .cat-card-body {
+      padding: 16px 18px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cat-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .cat-card-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .cat-card-badge {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-full    { background: rgba(201,151,63,0.18); color: var(--gold); border: 1px solid rgba(201,151,63,0.3); }
+    .badge-bumper  { background: rgba(192,192,192,0.12); color: var(--silver); border: 1px solid rgba(192,192,192,0.25); }
+    .badge-ba      { background: rgba(245,245,245,0.08); color: var(--white); border: 1px solid rgba(245,245,245,0.2); }
+    .badge-sw      { background: rgba(201,151,63,0.18); color: var(--gold); border: 1px solid rgba(201,151,63,0.3); }
+
+    .cat-card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+    }
+    .cat-card-model {
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: 0.3px;
+    }
+
+    .cat-card-cta {
+      margin-top: auto;
+      padding-top: 14px;
+      display: flex;
+    }
+    .cat-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #25D366;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .cat-wa-btn:hover {
+      background: #1ebe5d;
+      transform: translateY(-1px);
+    }
+    .cat-wa-btn svg { flex-shrink: 0; }
+
+    /* Empty state */
+    .cat-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .cat-empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .cat-empty-text {
+      font-family: var(--bebas);
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--gray);
+    }
+    .cat-empty-sub {
+      font-size: 14px;
+      color: #444;
+      margin-top: 8px;
+    }
+
+    /* Loading state */
+    .cat-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px;
+      color: var(--gray);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Responsive catalogue */
+    @media (max-width: 1023px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      #catalogue { padding: 80px 0; }
+      .cat-tab   { padding: 12px 24px; font-size: 12px; }
+      .cat-model-select { min-width: 100%; width: 100%; }
+    }
+    @media (max-width: 540px) {
+      .cat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .cat-card-name { font-size: 13px; }
+    }
+    @media (max-width: 380px) {
+      .cat-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
@@ -1528,11 +1865,12 @@
 
 <!-- ─── MOBILE NAV ──────────────────────────────────────────────────────── -->
 <nav class="mobile-nav" id="mobileNav">
-  <a href="#home"     onclick="closeMobile()">Home</a>
-  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#home"      onclick="closeMobile()">Home</a>
+  <a href="#services"  onclick="closeMobile()">Services</a>
+  <a href="#catalogue" onclick="closeMobile()">Catalogue</a>
   <a href="#recliners" onclick="closeMobile()">Recliners</a>
-  <a href="#about"    onclick="closeMobile()">About</a>
-  <a href="#contact"  onclick="closeMobile()">Contact</a>
+  <a href="#about"     onclick="closeMobile()">About</a>
+  <a href="#contact"   onclick="closeMobile()">Contact</a>
 </nav>
 
 <!-- ─── NAVBAR ────────────────────────────────────────────────────────────── -->
@@ -1543,6 +1881,7 @@
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#catalogue">Catalogue</a></li>
     <li><a href="#recliners">Recliners</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1805,7 +2144,50 @@
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════════════
-     SECTION 4 — STAR SERVICE: RECLINERS
+     SECTION 4 — CATALOGUE
+════════════════════════════════════════════════════════════════════════ -->
+<section id="catalogue">
+  <div class="section-inner">
+
+    <div class="cat-header reveal">
+      <p class="section-label">Browse & Enquire</p>
+      <h2 class="section-heading">Our <span style="color:var(--gold)">Catalogue</span></h2>
+      <p class="cat-sub">Premium upgrades for your car. Browse by category, filter by brand and model, then enquire directly on WhatsApp.</p>
+    </div>
+
+    <!-- Service tabs -->
+    <div class="cat-tabs reveal">
+      <button class="cat-tab active" data-cat="body-kits">Body Kits</button>
+      <button class="cat-tab" data-cat="steering-wheels">Steering Wheels</button>
+    </div>
+
+    <!-- Brand filter -->
+    <div class="cat-brands-wrap reveal">
+      <p class="cat-brands-label">Filter by brand</p>
+      <div class="cat-brands" id="catBrandBtns"></div>
+    </div>
+
+    <!-- Model dropdown -->
+    <div class="cat-model-wrap reveal" id="catModelWrap" style="display:none;">
+      <p class="cat-model-label">Filter by model</p>
+      <select class="cat-model-select" id="catModelSelect">
+        <option value="">All Models</option>
+      </select>
+    </div>
+
+    <!-- Results count -->
+    <p class="cat-results-meta" id="catResultsMeta"></p>
+
+    <!-- Kit grid -->
+    <div class="cat-grid" id="catGrid">
+      <div class="cat-loading">Loading catalogue…</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     SECTION 5 — STAR SERVICE: RECLINERS
 ════════════════════════════════════════════════════════════════════════ -->
 <section id="recliners">
   <div class="section-inner">
@@ -2381,6 +2763,157 @@
     buildDots();
     updateArrows();
     resetAuto();
+  })();
+
+  /* ════════════════════════════════════════════════════════════════════
+     CATALOGUE
+  ════════════════════════════════════════════════════════════════════ */
+  (function initCatalogue() {
+    let catalogueData = null;
+    let activeCategory = 'body-kits';
+    let activeBrand    = null;
+    let activeModel    = '';
+
+    const grid        = document.getElementById('catGrid');
+    const brandBtns   = document.getElementById('catBrandBtns');
+    const modelWrap   = document.getElementById('catModelWrap');
+    const modelSelect = document.getElementById('catModelSelect');
+    const resultsMeta = document.getElementById('catResultsMeta');
+    const tabs        = document.querySelectorAll('.cat-tab');
+
+    if (!grid) return;
+
+    /* ── BADGE helper ── */
+    function badgeHtml(kitType) {
+      if (kitType === 'full-kit')       return '<span class="cat-card-badge badge-full">Full Kit</span>';
+      if (kitType === 'bumper-only')    return '<span class="cat-card-badge badge-bumper">Bumper Only</span>';
+      if (kitType === 'before-after')   return '<span class="cat-card-badge badge-ba">Before / After</span>';
+      if (kitType === 'steering-wheel') return '<span class="cat-card-badge badge-sw">Steering Wheel</span>';
+      return '';
+    }
+
+    /* ── WhatsApp message ── */
+    function waLink(kit) {
+      const msg = encodeURIComponent(
+        'Hi! I\'m interested in the ' + kit.kitName +
+        ' for my ' + kit.brand + ' ' + kit.model +
+        '. Please share details and pricing.'
+      );
+      return 'https://wa.me/918019065252?text=' + msg;
+    }
+
+    /* ── Render grid ── */
+    function renderGrid() {
+      const items = (catalogueData[activeCategory] || []).filter(k => {
+        if (activeBrand && k.brand !== activeBrand) return false;
+        if (activeModel && k.model !== activeModel) return false;
+        return true;
+      });
+
+      resultsMeta.textContent = items.length + (items.length === 1 ? ' kit found' : ' kits found');
+
+      if (!items.length) {
+        grid.innerHTML = '<div class="cat-empty"><div class="cat-empty-icon">🔍</div><div class="cat-empty-text">No kits found</div><p class="cat-empty-sub">Try a different brand or model</p></div>';
+        return;
+      }
+
+      grid.innerHTML = items.map(kit => {
+        const imgSrc  = kit.image;
+        const imgTag  = '<img class="cat-card-img" src="' + imgSrc + '" alt="' + kit.kitName + '" loading="lazy" onerror="this.style.display=\'none\';this.closest(\'.cat-card-img-wrap\').classList.add(\'no-image\')" />';
+        return '<div class="cat-card">' +
+          '<div class="cat-card-img-wrap" data-kit="' + kit.kitName + '">' +
+            '<span class="cat-ph-icon" aria-hidden="true">📷</span>' +
+            imgTag +
+          '</div>' +
+          '<div class="cat-card-body">' +
+            '<div class="cat-card-top">' +
+              '<span class="cat-card-brand">' + kit.brand + '</span>' +
+              badgeHtml(kit.kitType) +
+            '</div>' +
+            '<div class="cat-card-name">' + kit.kitName + '</div>' +
+            '<div class="cat-card-model">' + kit.model + '</div>' +
+            '<div class="cat-card-cta">' +
+              '<a href="' + waLink(kit) + '" target="_blank" rel="noopener" class="cat-wa-btn">' +
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
+                'Enquire on WhatsApp →' +
+              '</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* ── Build brand buttons ── */
+    function buildBrands() {
+      const items  = catalogueData[activeCategory] || [];
+      const brands = [...new Set(items.map(k => k.brand))];
+
+      brandBtns.innerHTML = brands.map(b =>
+        '<button class="cat-brand-btn' + (activeBrand === b ? ' active' : '') + '" data-brand="' + b + '">' + b + '</button>'
+      ).join('');
+
+      brandBtns.querySelectorAll('.cat-brand-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const brand = btn.dataset.brand;
+          activeBrand = (activeBrand === brand) ? null : brand;
+          activeModel = '';
+          buildBrands();
+          buildModels();
+          renderGrid();
+        });
+      });
+    }
+
+    /* ── Build model dropdown ── */
+    function buildModels() {
+      if (!activeBrand) {
+        modelWrap.style.display = 'none';
+        activeModel = '';
+        return;
+      }
+      const items  = catalogueData[activeCategory] || [];
+      const models = [...new Set(items.filter(k => k.brand === activeBrand).map(k => k.model))];
+      modelSelect.innerHTML = '<option value="">All Models</option>' +
+        models.map(m => '<option value="' + m + '"' + (activeModel === m ? ' selected' : '') + '>' + m + '</option>').join('');
+      modelWrap.style.display = '';
+    }
+
+    /* ── Tab switch ── */
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeCategory = tab.dataset.cat;
+        activeBrand = null;
+        activeModel = '';
+        buildBrands();
+        buildModels();
+        renderGrid();
+      });
+    });
+
+    /* ── Model select change ── */
+    modelSelect.addEventListener('change', () => {
+      activeModel = modelSelect.value;
+      renderGrid();
+    });
+
+    /* ── Load data ── */
+    fetch('catalogue/catalogue-data.json')
+      .then(r => {
+        if (!r.ok) throw new Error('Catalogue data not found');
+        return r.json();
+      })
+      .then(data => {
+        catalogueData = data;
+        buildBrands();
+        buildModels();
+        renderGrid();
+      })
+      .catch(() => {
+        grid.innerHTML = '<div class="cat-empty"><div class="cat-empty-icon">⚠️</div><div class="cat-empty-text">Catalogue loading</div><p class="cat-empty-sub">Please try again shortly</p></div>';
+        resultsMeta.textContent = '';
+      });
   })();
 
   // ─── THEME TOGGLE ────────────────────────────────────────────────────────
