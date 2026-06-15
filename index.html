@@ -87,7 +87,7 @@ body{
 .nav-links a{
   font-size:11px;font-weight:600;
   letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--dim);transition:color .2s;
+  color:rgba(255,255,255,.55);transition:color .2s;
 }
 .nav-links a:hover{color:var(--txt)}
 .nav-right{display:flex;align-items:center;gap:14px}
@@ -144,22 +144,18 @@ body.light .icon-sun{display:block}
 }
 .hero-bg{
   position:absolute;inset:0;
-  background:url('maserati.jpg') center 28% / cover no-repeat;
+  background:url('maserati.jpg') center 58% / cover no-repeat;
   will-change:transform;
 }
 .hero-overlay{
   position:absolute;inset:0;
   background:linear-gradient(
     to bottom,
-    rgba(5,5,5,.15) 0%,
-    rgba(5,5,5,.45) 45%,
-    rgba(5,5,5,.80) 75%,
+    rgba(5,5,5,.55) 0%,
+    rgba(5,5,5,.35) 35%,
+    rgba(5,5,5,.65) 70%,
     rgba(5,5,5,1) 100%
   );
-}
-.hero-edge{
-  position:absolute;left:0;top:15%;bottom:15%;
-  width:3px;background:var(--red);z-index:2;
 }
 .hero-content{
   position:relative;z-index:2;
@@ -906,7 +902,7 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
 <section id="home">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-edge"></div>
+
   <div class="hero-content">
     <span class="hero-eyebrow">Jubilee Hills · Hyderabad · Est. 1999</span>
     <div class="hero-wm">
