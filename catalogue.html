@@ -297,25 +297,26 @@ body{
 }
 .model-pill:hover .model-pill-arrow{opacity:1;transform:translateX(0)}
 
-/* ── KIT GALLERY — full-bleed portrait cards ── */
+/* ── KIT GALLERY — full-bleed cards ── */
 .kit-grid{
   display:grid;
   gap:3px;
-  /* columns set dynamically via JS based on kit count */
   grid-template-columns: repeat(var(--kit-cols,3), 1fr);
+  /* Fill the remaining viewport — no scroll needed */
+  height:clamp(300px, calc(100vh - 250px), 560px);
 }
 @media(max-width:700px){
-  .kit-grid{grid-template-columns:repeat(2,1fr) !important}
+  .kit-grid{grid-template-columns:repeat(2,1fr) !important;height:clamp(220px,55vw,400px)}
 }
 @media(max-width:420px){
-  .kit-grid{grid-template-columns:1fr !important}
+  .kit-grid{grid-template-columns:1fr !important;height:280px}
 }
 
 .kit-card{
   position:relative;
   overflow:hidden;
   cursor:pointer;
-  aspect-ratio:3/4;
+  /* no aspect-ratio — height controlled by grid */
   background:#0e0e0e;
   border:1px solid var(--line);
   transition:border-color .3s;
@@ -337,24 +338,20 @@ body{
 }
 .kit-card:hover .kit-img-wrap img{transform:scale(1.06)}
 
-/* Gradient overlay — always present */
+/* Gradient overlay — dark top hides PDF header; dark bottom holds kit name */
 .kit-card-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top,
-    rgba(5,5,5,.92) 0%,
-    rgba(5,5,5,.45) 45%,
-    transparent 75%
-  );
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.92) 0%, rgba(5,5,5,.6) 20%, transparent 38%),
+    linear-gradient(to top,   rgba(5,5,5,.92) 0%, rgba(5,5,5,.5) 35%, transparent 58%);
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:20px 18px;
   transition:background .35s;
 }
 .kit-card:hover .kit-card-overlay{
-  background:linear-gradient(to top,
-    rgba(5,5,5,.97) 0%,
-    rgba(5,5,5,.6) 50%,
-    rgba(5,5,5,.15) 80%
-  );
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.95) 0%, rgba(5,5,5,.7) 22%, transparent 40%),
+    linear-gradient(to top,   rgba(5,5,5,.97) 0%, rgba(5,5,5,.7) 40%, rgba(5,5,5,.15) 62%);
 }
 
 /* Badge in card */
