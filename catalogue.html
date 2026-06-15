@@ -297,108 +297,194 @@ body{
 }
 .model-pill:hover .model-pill-arrow{opacity:1;transform:translateX(0)}
 
-/* ── KIT GALLERY — horizontal bars ── */
+/* ── KIT GALLERY — full-bleed portrait cards ── */
 .kit-grid{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
+  display:grid;
+  gap:3px;
+  /* columns set dynamically via JS based on kit count */
+  grid-template-columns: repeat(var(--kit-cols,3), 1fr);
+}
+@media(max-width:700px){
+  .kit-grid{grid-template-columns:repeat(2,1fr) !important}
+}
+@media(max-width:420px){
+  .kit-grid{grid-template-columns:1fr !important}
 }
 
 .kit-card{
-  position:relative;overflow:hidden;
-  background:var(--bg2);
-  border:1px solid var(--line);
-  cursor:pointer;
-  display:flex;
-  height:210px;
-  transition:border-color .35s, background .35s;
-}
-.kit-card:hover{
-  border-color:rgba(201,151,63,.35);
-  background:var(--bg3);
-}
-
-/* Image — left bar, 38% wide */
-.kit-img-wrap{
   position:relative;
-  flex-shrink:0;
-  width:38%;
   overflow:hidden;
+  cursor:pointer;
+  aspect-ratio:3/4;
   background:#0e0e0e;
-  border-right:1px solid var(--line);
+  border:1px solid var(--line);
+  transition:border-color .3s;
+}
+.kit-card:hover{border-color:rgba(201,151,63,.5)}
+
+/* Full-bleed image */
+.kit-img-wrap{
+  position:absolute;inset:0;
+  overflow:hidden;
 }
 .kit-img-wrap img{
   width:100%;height:100%;
   object-fit:contain;
-  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  transition:transform .65s cubic-bezier(.4,0,.2,1), filter .3s;
 }
-/* Parts images (full-kit, bumper-only, steering-wheel) — white bg → dark via invert */
 .kit-img-wrap img.img-parts{
   filter:invert(1) hue-rotate(180deg);
 }
-/* Car photos (before-after) — show naturally, just brighten slightly */
 .kit-img-wrap img.img-photo{
   object-fit:cover;
-  filter:brightness(0.88) contrast(1.05);
+  filter:brightness(0.9) contrast(1.05);
 }
-.kit-card:hover .kit-img-wrap img{transform:scale(1.04)}
+.kit-card:hover .kit-img-wrap img{transform:scale(1.06)}
 
-/* Right content area */
-.kit-info{
-  flex:1;
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding:22px 28px 22px 28px;
-  overflow:hidden;
+/* Gradient overlay — always present */
+.kit-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,
+    rgba(5,5,5,.92) 0%,
+    rgba(5,5,5,.45) 45%,
+    transparent 75%
+  );
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px 18px;
+  transition:background .35s;
 }
-.kit-info-top{}
+.kit-card:hover .kit-card-overlay{
+  background:linear-gradient(to top,
+    rgba(5,5,5,.97) 0%,
+    rgba(5,5,5,.6) 50%,
+    rgba(5,5,5,.15) 80%
+  );
+}
 
+/* Badge in card */
 .kit-type-badge{
   display:inline-flex;align-items:center;
-  padding:3px 10px;margin-bottom:12px;
+  padding:3px 10px;margin-bottom:10px;
   font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  border:1px solid;
+  border:1px solid;width:fit-content;
 }
-.badge-full-kit{color:#4ade80;border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
-.badge-bumper-only{color:#fb923c;border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.06)}
-.badge-before-after{color:#60a5fa;border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.06)}
-.badge-steering-wheel{color:#c084fc;border-color:rgba(192,132,252,.3);background:rgba(192,132,252,.06)}
+.badge-full-kit{color:#4ade80;border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.08)}
+.badge-bumper-only{color:#fb923c;border-color:rgba(251,146,60,.4);background:rgba(251,146,60,.08)}
+.badge-before-after{color:#60a5fa;border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.08)}
+.badge-steering-wheel{color:#c084fc;border-color:rgba(192,132,252,.4);background:rgba(192,132,252,.08)}
 
 .kit-name{
-  font-size:15px;font-weight:500;color:var(--txt);
-  line-height:1.45;
+  font-size:13px;font-weight:600;color:var(--txt);
+  line-height:1.4;margin-bottom:10px;
 }
 
-.kit-enquire{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:16px;
-  border-top:1px solid var(--line);
+/* "View Details" CTA — slides up on hover */
+.kit-view-cta{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:6px;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .3s, transform .3s;
 }
-.kit-wa-link{
-  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:#25D366;display:flex;align-items:center;gap:7px;
-  transition:gap .2s, opacity .2s;
+.kit-card:hover .kit-view-cta{opacity:1;transform:translateY(0)}
+
+/* ── LIGHTBOX ── */
+#lightbox{
+  position:fixed;inset:0;z-index:2000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
 }
-.kit-wa-link:hover{opacity:.8;gap:10px}
-.kit-id{
-  font-size:10px;font-weight:600;letter-spacing:1.5px;
-  color:var(--mute);text-transform:uppercase;
+#lightbox.lb-open{opacity:1;pointer-events:auto}
+
+#lb-backdrop{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(8px);
+  cursor:pointer;
 }
 
-/* Gold accent bar slides in from left on hover */
-.kit-card::before{
-  content:'';
-  position:absolute;left:0;top:0;bottom:0;
-  width:2px;
-  background:var(--gold);
-  transform:scaleY(0);transform-origin:bottom;
+#lb-panel{
+  position:relative;z-index:1;
+  width:min(900px,92vw);
+  max-height:92vh;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform:scale(.96) translateY(12px);
   transition:transform .35s cubic-bezier(.4,0,.2,1);
 }
-.kit-card:hover::before{transform:scaleY(1)}
+#lightbox.lb-open #lb-panel{transform:scale(1) translateY(0)}
 
-/* Mobile: stack vertically */
-@media(max-width:640px){
-  .kit-card{flex-direction:column;height:auto}
-  .kit-img-wrap{width:100%;height:210px}
+#lb-img-wrap{
+  position:relative;
+  flex:1;overflow:hidden;
+  max-height:65vh;
+  background:#0e0e0e;
+  display:flex;align-items:center;justify-content:center;
+}
+#lb-img{
+  max-width:100%;max-height:65vh;
+  object-fit:contain;
+  display:block;
+}
+#lb-img.img-parts{filter:invert(1) hue-rotate(180deg)}
+#lb-img.img-photo{object-fit:cover;width:100%;filter:brightness(0.9) contrast(1.05)}
+
+#lb-info{
+  padding:24px 28px 24px;
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+#lb-badge-name{flex:1;min-width:0}
+#lb-badge{margin-bottom:8px}
+#lb-name{font-size:16px;font-weight:600;color:var(--txt);line-height:1.4}
+
+#lb-wa{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;
+  background:#25D366;color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  white-space:nowrap;
+  transition:background .2s,transform .2s;
+  flex-shrink:0;
+}
+#lb-wa:hover{background:#1ea952;transform:translateY(-1px)}
+
+/* Nav arrows */
+.lb-arrow{
+  position:absolute;top:50%;z-index:2;
+  transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(5,5,5,.7);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--txt);cursor:pointer;
+  transition:background .2s,border-color .2s,opacity .2s;
+}
+.lb-arrow:hover{background:rgba(201,151,63,.2);border-color:var(--gold)}
+.lb-arrow.lb-hidden-btn{opacity:0;pointer-events:none}
+#lb-prev{left:14px}
+#lb-next{right:14px}
+
+/* Close button */
+#lb-close{
+  position:absolute;top:14px;right:14px;z-index:3;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(5,5,5,.7);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--dim);cursor:pointer;
+  transition:color .2s,background .2s;
+}
+#lb-close:hover{color:var(--txt);background:rgba(5,5,5,.9)}
+
+/* Counter pill */
+#lb-counter{
+  position:absolute;bottom:14px;right:14px;z-index:2;
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--dim);background:rgba(5,5,5,.6);
+  padding:4px 10px;
 }
 
 /* ── RESULT COUNTER (kept for result-bar class) ── */
@@ -465,6 +551,30 @@ body{
 <body>
 
 <div id="progress"></div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <div id="lb-backdrop"></div>
+  <div id="lb-panel">
+    <button id="lb-close" onclick="closeLightbox()" aria-label="Close">×</button>
+    <button class="lb-arrow" id="lb-prev" onclick="lbNav(-1)">‹</button>
+    <button class="lb-arrow" id="lb-next" onclick="lbNav(1)">›</button>
+    <div id="lb-img-wrap">
+      <img id="lb-img" src="" alt="" />
+    </div>
+    <div id="lb-counter"></div>
+    <div id="lb-info">
+      <div id="lb-badge-name">
+        <div id="lb-badge"></div>
+        <div id="lb-name"></div>
+      </div>
+      <a id="lb-wa" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.77A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.4c-.34-.17-2.02-1-2.34-1.1-.32-.12-.55-.17-.78.17-.23.34-.9 1.1-1.1 1.33-.2.23-.4.26-.74.09-.34-.18-1.43-.53-2.72-1.68-1.01-.9-1.69-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.12-.23.06-.43-.03-.6-.09-.18-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59H9.7c-.2 0-.54.07-.82.37-.28.29-1.08 1.05-1.08 2.57 0 1.52 1.1 2.99 1.26 3.2.16.2 2.17 3.32 5.26 4.65.74.32 1.31.5 1.76.64.74.23 1.41.2 1.94.12.59-.09 1.82-.74 2.08-1.46.25-.72.25-1.34.18-1.47-.08-.12-.3-.2-.63-.37z"/></svg>
+        Enquire on WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- WhatsApp float -->
 <a class="wa-float" href="https://wa.me/918019065252?text=Hi%2C%20I%20want%20to%20enquire%20about%20modifications" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -836,11 +946,16 @@ function selectModel(model, animate=true){
   if(animate) showStep('kits');
 }
 
+let lbKits = [];
+let lbIdx = 0;
+
 function buildKitGrid(cat, brand, model){
   const items = data[cat].filter(x=>x.brand===brand && x.model===model);
+  lbKits = items; // store for lightbox navigation
+
   document.getElementById('kits-label').textContent = brand.toUpperCase() + ' · ' + model.toUpperCase();
   document.getElementById('kits-title').textContent = model;
-  document.getElementById('kits-sub').textContent = items.length + ' kit option' + (items.length>1?'s':'') + ' available — enquire on WhatsApp';
+  document.getElementById('kits-sub').textContent = items.length + ' kit option' + (items.length>1?'s':'') + ' available — click any card to view';
 
   const grid = document.getElementById('kit-grid');
   grid.innerHTML = '';
@@ -850,34 +965,83 @@ function buildKitGrid(cat, brand, model){
     return;
   }
 
-  items.forEach(kit=>{
+  // Set column count as CSS variable — capped at 4
+  const cols = Math.min(items.length, 4);
+  grid.style.setProperty('--kit-cols', cols);
+
+  items.forEach((kit, idx)=>{
     const badgeClass = 'badge-'+kit.kitType;
     const badgeLabel = BADGE_LABEL[kit.kitType] || kit.kitType;
-    const waMsg = encodeURIComponent(`Hi, I'm interested in the ${kit.kitName}. Please share details and pricing.`);
+    const imgClass = kit.kitType === 'before-after' ? 'img-photo' : 'img-parts';
     const card = document.createElement('div');
     card.className = 'kit-card';
-    const imgClass = kit.kitType === 'before-after' ? 'img-photo' : 'img-parts';
     card.innerHTML = `
       <div class="kit-img-wrap">
         <img src="${kit.image}" alt="${kit.kitName}" loading="lazy" class="${imgClass}" />
       </div>
-      <div class="kit-info">
-        <div class="kit-info-top">
-          <div class="kit-type-badge ${badgeClass}">${badgeLabel}</div>
-          <div class="kit-name">${kit.kitName}</div>
-        </div>
-        <div class="kit-enquire">
-          <a class="kit-wa-link" href="${WA}${waMsg}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.77A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.4c-.34-.17-2.02-1-2.34-1.1-.32-.12-.55-.17-.78.17-.23.34-.9 1.1-1.1 1.33-.2.23-.4.26-.74.09-.34-.18-1.43-.53-2.72-1.68-1.01-.9-1.69-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.12-.23.06-.43-.03-.6-.09-.18-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59H9.7c-.2 0-.54.07-.82.37-.28.29-1.08 1.05-1.08 2.57 0 1.52 1.1 2.99 1.26 3.2.16.2 2.17 3.32 5.26 4.65.74.32 1.31.5 1.76.64.74.23 1.41.2 1.94.12.59-.09 1.82-.74 2.08-1.46.25-.72.25-1.34.18-1.47-.08-.12-.3-.2-.63-.37z"/></svg>
-            Enquire on WhatsApp
-          </a>
-          <span class="kit-id">${kit.id.toUpperCase()}</span>
-        </div>
+      <div class="kit-card-overlay">
+        <div class="kit-type-badge ${badgeClass}">${badgeLabel}</div>
+        <div class="kit-name">${kit.kitName}</div>
+        <div class="kit-view-cta">View Details →</div>
       </div>
     `;
+    card.onclick = ()=>openLightbox(idx);
     grid.appendChild(card);
   });
 }
+
+/* ── LIGHTBOX ── */
+function openLightbox(idx){
+  lbIdx = idx;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('lb-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('lb-open');
+  document.body.style.overflow = '';
+}
+
+function lbNav(dir){
+  lbIdx = (lbIdx + dir + lbKits.length) % lbKits.length;
+  renderLightbox();
+}
+
+function renderLightbox(){
+  const kit = lbKits[lbIdx];
+  const badgeClass = 'badge-'+kit.kitType;
+  const badgeLabel = BADGE_LABEL[kit.kitType] || kit.kitType;
+  const imgClass = kit.kitType === 'before-after' ? 'img-photo' : 'img-parts';
+  const waMsg = encodeURIComponent(`Hi, I'm interested in the ${kit.kitName}. Please share details and pricing.`);
+
+  const img = document.getElementById('lb-img');
+  img.src = kit.image;
+  img.alt = kit.kitName;
+  img.className = imgClass;
+
+  document.getElementById('lb-badge').innerHTML = `<span class="kit-type-badge ${badgeClass}">${badgeLabel}</span>`;
+  document.getElementById('lb-name').textContent = kit.kitName;
+  document.getElementById('lb-wa').href = WA + waMsg;
+  document.getElementById('lb-counter').textContent = (lbIdx+1) + ' / ' + lbKits.length;
+
+  // Hide arrows if only 1 kit
+  const hide = lbKits.length <= 1;
+  document.getElementById('lb-prev').classList.toggle('lb-hidden-btn', hide);
+  document.getElementById('lb-next').classList.toggle('lb-hidden-btn', hide);
+}
+
+// Close on backdrop click
+document.getElementById('lb-backdrop').onclick = closeLightbox;
+
+// Keyboard nav
+document.addEventListener('keydown', e=>{
+  const lb = document.getElementById('lightbox');
+  if(!lb.classList.contains('lb-open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') lbNav(-1);
+  if(e.key === 'ArrowRight') lbNav(1);
+});
 
 /* ── SCROLL PROGRESS ── */
 window.addEventListener('scroll',()=>{
