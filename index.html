@@ -137,32 +137,33 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 .gold{color:var(--gold)}
 .red{color:var(--red)}
 
-/* ── SERVICES — HORIZONTAL SLIDER ─── */
+/* ── SERVICES — EDITORIAL SLIDER ─── */
 #services{padding:110px 0 80px;background:var(--bg);overflow:hidden}
-.svc-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:48px;flex-wrap:wrap}
-.svc-track{display:flex;gap:2px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-left:var(--pad)}
-.svc-track::-webkit-scrollbar{display:none}
-.svc-slide{scroll-snap-align:start;flex-shrink:0;width:clamp(260px,30vw,400px);height:clamp(360px,50vh,500px);position:relative;overflow:hidden;background:var(--bg2);border:1px solid var(--line);display:flex;flex-direction:column;transition:border-color .25s}
-.svc-slide:hover{border-color:rgba(201,151,63,.35)}
-.svc-slide-img{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg3)}
-.svc-slide-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.4,0,.2,1)}
-.svc-slide:hover .svc-slide-img img{transform:scale(1.05)}
-.svc-slide-ph{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--mute)}
-.svc-slide-num{position:absolute;top:14px;left:18px;font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(255,255,255,.05);line-height:1;pointer-events:none;user-select:none}
-.svc-slide-body{padding:18px 20px;border-top:1px solid var(--line);flex-shrink:0}
-.svc-slide-nm{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;margin-bottom:5px;transition:color .2s}
-.svc-slide:hover .svc-slide-nm{color:var(--gold)}
-.svc-slide-ds{font-size:11px;font-weight:300;color:var(--dim);line-height:1.6}
-.svc-slide-tag{display:inline-block;margin-top:8px;font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.svc-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:40px;flex-wrap:wrap}
+.svc-track{display:flex;gap:3px;padding-left:var(--pad);align-items:flex-end;will-change:transform;transition:transform .58s cubic-bezier(.4,0,.2,1)}
+.svc-slide{flex-shrink:0;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.svc-slide.t-tall{width:clamp(200px,21vw,290px);height:clamp(480px,64vh,600px)}
+.svc-slide.t-wide{width:clamp(380px,44vw,580px);height:clamp(300px,40vh,420px)}
+.svc-slide.t-std{width:clamp(260px,30vw,390px);height:clamp(380px,52vh,500px)}
+.svc-n{position:absolute;top:-10px;right:-8px;font-family:'Bebas Neue',sans-serif;font-size:clamp(110px,16vw,200px);color:rgba(255,255,255,.055);line-height:1;user-select:none;pointer-events:none;z-index:1}
+.svc-img{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.4,0,.2,1)}
+.svc-slide:hover .svc-img img{transform:scale(1.04)}
+.svc-ph{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.15)}
+.svc-body{padding:14px 18px;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.svc-nm{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;line-height:1.1;margin:4px 0 4px;transition:color .2s}
+.svc-slide:hover .svc-nm{color:var(--gold)}
+.svc-ds{font-size:11px;font-weight:300;color:rgba(255,255,255,.32);line-height:1.5}
+.svc-tag-l{display:inline-block;margin-bottom:2px;font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:2px 7px;border-radius:2px}
 .tag-pop{background:rgba(232,0,13,.15);color:var(--red);border:1px solid rgba(232,0,13,.2)}
 .tag-prem{background:rgba(201,151,63,.12);color:var(--gold);border:1px solid rgba(201,151,63,.2)}
-.svc-nav{display:flex;align-items:center;gap:10px;padding:24px 0 0;max-width:var(--max);margin:0 auto}
-.svc-nav-btn{width:44px;height:44px;border:1px solid var(--mute);display:flex;align-items:center;justify-content:center;color:var(--txt);font-size:18px;transition:border-color .2s,background .2s;flex-shrink:0}
+.svc-nav{display:flex;align-items:center;gap:16px;padding:28px 0 0;max-width:var(--max);margin:0 auto}
+.svc-nav-btn{width:44px;height:44px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:var(--txt);font-size:18px;transition:border-color .2s,color .2s;flex-shrink:0;background:none}
 .svc-nav-btn:hover{border-color:var(--gold);color:var(--gold)}
-.svc-nav-dots{display:flex;gap:6px;flex:1}
-.svc-nav-dot{height:2px;width:24px;background:var(--mute);transition:background .25s,width .25s}
-.svc-nav-dot.on{background:var(--gold);width:36px}
-.svc-more{margin-top:32px;font-size:14px;color:var(--dim);line-height:1.7}
+.svc-prog{flex:1;height:1px;background:rgba(255,255,255,.1);position:relative;overflow:hidden}
+.svc-prog-fill{position:absolute;inset-block:0;left:0;width:0;background:var(--gold);transition:width .45s cubic-bezier(.4,0,.2,1)}
+.svc-counter{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.28);flex-shrink:0}
+.svc-more{margin-top:28px;font-size:14px;color:var(--dim);line-height:1.7}
 .svc-more a{color:var(--red);transition:opacity .2s}
 .svc-more a:hover{opacity:.75}
 
@@ -498,137 +499,127 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     </div>
   </div>
   <div class="svc-track" id="svcTrack">
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">01</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Luxury Recliners</div>
-        <div class="svc-slide-ds">First-class cabin on wheels — custom leather, powered adjustment, ambient lighting.</div>
-        <span class="svc-slide-tag tag-pop">Most Popular</span>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">02</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Paint Protection Film</div>
-        <div class="svc-slide-ds">Military-grade film against chips, scratches and UV. Full body from ₹1L–₹2L.</div>
-        <span class="svc-slide-tag tag-prem">Premium</span>
+
+    <div class="svc-slide t-wide" style="background:#272727">
+      <div class="svc-n">01</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <span class="svc-tag-l tag-pop">Most Popular</span>
+        <div class="svc-nm">Luxury Recliners</div>
+        <div class="svc-ds">First-class cabin on wheels — custom leather, powered adjustment, ambient lighting.</div>
       </div>
     </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">03</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Ceramic Coating</div>
-        <div class="svc-slide-ds">Nano-ceramic protection with deep gloss. 9H hardness, hydrophobic finish. ₹15K–₹60K.</div>
-        <span class="svc-slide-tag tag-prem">Premium</span>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">04</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Body Kits &amp; Aero</div>
-        <div class="svc-slide-ds">BMW, Mercedes, Audi. 116 kits in our catalogue. Custom wide-body and bumper replacements.</div>
+
+    <div class="svc-slide t-tall" style="background:#1e1e1e">
+      <div class="svc-n">02</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <span class="svc-tag-l tag-prem">Premium</span>
+        <div class="svc-nm">Paint Protection Film</div>
+        <div class="svc-ds">Military-grade film against chips, scratches &amp; UV.</div>
       </div>
     </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">05</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Custom Wraps &amp; Vinyl</div>
-        <div class="svc-slide-ds">Full wraps, partial wraps, carbon vinyl, chrome delete. Any colour. Any finish.</div>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">06</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Alloy Wheels</div>
-        <div class="svc-slide-ds">OEM replacements, aftermarket upgrades, custom offsets and refurbishment for all makes.</div>
+
+    <div class="svc-slide t-tall" style="background:#232323">
+      <div class="svc-n">03</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <span class="svc-tag-l tag-prem">Premium</span>
+        <div class="svc-nm">Ceramic Coating</div>
+        <div class="svc-ds">9H nano-ceramic, deep gloss, hydrophobic. ₹15K–₹60K.</div>
       </div>
     </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">07</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Performance Exhausts</div>
-        <div class="svc-slide-ds">Sport and valvetronic exhaust systems. Stock, catback and fully custom setups.</div>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">08</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Window Tinting</div>
-        <div class="svc-slide-ds">Premium ceramic window tints. UV protection, heat rejection, enhanced privacy.</div>
+
+    <div class="svc-slide t-wide" style="background:#2a2a2a">
+      <div class="svc-n">04</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Body Kits &amp; Aero</div>
+        <div class="svc-ds">116 kits across BMW, Mercedes, Audi. Custom wide-body and bumper replacements.</div>
       </div>
     </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">09</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Deep Interior Detailing</div>
-        <div class="svc-slide-ds">Steam-clean, shampoo and ozone treatment. ₹5K–₹7K. Done in 1–2 hours.</div>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">10</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Infotainment Upgrades</div>
-        <div class="svc-slide-ds">Apple CarPlay, Android Auto and full AV system upgrades for every make and model.</div>
+
+    <div class="svc-slide t-std" style="background:#1e1e1e">
+      <div class="svc-n">05</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Custom Wraps &amp; Vinyl</div>
+        <div class="svc-ds">Full wraps, carbon vinyl, chrome delete. Any colour, any finish.</div>
       </div>
     </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">11</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Suspension Mods</div>
-        <div class="svc-slide-ds">Ride height, stance, coilovers, airbag suspension and performance handling upgrades.</div>
-      </div>
-    </div>
-    <div class="svc-slide">
-      <div class="svc-slide-img">
-        <div class="svc-slide-num">12</div>
-        <div class="svc-slide-ph">Image Coming Soon</div>
-      </div>
-      <div class="svc-slide-body">
-        <div class="svc-slide-nm">Custom Steering Wheels</div>
-        <div class="svc-slide-ds">OEM replacement and premium aftermarket steering wheels. Browse our 12-wheel catalogue.</div>
+
+    <div class="svc-slide t-tall" style="background:#252525">
+      <div class="svc-n">06</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Alloy Wheels</div>
+        <div class="svc-ds">OEM replacements, aftermarket upgrades, custom offsets.</div>
       </div>
     </div>
+
+    <div class="svc-slide t-std" style="background:#1c1c1c">
+      <div class="svc-n">07</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Performance Exhausts</div>
+        <div class="svc-ds">Sport and valvetronic systems. Stock, catback, fully custom.</div>
+      </div>
+    </div>
+
+    <div class="svc-slide t-tall" style="background:#222222">
+      <div class="svc-n">08</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Window Tinting</div>
+        <div class="svc-ds">Premium ceramic tints. UV protection, heat rejection, privacy.</div>
+      </div>
+    </div>
+
+    <div class="svc-slide t-std" style="background:#262626">
+      <div class="svc-n">09</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Deep Interior Detailing</div>
+        <div class="svc-ds">Steam-clean, shampoo, ozone treatment. ₹5K–₹7K.</div>
+      </div>
+    </div>
+
+    <div class="svc-slide t-wide" style="background:#1e1e1e">
+      <div class="svc-n">10</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Infotainment Upgrades</div>
+        <div class="svc-ds">Apple CarPlay, Android Auto and full AV upgrades for every make.</div>
+      </div>
+    </div>
+
+    <div class="svc-slide t-tall" style="background:#232323">
+      <div class="svc-n">11</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Suspension Mods</div>
+        <div class="svc-ds">Coilovers, airbag, stance, performance handling.</div>
+      </div>
+    </div>
+
+    <div class="svc-slide t-std" style="background:#252525">
+      <div class="svc-n">12</div>
+      <div class="svc-img"><span class="svc-ph">Photo Coming Soon</span></div>
+      <div class="svc-body">
+        <div class="svc-nm">Custom Steering Wheels</div>
+        <div class="svc-ds">OEM replacement and premium aftermarket steering wheels.</div>
+      </div>
+    </div>
+
   </div>
   <div class="wrap">
     <div class="svc-nav">
-      <button class="svc-nav-btn" id="svcPrev" aria-label="Previous service">&#8592;</button>
-      <button class="svc-nav-btn" id="svcNext" aria-label="Next service">&#8594;</button>
-      <div class="svc-nav-dots" id="svcDots"></div>
+      <button class="svc-nav-btn" id="svcPrev" aria-label="Previous">&#8592;</button>
+      <div class="svc-prog"><div class="svc-prog-fill" id="svcFill"></div></div>
+      <button class="svc-nav-btn" id="svcNext" aria-label="Next">&#8594;</button>
+      <span class="svc-counter" id="svcCounter">01 / 12</span>
     </div>
-    <p class="svc-more" data-rv="up"><strong>Can't find your modification?</strong> The 12 above are just where we <em>start</em>. From custom roll cages to track-day prep — we do it all. <a href="https://wa.me/918019065252" target="_blank" rel="noopener">Tell us your idea →</a></p>
+    <p class="svc-more" data-rv="up"><strong>Can't find your modification?</strong> The 12 above are just where we <em>start</em>. <a href="https://wa.me/918019065252" target="_blank" rel="noopener">Tell us your idea →</a></p>
   </div>
 </section>
 
@@ -942,33 +933,34 @@ window.addEventListener('scroll',()=>{
 /* ── SERVICES SLIDER ─────────────────── */
 (function(){
   const track=document.getElementById('svcTrack');
-  const dotsWrap=document.getElementById('svcDots');
+  const fill=document.getElementById('svcFill');
+  const counter=document.getElementById('svcCounter');
   const prev=document.getElementById('svcPrev');
   const next=document.getElementById('svcNext');
   if(!track)return;
-  const slides=track.querySelectorAll('.svc-slide');
+  const slides=Array.from(track.querySelectorAll('.svc-slide'));
+  const n=slides.length;
   let cur=0;
-  slides.forEach((_,i)=>{
-    const d=document.createElement('div');
-    d.className='svc-nav-dot'+(i===0?' on':'');
-    dotsWrap.appendChild(d);
-  });
-  function dots(){
-    dotsWrap.querySelectorAll('.svc-nav-dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
-  }
-  function gap(){return parseInt(getComputedStyle(track).gap)||2;}
-  function slideW(){return slides[0].offsetWidth+gap();}
+  let pad0=0;
+  function init(){pad0=slides[0]?slides[0].offsetLeft:0;}
   function go(idx){
-    cur=Math.max(0,Math.min(idx,slides.length-1));
-    track.scrollTo({left:cur*slideW(),behavior:'smooth'});
-    dots();
+    cur=Math.max(0,Math.min(idx,n-1));
+    track.style.transform='translateX(-'+(slides[cur].offsetLeft-pad0)+'px)';
+    if(fill)fill.style.width=((cur/(n-1))*100)+'%';
+    if(counter)counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(n).padStart(2,'0');
   }
-  if(prev)prev.onclick=()=>go(cur-1);
-  if(next)next.onclick=()=>go(cur+1);
-  track.addEventListener('scroll',()=>{
-    const i=Math.round(track.scrollLeft/slideW());
-    if(i!==cur){cur=i;dots();}
+  if(prev)prev.addEventListener('click',()=>go(cur-1));
+  if(next)next.addEventListener('click',()=>go(cur+1));
+  let tx=null;
+  track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{
+    if(tx===null)return;
+    const d=tx-e.changedTouches[0].clientX;
+    if(Math.abs(d)>50)go(d>0?cur+1:cur-1);
+    tx=null;
   },{passive:true});
+  window.addEventListener('resize',()=>{init();go(cur);},{passive:true});
+  init();go(0);
 })();
 
 /* ── CATALOGUE PREVIEW ───────────────── */
