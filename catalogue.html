@@ -330,13 +330,18 @@ body{
 .kit-img-wrap img{
   width:100%;height:100%;
   object-fit:contain;
-  /* invert flips white→black (matches dark bg), hue-rotate(180°) cancels the hue shift on colours — product colours stay accurate */
-  filter:invert(1) hue-rotate(180deg);
   transition:transform .55s cubic-bezier(.4,0,.2,1);
 }
-.kit-card:hover .kit-img-wrap img{
-  transform:scale(1.04);
+/* Parts images (full-kit, bumper-only, steering-wheel) — white bg → dark via invert */
+.kit-img-wrap img.img-parts{
+  filter:invert(1) hue-rotate(180deg);
 }
+/* Car photos (before-after) — show naturally, just brighten slightly */
+.kit-img-wrap img.img-photo{
+  object-fit:cover;
+  filter:brightness(0.88) contrast(1.05);
+}
+.kit-card:hover .kit-img-wrap img{transform:scale(1.04)}
 
 /* Right content area */
 .kit-info{
@@ -851,9 +856,10 @@ function buildKitGrid(cat, brand, model){
     const waMsg = encodeURIComponent(`Hi, I'm interested in the ${kit.kitName}. Please share details and pricing.`);
     const card = document.createElement('div');
     card.className = 'kit-card';
+    const imgClass = kit.kitType === 'before-after' ? 'img-photo' : 'img-parts';
     card.innerHTML = `
       <div class="kit-img-wrap">
-        <img src="${kit.image}" alt="${kit.kitName}" loading="lazy" />
+        <img src="${kit.image}" alt="${kit.kitName}" loading="lazy" class="${imgClass}" />
       </div>
       <div class="kit-info">
         <div class="kit-info-top">
