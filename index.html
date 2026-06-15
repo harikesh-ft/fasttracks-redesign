@@ -1,1714 +1,913 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Fasttracks Car Care — India's Biggest Instant Car Modification Studio</title>
-<meta name="description" content="Fasttracks Car Care, Jubilee Hills Hyderabad. Luxury Recliners, PPF, Body Kits, Steering Wheels and 12+ services. Book on WhatsApp." />
-<link rel="icon" type="image/png" href="fasttracks_icon.png" />
-<link rel="apple-touch-icon" href="fasttracks_icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+<meta name="description" content="Premium body kits, luxury recliners, PPF, ceramic coating and 12+ services. 50,000 sq ft studio, Jubilee Hills Hyderabad."/>
+<link rel="icon" type="image/png" href="fasttracks_icon.png"/>
+<link rel="apple-touch-icon" href="fasttracks_icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
-/* ── RESET ───────────────────────────────────── */
+/* ── TOKENS ─────────────────────────── */
+:root{
+  --red:#E8000D; --gold:#C9973F;
+  --bg:#050505; --bg2:#0D0D0D; --bg3:#141414;
+  --txt:#F0F0F0; --dim:#888; --mute:#333;
+  --line:rgba(255,255,255,.07);
+  --pad:clamp(20px,5vw,80px); --max:1320px;
+}
+
+/* ── RESET ──────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+body{font-family:'Schibsted Grotesk',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;cursor:none}
 img{display:block}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
-button{cursor:pointer;background:none;border:none}
-
-/* ── TOKENS ──────────────────────────────────── */
-:root{
-  --red:#E8000D;
-  --gold:#C9973F;
-  --bg:#050505;
-  --bg2:#0D0D0D;
-  --bg3:#141414;
-  --txt:#F0F0F0;
-  --dim:#888;
-  --mute:#444;
-  --line:rgba(255,255,255,0.07);
-  --pad:60px;
-  --max:1280px;
-}
-
-/* ── BASE ────────────────────────────────────── */
-body{
-  font-family:'Montserrat',sans-serif;
-  background:var(--bg);
-  color:var(--txt);
-  overflow-x:hidden;
-}
+button{cursor:none;background:none;border:none;font-family:inherit}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-.label{
-  font-size:10px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;
-  color:var(--dim);
-}
-.red-label{color:var(--red)}
-.gold-label{color:var(--gold)}
-.display{
-  font-family:'Bebas Neue',sans-serif;
-  line-height:.92;letter-spacing:.02em;
-}
 
-/* ── FLOATING WA ─────────────────────────────── */
-.wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:900;
-  width:54px;height:54px;border-radius:50%;
-  background:#25D366;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 20px rgba(37,211,102,.35);
-  transition:transform .2s,box-shadow .2s;
-}
-.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.5)}
+/* ── LOADER ─────────────────────────── */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .7s .1s,visibility .7s .1s}
+#loader.out{opacity:0;visibility:hidden}
+.ld-icon{height:36px;filter:brightness(0) invert(1);animation:ld-pulse 1.4s ease-in-out infinite}
+@keyframes ld-pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.ld-track{width:180px;height:1px;background:var(--mute);overflow:hidden}
+.ld-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red));transition:width .06s linear}
+.ld-txt{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--dim)}
 
-/* ── NAVBAR ──────────────────────────────────── */
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:24px var(--pad);
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background .4s,padding .4s,border .4s;
-}
-#nav.scrolled{
-  background:rgba(5,5,5,.96);
-  padding:14px var(--pad);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(12px);
-}
-.nav-logo{display:flex;align-items:center}
-.nav-icon{height:30px;width:auto;max-width:none;filter:brightness(0) invert(1);transition:height .3s}
-#nav.scrolled .nav-icon{height:24px}
-.nav-links{
-  display:flex;align-items:center;gap:36px;
-}
-.nav-links a{
-  font-size:11px;font-weight:600;
-  letter-spacing:2.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.55);transition:color .2s;
-}
+/* ── CURSOR ─────────────────────────── */
+#cur-d{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cur-r{position:fixed;top:0;left:0;width:38px;height:38px;border:1px solid rgba(255,255,255,.25);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,opacity .25s}
+.hovering #cur-d{width:10px;height:10px;background:var(--gold)}
+.hovering #cur-r{width:54px;height:54px;border-color:rgba(201,151,63,.5)}
+
+/* ── SCROLL PROGRESS ────────────────── */
+#sprog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--red));z-index:1001;width:0;pointer-events:none}
+
+/* ── FLOAT WA ───────────────────────── */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:900;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);transition:transform .25s,box-shadow .25s;cursor:none}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,.5)}
+
+/* ── NAV ────────────────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;transition:background .4s,padding .35s,border .4s}
+#nav.scrolled{background:rgba(5,5,5,.95);padding:14px var(--pad);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}
+.nav-logo img{height:28px;width:auto;filter:brightness(0) invert(1);transition:height .3s}
+#nav.scrolled .nav-logo img{height:22px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .2s}
 .nav-links a:hover{color:var(--txt)}
-.nav-right{display:flex;align-items:center;gap:14px}
-.nav-cat{
-  font-size:10px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--gold);
-  border:1px solid var(--gold);padding:8px 18px;
-  transition:background .2s,color .2s;
-}
-.nav-cat:hover{background:var(--gold);color:#000}
-.nav-book{
-  font-size:10px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;
-  background:var(--red);color:#fff;
-  padding:10px 20px;
-  transition:background .2s;
-}
-.nav-book:hover{background:#c00010}
-.theme-btn{color:var(--dim);transition:color .2s;padding:4px;display:flex}
-.theme-btn:hover{color:var(--txt)}
-.theme-btn svg{width:18px;height:18px}
-.icon-sun{display:none}
-body.light .icon-moon{display:none}
-body.light .icon-sun{display:block}
+.nav-r{display:flex;align-items:center;gap:10px}
+.n-cat{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:7px 16px;transition:background .2s,color .2s}
+.n-cat:hover{background:var(--gold);color:#000}
+.n-book{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--red);color:#fff;padding:9px 18px;transition:background .2s}
+.n-book:hover{background:#c0000e}
 .burger{display:none;flex-direction:column;gap:5px;padding:4px}
 .burger span{display:block;width:22px;height:1.5px;background:var(--txt);transition:all .3s}
 .burger.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
 
-/* ── MOBILE NAV ──────────────────────────────── */
-#mob-nav{
-  position:fixed;inset:0;background:var(--bg);z-index:999;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:36px;
-  transform:translateY(-100%);
-  transition:transform .5s cubic-bezier(.76,0,.24,1);
-}
-#mob-nav.open{transform:translateY(0)}
-#mob-nav a{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,9vw,64px);letter-spacing:4px;
-  color:var(--txt);transition:color .2s;
-}
-#mob-nav a:hover{color:var(--red)}
-#mob-nav .mob-cat{color:var(--gold);font-size:clamp(28px,6vw,44px)}
+/* ── MOBILE NAV ─────────────────────── */
+#mob{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateY(-100%);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+#mob.open{transform:translateY(0)}
+#mob a{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,64px);letter-spacing:4px;color:var(--txt);transition:color .2s}
+#mob a:hover{color:var(--red)}
+#mob .m-cat{color:var(--gold);font-size:clamp(28px,6vw,44px)}
 
-/* ── HERO ────────────────────────────────────── */
-#home{
-  height:100vh;min-height:680px;
-  position:relative;display:flex;
-  align-items:center;justify-content:center;
-  text-align:center;
-  background:#000;
-  overflow:hidden;
-}
-/* gold spotlight glow */
-#home::before{
-  content:'';
-  position:absolute;
-  top:-10%;left:50%;
-  transform:translateX(-50%);
-  width:900px;height:700px;
-  background:radial-gradient(ellipse,rgba(201,151,63,.18) 0%,rgba(201,151,63,.06) 35%,transparent 70%);
-  pointer-events:none;z-index:1;
-}
-/* diagonal speed lines */
-#home::after{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    linear-gradient(135deg,transparent 49%,rgba(201,151,63,.04) 49%,rgba(201,151,63,.04) 50%,transparent 50%),
-    linear-gradient(135deg,transparent 64%,rgba(201,151,63,.03) 64%,rgba(201,151,63,.03) 65%,transparent 65%),
-    linear-gradient(-45deg,transparent 55%,rgba(232,0,13,.03) 55%,rgba(232,0,13,.03) 56%,transparent 56%);
-  pointer-events:none;z-index:1;
-}
-.hero-bg{display:none}
-.hero-overlay{display:none}
-/* ghost text */
-.hero-ghost{
-  position:absolute;
-  bottom:-24px;left:50%;
-  transform:translateX(-50%);
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(100px,22vw,240px);
-  color:rgba(201,151,63,.055);
-  letter-spacing:12px;white-space:nowrap;
-  z-index:1;pointer-events:none;user-select:none;
-  line-height:1;
-}
-/* corner brackets */
-.hero-corner{
-  position:absolute;width:50px;height:50px;z-index:2;
-}
-.hc-tl{top:80px;left:40px;border-top:1px solid rgba(201,151,63,.5);border-left:1px solid rgba(201,151,63,.5)}
-.hc-tr{top:80px;right:40px;border-top:1px solid rgba(201,151,63,.5);border-right:1px solid rgba(201,151,63,.5)}
-.hc-bl{bottom:60px;left:40px;border-bottom:1px solid rgba(201,151,63,.5);border-left:1px solid rgba(201,151,63,.5)}
-.hc-br{bottom:60px;right:40px;border-bottom:1px solid rgba(201,151,63,.5);border-right:1px solid rgba(201,151,63,.5)}
-/* car silhouette */
-.hero-car{
-  position:absolute;bottom:60px;left:50%;
-  transform:translateX(-50%);
-  width:min(900px,90vw);z-index:1;
-  opacity:.12;pointer-events:none;
-}
-/* feature strip */
-.feat-strip{
-  background:var(--bg2);
-  border-bottom:1px solid var(--line);
-}
-.feat-inner{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  max-width:var(--max);margin:0 auto;
-}
-.feat-item{
-  padding:28px 24px;
-  display:flex;flex-direction:column;gap:10px;
-  border-right:1px solid var(--line);
-  position:relative;
-}
-.feat-item:last-child{border-right:none}
-.feat-item::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:2px;background:var(--gold);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .4s;
-}
-.feat-item:hover::after{transform:scaleX(1)}
-.feat-ico{
-  width:24px;height:24px;color:var(--gold);
-}
-.feat-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:18px;letter-spacing:1px;color:var(--txt);
-}
-.feat-desc{
-  font-size:11px;color:var(--dim);
-  line-height:1.6;letter-spacing:.3px;
-}
-@media(max-width:768px){
-  .feat-inner{grid-template-columns:1fr 1fr}
-  .feat-item:nth-child(2){border-right:none}
-  .feat-item:nth-child(3){border-right:1px solid var(--line)}
-  .feat-item:nth-child(3),.feat-item:nth-child(4){border-top:1px solid var(--line)}
-}
-.hero-content{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;
-  align-items:center;gap:18px;
-  padding:0 20px;
-}
-.hero-eyebrow{
-  font-size:10px;font-weight:600;
-  letter-spacing:5px;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
-}
-.hero-gold-bar{
-  display:flex;align-items:center;gap:14px;
-  margin:4px 0;
-}
-.hero-gold-bar span{
-  flex:1;height:1px;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-  max-width:100px;
-}
-.hero-gold-bar i{
-  font-style:normal;font-size:12px;
-  color:var(--gold);letter-spacing:6px;
-  font-weight:400;
-}
-.hero-wm{
-  width:min(640px,82vw);
-}
-.hero-wm img{
-  width:100%;height:auto;
-  max-width:none;
-  filter:brightness(0) invert(1);
-}
-.hero-sub{
-  font-size:clamp(9px,1.1vw,11px);
-  font-weight:500;letter-spacing:4px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.4);
-  margin-top:-6px;
-}
-.hero-btns{
-  display:flex;gap:14px;margin-top:8px;
-  flex-wrap:wrap;justify-content:center;
-}
-.btn-red{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--red);color:#fff;
-  font-size:10px;font-weight:700;
-  letter-spacing:2.5px;text-transform:uppercase;
-  padding:14px 28px;
-  transition:background .2s,transform .2s;
-}
-.btn-red:hover{background:#c00010;transform:translateY(-2px)}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:10px;
-  background:transparent;color:var(--txt);
-  font-size:10px;font-weight:700;
-  letter-spacing:2.5px;text-transform:uppercase;
-  padding:14px 28px;
-  border:1px solid rgba(255,255,255,.25);
-  transition:border-color .2s,transform .2s;
-}
-.btn-ghost:hover{border-color:var(--txt);transform:translateY(-2px)}
-.hero-scroll{
-  position:absolute;bottom:28px;left:50%;
-  transform:translateX(-50%);z-index:2;
-  display:flex;flex-direction:column;
-  align-items:center;gap:10px;
-}
-.hero-scroll-line{
-  width:1px;height:44px;
-  background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);
-  animation:sline 1.8s ease-in-out infinite;
-}
-.hero-scroll-txt{
-  font-size:8px;letter-spacing:4px;
-  text-transform:uppercase;color:var(--mute);
-}
-@keyframes sline{
-  0%{transform:scaleY(0);transform-origin:top}
-  50%{transform:scaleY(1);transform-origin:top}
-  50.01%{transform-origin:bottom}
-  100%{transform:scaleY(0);transform-origin:bottom}
-}
+/* ── HERO ───────────────────────────── */
+#home{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;background:#000;overflow:hidden}
+#hero-c{position:absolute;inset:0;z-index:0}
+.h-geo{position:absolute;inset:0;z-index:1;pointer-events:none}
+.h-geo::before{content:'';position:absolute;top:-8%;left:50%;transform:translateX(-50%);width:1000px;height:700px;background:radial-gradient(ellipse,rgba(232,0,13,.11) 0%,rgba(201,151,63,.06) 35%,transparent 65%)}
+.h-geo::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 48%,rgba(201,151,63,.03) 48%,rgba(201,151,63,.03) 49.5%,transparent 49.5%),linear-gradient(-45deg,transparent 56%,rgba(232,0,13,.025) 56%,rgba(232,0,13,.025) 57.5%,transparent 57.5%)}
+.h-ghost{position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,19vw,210px);color:rgba(201,151,63,.04);letter-spacing:10px;white-space:nowrap;z-index:1;pointer-events:none;line-height:1;user-select:none;will-change:transform}
+.hc{position:absolute;width:46px;height:46px;z-index:2}
+.hc-tl{top:88px;left:36px;border-top:1px solid rgba(201,151,63,.4);border-left:1px solid rgba(201,151,63,.4)}
+.hc-tr{top:88px;right:36px;border-top:1px solid rgba(201,151,63,.4);border-right:1px solid rgba(201,151,63,.4)}
+.hc-bl{bottom:56px;left:36px;border-bottom:1px solid rgba(201,151,63,.4);border-left:1px solid rgba(201,151,63,.4)}
+.hc-br{bottom:56px;right:36px;border-bottom:1px solid rgba(201,151,63,.4);border-right:1px solid rgba(201,151,63,.4)}
+.h-inner{position:relative;z-index:3}
+.h-loc{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:28px;opacity:0;animation:fuA .8s 1.3s cubic-bezier(.2,.8,.2,1) forwards}
+.h-wm{display:block;height:clamp(38px,7.5vw,86px);width:auto;margin:0 auto 20px;opacity:0;animation:wmIn 1s 1s cubic-bezier(.2,.8,.2,1) forwards}
+.h-sep{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:20px;opacity:0;animation:fuA .8s 1.5s cubic-bezier(.2,.8,.2,1) forwards}
+.h-sep em{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;color:var(--gold);font-style:normal;text-transform:uppercase}
+.h-sep span{display:block;width:44px;height:1px;background:rgba(255,255,255,.12)}
+.h-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,3.5vw,40px);letter-spacing:5px;color:rgba(255,255,255,.5);margin-bottom:38px;opacity:0;animation:fuA .8s 1.65s cubic-bezier(.2,.8,.2,1) forwards}
+.h-ctas{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;opacity:0;animation:fuA .8s 1.85s cubic-bezier(.2,.8,.2,1) forwards}
+.btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-family:'Schibsted Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border-radius:30px;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-red:hover{background:#c0000e;transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,0,13,.35)}
+.btn-out{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);color:var(--txt);font-family:'Schibsted Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border-radius:30px;transition:border-color .2s,background .2s,transform .2s}
+.btn-out:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.04);transform:translateY(-2px)}
+.h-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fuA .8s 2.2s forwards}
+.sw{width:20px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:10px;position:relative}
+.sw-d{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:3px;height:6px;background:var(--gold);border-radius:2px;animation:swAn 1.8s ease-in-out infinite}
+.h-scroll-txt{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.25)}
+@keyframes fuA{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes wmIn{from{opacity:0;transform:scale(.88) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes swAn{0%{opacity:1;top:5px}80%{opacity:0;top:16px}100%{opacity:0;top:5px}}
 
-/* ── ABOUT ───────────────────────────────────── */
-#about{padding:120px 0;background:var(--bg)}
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:start;
-}
-.about-eyebrow{
-  display:flex;align-items:center;gap:14px;
-  margin-bottom:24px;
-}
-.about-eyebrow::after{
-  content:'';flex:1;height:1px;
-  background:var(--line);max-width:60px;
-}
-.about-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(64px,9vw,120px);
-  line-height:.88;margin-bottom:28px;
-}
-.about-heading .num{color:var(--red)}
-.about-heading .sm{
-  font-size:clamp(28px,4vw,50px);
-  color:rgba(240,240,240,.5);
-}
-.about-text{
-  font-size:14px;line-height:1.9;
-  color:var(--dim);margin-bottom:44px;
-  max-width:460px;
-}
-.stats-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--line);
-}
-.stat{
-  padding:22px 16px;text-align:center;
-  border-right:1px solid var(--line);
-}
-.stat:last-child{border-right:none}
-.stat-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:40px;color:var(--gold);
-  line-height:1;margin-bottom:6px;
-}
-.stat-n em{color:var(--red);font-style:normal}
-.stat-l{
-  font-size:8px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--mute);
-}
-/* Founder */
-/* about badge — replaces founder photo card */
-.about-badge{
-  height:100%;min-height:400px;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(201,151,63,.2);
-  position:relative;overflow:hidden;
-  background:var(--bg2);
-}
-.about-badge::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 40%,rgba(201,151,63,.1) 0%,transparent 65%);
-}
-/* corner micro-brackets */
-.about-badge::after{
-  content:'';position:absolute;
-  top:16px;left:16px;
-  width:24px;height:24px;
-  border-top:1px solid rgba(201,151,63,.4);
-  border-left:1px solid rgba(201,151,63,.4);
-}
-.badge-inner{
-  position:relative;z-index:1;
-  text-align:center;padding:48px 40px;
-}
-.badge-est{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:14px;letter-spacing:8px;
-  color:var(--gold);opacity:.6;
-  margin-bottom:0;
-}
-.badge-year{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(100px,14vw,160px);
-  line-height:.85;color:var(--txt);
-  letter-spacing:-4px;
-}
-.badge-divider{
-  display:flex;align-items:center;gap:12px;
-  justify-content:center;
-  margin:20px 0;
-}
-.badge-divider span{
-  flex:1;max-width:80px;
-  height:1px;background:rgba(201,151,63,.35);
-}
-.badge-divider i{
-  font-style:normal;color:var(--gold);font-size:10px;
-}
-.badge-loc{
-  font-size:11px;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;color:var(--dim);
-  margin-bottom:12px;
-}
-.badge-tagline{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:16px;letter-spacing:4px;
-  color:var(--gold);opacity:.8;
-}
+/* ── MARQUEE ────────────────────────── */
+.mq-wrap{overflow:hidden;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 0}
+.mq-track{display:flex;white-space:nowrap;animation:mqMove 28s linear infinite}
+.mq-wrap:hover .mq-track{animation-play-state:paused}
+.mq-item{display:inline-flex;align-items:center;gap:18px;padding:0 20px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.mq-item em{color:var(--gold);font-style:normal}
+.mq-dot{width:3px;height:3px;background:var(--red);border-radius:50%;display:inline-block;flex-shrink:0}
+@keyframes mqMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── SERVICES ────────────────────────────────── */
-#services{
-  padding:120px 0;background:var(--bg2);
-  border-top:1px solid var(--line);
-}
-.svc-top{
-  display:flex;align-items:flex-end;
-  justify-content:space-between;
-  gap:40px;margin-bottom:64px;
-  flex-wrap:wrap;
-}
-.svc-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.svc-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,7vw,96px);
-  line-height:.9;color:var(--txt);
-}
-.svc-sub{
-  font-size:13px;line-height:1.8;
-  color:var(--dim);max-width:300px;
-}
-.svc-list{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--line);
-  border:1px solid var(--line);
-  margin-bottom:48px;
-}
-.svc-row{
-  background:var(--bg2);
-  padding:32px 28px 28px;
-  display:flex;flex-direction:column;gap:10px;
-  position:relative;overflow:hidden;
-  transition:background .25s;cursor:default;
-}
-.svc-row::after{
-  content:'';
-  position:absolute;bottom:0;left:0;right:0;
-  height:2px;background:var(--red);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .3s;
-}
-.svc-row:hover{background:var(--bg3)}
-.svc-row:hover::after{transform:scaleX(1)}
-.svc-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:52px;line-height:1;
-  color:rgba(255,255,255,.06);
-  transition:color .25s;
-  margin-bottom:4px;
-}
-.svc-row:hover .svc-n{color:rgba(232,0,13,.25)}
-.svc-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(17px,1.8vw,22px);
-  letter-spacing:.5px;color:var(--txt);
-  line-height:1.15;
-}
-.svc-desc{
-  font-size:12px;line-height:1.75;
-  color:var(--dim);flex:1;
-}
-.svc-tag{
-  font-size:8px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  padding:4px 10px;border:1px solid;
-  align-self:flex-start;margin-top:6px;
-}
-.svc-tag.pop{color:var(--red);border-color:var(--red)}
-.svc-tag.gold{color:var(--gold);border-color:var(--gold)}
-.svc-icon{
-  width:28px;height:28px;
-  color:var(--gold);opacity:.7;
-  margin-bottom:8px;flex-shrink:0;
-  transition:opacity .25s;
-}
-.svc-row:hover .svc-icon{opacity:1}
-/* ── PRESTIGE BAR ─────────────────────────────── */
-.prestige-bar{
-  background:var(--bg);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:20px 0;overflow:hidden;
-}
-.prestige-inner{
-  display:flex;align-items:center;justify-content:center;
-  gap:32px;flex-wrap:nowrap;overflow:hidden;
-}
-.prestige-inner span{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:13px;letter-spacing:8px;
-  color:var(--gold);opacity:.75;
-}
-.prestige-inner i{
-  font-style:normal;color:var(--red);
-  font-size:6px;line-height:1;
-}
-.svc-more{
-  font-size:13px;color:var(--dim);line-height:1.8;
-}
-.svc-more strong{color:var(--txt);font-weight:600}
+/* ── REVEAL ─────────────────────────── */
+[data-rv]{opacity:0;transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1)}
+[data-rv="up"]{transform:translateY(44px)}
+[data-rv="left"]{transform:translateX(-56px)}
+[data-rv="right"]{transform:translateX(56px)}
+[data-rv="scale"]{transform:scale(.9)}
+[data-rv="fade"]{transform:none}
+[data-rv].vis{opacity:1;transform:none}
 
-/* ── CATALOGUE PREVIEW ───────────────────────── */
-#catalogue{
-  padding:120px 0 80px;background:var(--bg);
-  border-top:1px solid var(--line);
-}
-.cat-top{
-  display:grid;grid-template-columns:1fr auto;
-  align-items:end;gap:32px;margin-bottom:52px;
-}
-.cat-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.cat-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(48px,7vw,96px);
-  line-height:.9;
-}
-.cat-heading span{color:var(--gold)}
-.cat-sub{
-  font-size:13px;line-height:1.8;
-  color:var(--dim);margin-top:14px;max-width:500px;
-}
-.cat-view-all{
-  font-size:10px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--gold);white-space:nowrap;
-  display:inline-flex;align-items:center;gap:8px;
-  transition:gap .2s;border-bottom:1px solid transparent;
-  padding-bottom:2px;
-}
-.cat-view-all:hover{gap:14px;border-color:var(--gold)}
-/* Scroll track */
-.cat-track{
-  display:flex;gap:16px;
-  overflow-x:auto;scrollbar-width:none;
-  padding-bottom:8px;margin-bottom:48px;
-  -webkit-overflow-scrolling:touch;
-}
-.cat-track::-webkit-scrollbar{display:none}
-.pcard{
-  flex:0 0 240px;
-  background:var(--bg2);border:1px solid var(--line);
-  overflow:hidden;transition:border-color .25s;
-}
-.pcard:hover{border-color:rgba(255,255,255,.15)}
-.pcard-img{
-  aspect-ratio:4/3;background:var(--bg3);
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:10px;
-  overflow:hidden;position:relative;
-}
-.pcard-img img{
-  width:100%;height:100%;
-  object-fit:cover;transition:transform .4s;
-}
-.pcard:hover .pcard-img img{transform:scale(1.05)}
-.pcard-ph{
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:8px;width:100%;height:100%;
-}
-.pcard-ph svg{width:28px;height:28px;opacity:.2;color:var(--dim)}
-.pcard-ph span{
-  font-size:8px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--mute);
-}
-.pcard-body{padding:16px 18px 20px}
-.pcard-brand{
-  font-size:8px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:6px;
-}
-.pcard-name{
-  font-size:13px;font-weight:700;
-  color:var(--txt);line-height:1.4;margin-bottom:14px;
-}
-.pcard-wa{
-  display:flex;align-items:center;gap:8px;
-  font-size:9px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;color:#25D366;
-  border:1px solid rgba(37,211,102,.25);
-  padding:8px 14px;transition:background .2s,color .2s;
-}
-.pcard-wa:hover{background:#25D366;color:#000}
-/* CTA strip */
-.cat-cta{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  border:1px solid var(--line);
-  padding:28px 36px;
-  transition:border-color .2s;
-}
-.cat-cta:hover{border-color:var(--gold)}
-.cat-cta-txt{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(20px,3vw,36px);
-  letter-spacing:2px;
-}
-.cat-cta-txt span{color:var(--gold)}
-.cat-cta-btn{
-  font-size:10px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  background:var(--gold);color:#000;
-  padding:14px 26px;flex-shrink:0;
-  transition:background .2s,transform .2s;
-}
-.cat-cta-btn:hover{background:#dba830;transform:translateY(-2px)}
+/* ── SHARED ─────────────────────────── */
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ey-n{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red)}
+.ey-t{font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--dim)}
+.s-head{font-family:'Bebas Neue',sans-serif;font-size:clamp(50px,7.5vw,96px);letter-spacing:2px;line-height:.93}
+.s-sub{font-size:15px;font-weight:300;color:var(--dim);line-height:1.75;max-width:500px}
+.gold{color:var(--gold)}
+.red{color:var(--red)}
 
-/* ── DIVIDER PHOTO ───────────────────────────── */
-.photo-div{
-  height:clamp(300px,50vh,520px);
-  position:relative;overflow:hidden;
-}
-.photo-div-bg{
-  position:absolute;inset:-10%;
-  background:url('lambo.jpg') center 40% / cover no-repeat;
-  transform:scale(1.1);
-}
-.photo-div-ov{
-  position:absolute;inset:0;
-  background:rgba(5,5,5,.62);
-  display:flex;align-items:center;justify-content:center;
-}
-.photo-div-txt{text-align:center}
-.photo-div-pre{
-  font-size:10px;font-weight:700;
-  letter-spacing:6px;text-transform:uppercase;
-  color:rgba(255,255,255,.4);margin-bottom:14px;
-}
-.photo-div-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(36px,7vw,88px);
-  letter-spacing:.03em;line-height:.92;
-}
-.photo-div-heading .red{color:var(--red)}
+/* ── SERVICES ───────────────────────── */
+#services{padding:110px 0;background:var(--bg)}
+.svc-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:56px;flex-wrap:wrap}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);background:var(--line);gap:1px}
+.svc-c{background:var(--bg2);padding:30px 26px 28px;display:flex;flex-direction:column;gap:14px;cursor:none;position:relative;overflow:hidden;transition:background .25s}
+.svc-c::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(201,151,63,.07) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
+.svc-c:hover::before{opacity:1}
+.svc-c:hover{background:var(--bg3)}
+.svc-ico{width:32px;height:32px;color:var(--gold);opacity:.65;flex-shrink:0;transition:opacity .25s,transform .35s}
+.svc-c:hover .svc-ico{opacity:1;transform:scale(1.12) rotate(-6deg)}
+.svc-nm{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1.5px;transition:color .2s}
+.svc-c:hover .svc-nm{color:var(--gold)}
+.svc-ds{font-size:12px;font-weight:300;color:var(--dim);line-height:1.65}
+.svc-tag{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px;width:fit-content}
+.svc-tag.pop{background:rgba(232,0,13,.15);color:var(--red);border:1px solid rgba(232,0,13,.2)}
+.svc-tag.prem{background:rgba(201,151,63,.12);color:var(--gold);border:1px solid rgba(201,151,63,.2)}
+.svc-arr{position:absolute;bottom:22px;right:22px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .25s,transform .25s;font-size:18px}
+.svc-c:hover .svc-arr{opacity:1;transform:translateX(0)}
+.svc-more{margin-top:40px;font-size:14px;color:var(--dim);line-height:1.7}
+.svc-more a{color:var(--red);transition:opacity .2s}
+.svc-more a:hover{opacity:.75}
 
-/* ── RECLINERS ───────────────────────────────── */
-#recliners{
-  padding:120px 0;background:var(--bg2);
-  border-top:1px solid var(--line);
-}
-.rec-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;
-}
-.rec-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.rec-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(44px,6vw,78px);
-  line-height:.92;margin-bottom:24px;
-}
-.rec-heading .red{color:var(--red)}
-.rec-text{
-  font-size:14px;line-height:1.9;
-  color:var(--dim);margin-bottom:32px;
-}
-.rec-vehicles{
-  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;
-}
-.vpill{
-  font-size:9px;font-weight:600;letter-spacing:1px;
-  padding:6px 14px;border:1px solid var(--line);
-  color:var(--dim);transition:border-color .2s,color .2s;
-}
-.vpill:hover{border-color:var(--txt);color:var(--txt)}
-.rec-visual{
-  width:100%;max-width:400px;aspect-ratio:1;
-  background:var(--bg3);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  font-size:88px;position:relative;overflow:hidden;
-  margin:0 auto;
-}
-.rec-ring{
-  position:absolute;
-  width:80%;height:80%;border-radius:50%;
-  border:1px solid rgba(232,0,13,.12);
-}
-.rec-ring2{
-  position:absolute;
-  width:58%;height:58%;border-radius:50%;
-  border:1px solid rgba(201,151,63,.1);
-}
-/* Marquee */
-.marquee-wrap{
-  overflow:hidden;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:18px 0;margin-top:80px;
-  white-space:nowrap;
-}
-.marquee-inner{
-  display:inline-flex;gap:40px;
-  animation:mq 30s linear infinite;
-}
-.marquee-inner span{
-  font-size:10px;font-weight:600;
-  letter-spacing:3px;text-transform:uppercase;
-  color:var(--mute);
-}
-.marquee-inner .dot{color:var(--red);letter-spacing:0}
-@keyframes mq{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+/* ── BRAND SHOWCASE ─────────────────── */
+#brands{padding:110px 0 0;background:var(--bg2)}
+.br-intro{text-align:center;margin-bottom:64px}
+.br-intro .eyebrow{justify-content:center}
+.br-intro .s-sub{margin:20px auto 0}
+.br-panels{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.bp{position:relative;height:540px;overflow:hidden;cursor:none}
+.bp-bg{position:absolute;inset:0;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.bp:hover .bp-bg{transform:scale(1.06)}
+.bp-glow{position:absolute;inset:0;opacity:0;transition:opacity .45s}
+.bp:hover .bp-glow{opacity:1}
+.bp-glare{position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.055) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
+.bp:hover .bp-glare{opacity:1}
+.bp-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.35) 50%,rgba(0,0,0,.08) 100%)}
+.bp-in{position:absolute;inset:0;padding:36px 40px;display:flex;flex-direction:column;justify-content:space-between}
+.bp-top{display:flex;justify-content:space-between;align-items:flex-start}
+.bp-label{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.bp-cnt{text-align:right}
+.bp-cnt .n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--gold);transition:letter-spacing .35s}
+.bp:hover .bp-cnt .n{letter-spacing:3px}
+.bp-cnt .l{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.bp-bot{}
+.bp-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,5.5vw,86px);letter-spacing:2px;line-height:.9;margin-bottom:8px;transition:letter-spacing .4s}
+.bp:hover .bp-name{letter-spacing:4px}
+.bp-type{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:10px}
+.bp-models{font-size:12px;font-weight:300;color:rgba(255,255,255,.38);letter-spacing:.3px;line-height:1.55;margin-bottom:14px}
+.bp-quote{font-size:13px;font-weight:300;font-style:italic;color:rgba(255,255,255,.35);margin-bottom:24px;line-height:1.5}
+.bp-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Schibsted Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);padding:10px 0;border-bottom:1px solid rgba(201,151,63,.28);width:fit-content;transition:gap .25s,border-color .25s}
+.bp-cta:hover{gap:14px;border-color:var(--gold)}
 
-/* ── WHY ─────────────────────────────────────── */
-#why{
-  padding:120px 0;background:var(--bg);
-  border-top:1px solid var(--line);
-}
-.why-top{margin-bottom:64px}
-.why-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.why-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,6vw,80px);
-  line-height:.9;max-width:560px;margin-top:8px;
-}
-.why-heading .red{color:var(--red)}
-.why-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--line);
-  border:1px solid var(--line);
-}
-.why-card{
-  padding:36px 28px;background:var(--bg);
-  transition:background .2s;
-}
-.why-card:hover{background:var(--bg2)}
-.why-card-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:52px;color:var(--line);
-  line-height:1;margin-bottom:18px;
-  transition:color .2s;
-}
-.why-card:hover .why-card-n{color:var(--red)}
-.why-card-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:22px;letter-spacing:1px;
-  color:var(--txt);margin-bottom:10px;
-}
-.why-card-desc{
-  font-size:12px;line-height:1.8;color:var(--dim);
-}
+/* Brand bg colors */
+.bp-bmw .bp-bg{background:linear-gradient(150deg,#04070f 0%,#07101e 45%,#050c16 100%)}
+.bp-bmw .bp-glow{background:radial-gradient(ellipse at 60% 25%,rgba(25,55,130,.28) 0%,transparent 60%)}
+.bp-merc .bp-bg{background:linear-gradient(150deg,#080808 0%,#111113 45%,#090909 100%)}
+.bp-merc .bp-glow{background:radial-gradient(ellipse at 40% 25%,rgba(160,160,170,.09) 0%,transparent 55%)}
+.bp-audi .bp-bg{background:linear-gradient(150deg,#0d0707 0%,#160a0a 45%,#0b0606 100%)}
+.bp-audi .bp-glow{background:radial-gradient(ellipse at 60% 25%,rgba(140,18,12,.22) 0%,transparent 55%)}
+.bp-rr .bp-bg{background:linear-gradient(150deg,#050c07 0%,#091207 45%,#060a05 100%)}
+.bp-rr .bp-glow{background:radial-gradient(ellipse at 40% 25%,rgba(18,75,22,.22) 0%,transparent 55%)}
 
-/* ── BOOK ────────────────────────────────────── */
-#book{
-  padding:120px 0;background:var(--bg2);
-  border-top:1px solid var(--line);
-}
-.book-header{text-align:center;margin-bottom:64px}
-.book-eyebrow{
-  display:flex;align-items:center;justify-content:center;
-  gap:14px;margin-bottom:16px;
-}
-.book-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,7vw,88px);
-  line-height:.9;
-}
-.book-heading .red{color:var(--red)}
-.book-steps{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--line);
-  border:1px solid var(--line);
-  margin-bottom:48px;
-}
-.book-step{
-  padding:40px 28px;background:var(--bg2);text-align:center;
-}
-.book-step-n{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:64px;color:rgba(232,0,13,.1);
-  line-height:1;margin-bottom:10px;
-}
-.book-step-title{
-  font-size:10px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--txt);margin-bottom:10px;
-}
-.book-step-desc{font-size:12px;line-height:1.8;color:var(--dim)}
-.book-cta{text-align:center}
-.book-note{
-  font-size:11px;color:var(--mute);
-  margin-top:18px;letter-spacing:.5px;
-}
-.book-note strong{color:var(--dim);font-weight:500}
+.br-cta-row{text-align:center;padding:48px 0 110px;background:var(--bg2)}
 
-/* ── CONTACT ─────────────────────────────────── */
-#contact{
-  padding:120px 0;background:var(--bg);
-  border-top:1px solid var(--line);
-}
-.contact-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;
-}
-.contact-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.contact-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,6vw,72px);
-  line-height:.9;margin-bottom:44px;
-}
-.contact-heading .red{color:var(--red)}
-.cinfo{display:flex;flex-direction:column;gap:0}
-.cinfo-item{
-  display:flex;gap:18px;align-items:flex-start;
-  padding:24px 0;border-bottom:1px solid var(--line);
-}
-.cinfo-item:last-child{border-bottom:none}
-.cinfo-icon{
-  width:14px;height:14px;flex-shrink:0;
-  color:var(--red);margin-top:3px;
-}
-.cinfo-lbl{
-  font-size:8px;font-weight:700;letter-spacing:3px;
-  text-transform:uppercase;color:var(--mute);
-  margin-bottom:5px;
-}
-.cinfo-val{
-  font-size:13px;font-weight:600;
-  color:var(--txt);line-height:1.6;
-}
-.cinfo-val a{color:var(--red);transition:color .2s}
-.cinfo-val a:hover{color:var(--txt)}
-.cinfo-note{font-size:11px;color:var(--dim);margin-top:3px}
-.contact-right{display:flex;flex-direction:column;justify-content:center}
-.cwa-card{
-  border:1px solid var(--line);padding:36px;
-}
-.cwa-heading{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:40px;line-height:.9;margin-bottom:14px;
-}
-.cwa-sub{
-  font-size:13px;line-height:1.8;
-  color:var(--dim);margin-bottom:28px;
-}
-.cwa-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:44px;color:var(--txt);
-  margin-bottom:24px;
-}
+/* ── RECLINERS ──────────────────────── */
+#recliners{padding:120px 0;background:var(--bg);position:relative;overflow:hidden}
+.rec-ghost{position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,180px);color:rgba(201,151,63,.025);letter-spacing:10px;white-space:nowrap;pointer-events:none;z-index:0;user-select:none}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
+.rec-feats{display:flex;flex-direction:column;gap:14px;margin:32px 0}
+.rec-feat{display:flex;align-items:flex-start;gap:14px}
+.rec-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;margin-top:8px;flex-shrink:0}
+.rec-ft{font-size:13px;font-weight:400;color:var(--dim);line-height:1.65}
+.rec-ft strong{color:var(--txt);font-weight:600}
+.vpills{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0}
+.vpill{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:1px solid var(--mute);padding:5px 12px;border-radius:2px;transition:color .2s,border-color .2s}
+.vpill:hover{color:var(--gold);border-color:rgba(201,151,63,.35)}
+.rec-vis{aspect-ratio:4/5;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.rec-vis-ph{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--mute)}
 
-/* ── FOOTER ──────────────────────────────────── */
-footer{
-  background:var(--bg2);
-  border-top:1px solid var(--line);
-  padding:48px 0 24px;
-}
-.ft-inner{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-.ft-top{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  gap:24px;margin-bottom:36px;flex-wrap:wrap;
-}
-.ft-wm{
-  height:32px;width:auto;max-width:none;
-  filter:brightness(0) invert(1);opacity:.55;
-  transition:opacity .2s;
-}
-.ft-wm:hover{opacity:.9}
-.ft-nav{display:flex;gap:28px;flex-wrap:wrap}
-.ft-nav a{
-  font-size:10px;font-weight:600;letter-spacing:2px;
-  text-transform:uppercase;color:var(--mute);
-  transition:color .2s;
-}
-.ft-nav a:hover{color:var(--txt)}
-.ft-socials{display:flex;gap:12px}
-.ft-social{
-  width:36px;height:36px;
-  border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--mute);transition:border-color .2s,color .2s;
-}
-.ft-social:hover{border-color:var(--red);color:var(--red)}
-.ft-social svg{width:15px;height:15px}
-.ft-bottom{
-  border-top:1px solid var(--line);padding-top:20px;
-  display:flex;align-items:center;
-  justify-content:space-between;gap:16px;flex-wrap:wrap;
-}
-.ft-copy{font-size:10px;color:var(--mute);letter-spacing:.5px}
-.ft-tagline{
-  font-size:9px;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;color:var(--mute);
-}
+/* ── ABOUT ──────────────────────────── */
+#about{padding:110px 0;background:var(--bg2)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.stats-g{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+.stat-b{padding:24px 0;border-bottom:1px solid var(--line)}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,4.5vw,60px);color:var(--gold);letter-spacing:2px;line-height:1}
+.stat-u{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.8vw,36px);color:var(--gold)}
+.stat-l{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-top:6px}
+.founder-c{position:relative}
+.founder-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block}
+.founder-cap{position:absolute;bottom:0;left:0;right:0;padding:22px 24px;background:linear-gradient(to top,rgba(0,0,0,.88),transparent)}
+.founder-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px}
+.founder-role{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:2px}
 
-/* ── LIGHT MODE ──────────────────────────────── */
-body.light{background:#F5F5F0;color:#111}
-body.light #nav.scrolled{background:rgba(245,245,240,.97);border-color:rgba(0,0,0,.08)}
-body.light .nav-links a{color:#666}
-body.light .nav-links a:hover{color:#111}
-body.light .nav-icon{filter:none}
-body.light .hero-wm img{filter:none}
-body.light .ft-wm{filter:none}
-body.light #about,body.light #catalogue,body.light #why,body.light #contact{background:#F5F5F0}
-body.light #services,body.light #recliners,body.light #book,body.light footer{background:#EBEBEB}
-body.light .about-heading .sm{color:rgba(17,17,17,.35)}
-body.light .about-text,body.light .svc-sub,body.light .rec-text,body.light .why-card-desc,body.light .book-step-desc,body.light .cwa-sub,body.light .cat-sub{color:#555}
-body.light .stats-row,.body.light .stat{border-color:rgba(0,0,0,.1)}
-body.light .stat-n{color:#111}
-body.light .svc-list{background:rgba(0,0,0,.08)}
-body.light .svc-row{background:#F5F5F5}
-body.light .svc-row:hover{background:#ECECEC}
-body.light .svc-name{color:#111}
-body.light .founder-body{background:#EBEBEB}
-body.light .founder-name,.body.light .founder-bio{color:#111}
-body.light .pcard{background:#EBEBEB;border-color:rgba(0,0,0,.1)}
-body.light .pcard-img{background:#ddd}
-body.light .pcard-name{color:#111}
-body.light .cat-cta{border-color:rgba(0,0,0,.1)}
-body.light .cat-cta-txt{color:#111}
-body.light .why-grid{background:rgba(0,0,0,.08)}
-body.light .why-card{background:#F5F5F0}
-body.light .why-card:hover{background:#EBEBEB}
-body.light .why-card-title{color:#111}
-body.light .book-steps{background:rgba(0,0,0,.08)}
-body.light .book-step{background:#EBEBEB}
-body.light .book-step-title{color:#111}
-body.light .cinfo-item{border-color:rgba(0,0,0,.08)}
-body.light .cinfo-val{color:#111}
-body.light .cwa-card{border-color:rgba(0,0,0,.1)}
-body.light .cwa-heading,.body.light .cwa-num{color:#111}
-body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
+/* ── WHY ────────────────────────────── */
+#why{padding:110px 0;background:var(--bg)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:60px}
+.why-i{background:var(--bg);padding:40px 34px;position:relative;overflow:hidden;transition:background .25s}
+.why-i::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--gold);transition:height .45s cubic-bezier(.2,.8,.2,1)}
+.why-i:hover::before{height:100%}
+.why-i:hover{background:var(--bg2)}
+.why-n{font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(255,255,255,.04);line-height:1;margin-bottom:14px}
+.why-t{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:10px}
+.why-d{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7}
 
-/* ── REVEAL ANIMATIONS ───────────────────────── */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
-.reveal.vis{opacity:1;transform:none}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
+/* ── BOOK ───────────────────────────── */
+#book{padding:110px 0;background:var(--bg2)}
+.book-in{max-width:820px;margin:0 auto;text-align:center}
+.book-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:52px 0;text-align:left}
+.bk-s{}
+.bk-n{font-family:'Bebas Neue',sans-serif;font-size:50px;color:rgba(255,255,255,.04);line-height:1;margin-bottom:10px}
+.bk-t{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;margin-bottom:6px}
+.bk-d{font-size:12px;font-weight:300;color:var(--dim);line-height:1.65}
+.bk-ctas{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
 
-/* ── RESPONSIVE ──────────────────────────────── */
-@media(max-width:1024px){
-  :root{--pad:32px}
-  .about-grid{grid-template-columns:1fr;gap:56px}
-  .rec-grid{grid-template-columns:1fr;gap:56px}
-  .contact-grid{grid-template-columns:1fr;gap:56px}
-  .why-grid{grid-template-columns:repeat(2,1fr)}
-  .svc-top{flex-direction:column;align-items:flex-start}
-  .svc-list{grid-template-columns:repeat(3,1fr)}
-  .cat-top{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-  :root{--pad:20px}
-  #nav{padding:16px var(--pad)}
-  #nav.scrolled{padding:12px var(--pad)}
-  .nav-links,.nav-cat,.nav-book{display:none}
-  .burger{display:flex}
-  #about,#services,#catalogue,#recliners,#why,#book,#contact{padding:72px 0}
-  .svc-list{grid-template-columns:repeat(2,1fr)}
-  .svc-n{font-size:40px}
-  .book-steps{grid-template-columns:1fr}
+/* ── CONTACT ────────────────────────── */
+#contact{padding:110px 0;background:var(--bg)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:50px}
+.ci-list{display:flex;flex-direction:column;gap:24px}
+.ci-row{padding-bottom:24px;border-bottom:1px solid var(--line)}
+.ci-l{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.ci-v{font-size:15px;font-weight:400;line-height:1.55}
+.ci-v a{transition:color .2s}
+.ci-v a:hover{color:var(--gold)}
+.map-wrap{height:100%;min-height:340px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.1) brightness(.65)}
+
+/* ── PRESTIGE BAR ───────────────────── */
+.pr-bar{overflow:hidden;background:var(--bg2);border-top:1px solid var(--line);padding:15px 0}
+.pr-track{display:flex;white-space:nowrap;animation:mqMove 22s linear infinite reverse}
+.pr-item{display:inline-flex;align-items:center;gap:14px;padding:0 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.12)}
+.pr-item em{color:rgba(201,151,63,.3);font-style:normal}
+
+/* ── FOOTER ─────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:44px var(--pad) 28px}
+.ft{max-width:var(--max);margin:0 auto}
+.ft-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:20px}
+.ft-wm{height:26px;filter:brightness(0) invert(1);opacity:.55;transition:opacity .2s}
+.ft-wm:hover{opacity:.8}
+.ft-links{display:flex;gap:24px;flex-wrap:wrap}
+.ft-links a{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.ft-links a:hover{color:var(--txt)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-copy{font-size:11px;color:var(--mute);letter-spacing:.5px}
+.ft-num{font-size:11px;color:var(--dim);transition:color .2s}
+.ft-num:hover{color:var(--gold)}
+
+/* ── RESPONSIVE ─────────────────────── */
+@media(max-width:960px){
+  .br-panels{grid-template-columns:1fr}
+  .bp{height:420px}
+  .ab-grid,.rec-grid,.ct-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
   .why-grid{grid-template-columns:1fr 1fr}
-  .hero-scroll{display:none}
-  .cat-top{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr 1fr 1fr}
-  .cat-cta{flex-direction:column;align-items:flex-start;gap:20px}
+  .book-steps{grid-template-columns:repeat(2,1fr)}
+  .svc-hd{align-items:flex-start}
 }
-@media(max-width:480px){
+@media(max-width:600px){
+  .nav-links,.n-cat{display:none}
+  .burger{display:flex}
+  .svc-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr;border:none}
-  .stat{border-right:none;border-bottom:1px solid var(--line)}
-  .stat:last-child{border-bottom:none}
-  .hero-btns{flex-direction:column;align-items:center}
-  .rec-visual{max-width:280px}
+  .book-steps{grid-template-columns:1fr 1fr}
+  .stats-g{grid-template-columns:1fr 1fr}
+  .ft-top{flex-direction:column;align-items:flex-start}
+  .ft-bot{flex-direction:column;align-items:flex-start}
+  .h-ctas{flex-direction:column;align-items:center}
 }
 </style>
 </head>
 <body>
 
-<!-- ── SVG SYMBOL ──────────────────────────────── -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="tt" viewBox="0 0 200 145" fill="currentColor">
-    <path d="M100,0 L105,10 L116,14 L105,18 L100,28 L95,18 L84,14 L95,10 Z"/>
-    <rect x="0" y="22" width="200" height="14"/>
-    <rect x="7" y="36" width="28" height="46"/>
-    <rect x="165" y="36" width="28" height="46"/>
-    <path d="M87,36 L113,36 L110,62 L107,84 L104,104 L101,120 L100,138 L99,120 L96,104 L93,84 L90,62 Z"/>
-  </symbol>
-</svg>
+<!-- LOADER -->
+<div id="loader">
+  <img src="fasttracks_icon.png" alt="Fasttracks" class="ld-icon"/>
+  <div class="ld-track"><div class="ld-bar" id="ldBar"></div></div>
+  <div class="ld-txt">Loading</div>
+</div>
 
-<!-- ── FLOATING WA ────────────────────────────── -->
-<a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="wa-float" title="Chat on WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- CURSOR -->
+<div id="cur-d"></div>
+<div id="cur-r"></div>
+
+<!-- SCROLL PROGRESS -->
+<div id="sprog"></div>
+
+<!-- FLOAT WA -->
+<a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="wa-float" title="WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ── MOBILE NAV ──────────────────────────────── -->
-<div id="mob-nav">
+<!-- MOBILE NAV -->
+<div id="mob">
   <a href="#home" onclick="closeMob()">Home</a>
   <a href="#services" onclick="closeMob()">Services</a>
-  <a href="catalogue.html" class="mob-cat">Catalogue</a>
+  <a href="#brands" onclick="closeMob()">Catalogue</a>
   <a href="#recliners" onclick="closeMob()">Recliners</a>
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="catalogue.html" class="m-cat">Browse Catalogue →</a>
 </div>
 
-<!-- ── NAVBAR ─────────────────────────────────── -->
+<!-- NAV -->
 <nav id="nav">
-  <a href="#home" class="nav-logo">
-    <img src="fasttracks_icon.png" alt="Fasttracks" class="nav-icon" />
-  </a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#recliners">Recliners</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="catalogue.html" class="nav-cat">Catalogue</a>
-    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
-    <a href="https://wa.me/918019065252" class="nav-book" target="_blank" rel="noopener">Book Now</a>
-    <div class="burger" id="burger" onclick="toggleMob()">
-      <span></span><span></span><span></span>
-    </div>
+  <a href="#home" class="nav-logo"><img src="fasttracks_icon.png" alt="Fasttracks"/></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#brands">Catalogue</a>
+    <a href="#recliners">Recliners</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-r">
+    <a href="catalogue.html" class="n-cat">View Catalogue</a>
+    <a href="https://wa.me/918019065252" class="n-book" target="_blank" rel="noopener">Book Now</a>
+    <button class="burger" id="burger" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════
-     HERO
-═══════════════════════════════════════ -->
+<!-- ═══ HERO ═══ -->
 <section id="home">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-overlay"></div>
-  <!-- ghost text -->
-  <div class="hero-ghost" aria-hidden="true">FASTTRACKS</div>
-  <!-- corner brackets -->
-  <div class="hero-corner hc-tl" aria-hidden="true"></div>
-  <div class="hero-corner hc-tr" aria-hidden="true"></div>
-  <div class="hero-corner hc-bl" aria-hidden="true"></div>
-  <div class="hero-corner hc-br" aria-hidden="true"></div>
-
-  <div class="hero-content" style="position:relative;z-index:3">
-    <span class="hero-eyebrow">Jubilee Hills · Hyderabad · Est. 1999</span>
-    <div class="hero-gold-bar"><span></span><i>✦</i><span></span></div>
-    <div class="hero-wm">
-      <img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" />
+  <canvas id="hero-c"></canvas>
+  <div class="h-geo"></div>
+  <div class="h-ghost">FASTTRACKS</div>
+  <div class="hc hc-tl"></div><div class="hc hc-tr"></div>
+  <div class="hc hc-bl"></div><div class="hc hc-br"></div>
+  <div class="h-inner">
+    <div class="h-loc">Jubilee Hills · Hyderabad · Est. 2009</div>
+    <img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" class="h-wm"/>
+    <div class="h-sep">
+      <span></span>
+      <em>✦ &nbsp; India's Biggest Instant Car Modification Studio &nbsp; ✦</em>
+      <span></span>
     </div>
-    <p class="hero-sub">India's Biggest Instant Car Modification Studio</p>
-    <div class="hero-btns">
-      <a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="btn-red">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div class="h-tag">Premium Modifications · 50,000 Sq Ft Studio</div>
+    <div class="h-ctas">
+      <a href="https://wa.me/918019065252" class="btn-red" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Book on WhatsApp
       </a>
-      <a href="#services" class="btn-ghost">Explore Services</a>
+      <a href="catalogue.html" class="btn-out">Browse Catalogue →</a>
     </div>
   </div>
-  <div class="hero-scroll" style="position:relative;z-index:3">
-    <div class="hero-scroll-line"></div>
-    <span class="hero-scroll-txt">Scroll</span>
+  <div class="h-scroll">
+    <div class="sw"><div class="sw-d"></div></div>
+    <div class="h-scroll-txt">Scroll</div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     FEATURE STRIP
-═══════════════════════════════════════ -->
-<div class="feat-strip">
-  <div class="feat-inner">
-    <div class="feat-item reveal">
-      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <div class="feat-title">Instant Service</div>
-      <div class="feat-desc">Walk-in welcome, no appointment needed. Your car leaves the same day.</div>
-    </div>
-    <div class="feat-item reveal reveal-delay-1">
-      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-      <div class="feat-title">Premium Quality</div>
-      <div class="feat-desc">OEM-grade materials, factory-level fit &amp; finish — every time.</div>
-    </div>
-    <div class="feat-item reveal reveal-delay-2">
-      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/></svg>
-      <div class="feat-title">365 Days Open</div>
-      <div class="feat-desc">We work every single day — no holidays, no exceptions.</div>
-    </div>
-    <div class="feat-item reveal reveal-delay-3">
-      <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <div class="feat-title">India's Largest Network</div>
-      <div class="feat-desc">Hyderabad's biggest vendor, supplier, and celebrity client base.</div>
-    </div>
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <div class="mq-item"><em>Body Kits</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Ceramic Coating<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Luxury Recliners</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Paint Protection Film<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Steering Wheels</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Window Tinting<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Custom Wraps</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Interior Detailing<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Custom Audio</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Performance Exhausts<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Body Kits</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Ceramic Coating<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Luxury Recliners</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Paint Protection Film<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Steering Wheels</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Window Tinting<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Custom Wraps</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Interior Detailing<span class="mq-dot"></span></div>
+    <div class="mq-item"><em>Custom Audio</em><span class="mq-dot"></span></div>
+    <div class="mq-item">Performance Exhausts<span class="mq-dot"></span></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     ABOUT
-═══════════════════════════════════════ -->
-<section id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <div class="about-eyebrow">
-          <span class="label red-label">01</span>
-          <span class="label">Our Legacy</span>
-        </div>
-        <div class="about-heading">
-          <div><span class="num">25</span><span class="sm">+</span></div>
-          <div class="sm">Years of</div>
-          <div>Transforming</div>
-          <div>Cars</div>
-        </div>
-        <p class="about-text">Fasttracks Car Care is India's most trusted and most connected car modification studio. Based in Jubilee Hills, Hyderabad, we have built the highest network base of vendors, clients, and Tollywood's finest — all under one roof.<br><br>We don't do average. We do legendary.</p>
-        <div class="stats-row">
-          <div class="stat">
-            <div class="stat-n">25<em>+</em></div>
-            <div class="stat-l">Years Experience</div>
-          </div>
-          <div class="stat">
-            <div class="stat-n">157<em>K+</em></div>
-            <div class="stat-l">Instagram Followers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-n">365</div>
-            <div class="stat-l">Days Open</div>
-          </div>
-        </div>
-      </div>
-      <div class="about-right reveal reveal-delay-2">
-        <div class="about-badge">
-          <div class="badge-inner">
-            <div class="badge-est">EST.</div>
-            <div class="badge-year">1999</div>
-            <div class="badge-divider"><span></span><i>◆</i><span></span></div>
-            <div class="badge-loc">Jubilee Hills · Hyderabad</div>
-            <div class="badge-tagline">PERFORMANCE &amp; PRESTIGE</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     SERVICES
-═══════════════════════════════════════ -->
+<!-- ═══ SERVICES ═══ -->
 <section id="services">
   <div class="wrap">
-    <div class="svc-top reveal">
+    <div class="svc-hd">
       <div>
-        <div class="svc-eyebrow">
-          <span class="label red-label">02</span>
-          <span class="label">What We Do</span>
-        </div>
-        <h2 class="svc-heading">Our Services</h2>
+        <div class="eyebrow" data-rv="up"><span class="ey-n">01</span><span class="ey-t">What We Do</span></div>
+        <h2 class="s-head" data-rv="up">Our<br/>Services</h2>
       </div>
-      <p class="svc-sub">From factory floor to show stopper — every service under one roof. 365 days a year.</p>
+      <p class="s-sub" data-rv="right">From factory floor to show stopper — every modification under one roof, 365 days a year.</p>
     </div>
-    <div class="svc-list">
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M3 14h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/><path d="M8 20v1M16 20v1"/></svg>
-        <span class="svc-n">01</span>
-        <span class="svc-name">Luxury Recliners</span>
-        <span class="svc-desc">Custom recliners in India's most premium SUVs. The definition of in-car luxury.</span>
+    <div class="svc-grid">
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M3 14h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/><path d="M8 20v1M16 20v1"/></svg>
+        <div class="svc-nm">Luxury Recliners</div>
+        <div class="svc-ds">India's most requested service. First-class cabin on wheels — custom leather, powered adjustment, ambient lighting.</div>
         <span class="svc-tag pop">Most Popular</span>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="svc-n">02</span>
-        <span class="svc-name">Paint Protection Film (PPF)</span>
-        <span class="svc-desc">Full body from ₹1L–₹2L · Military-grade film against chips, scratches &amp; UV.</span>
-        <span class="svc-tag gold">Premium</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="svc-nm">Paint Protection Film</div>
+        <div class="svc-ds">Military-grade film protecting against chips, scratches and UV. Full body from ₹1L–₹2L.</div>
+        <span class="svc-tag prem">Premium</span>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5H18l-3.75 2.7 1.5 4.5L12 12l-3.75 2.7 1.5-4.5L6 7.5h4.5z"/><circle cx="12" cy="12" r="9" stroke-dasharray="2 2"/></svg>
-        <span class="svc-n">03</span>
-        <span class="svc-name">Ceramic Coating</span>
-        <span class="svc-desc">Nano-ceramic protection with deep gloss. From ₹15K–₹60K.</span>
-        <span class="svc-tag gold">Premium</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+        <div class="svc-nm">Ceramic Coating</div>
+        <div class="svc-ds">Nano-ceramic protection with deep gloss. 9H hardness, hydrophobic finish. ₹15K–₹60K.</div>
+        <span class="svc-tag prem">Premium</span>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2v-4l3-4h14l3 4v4a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
-        <span class="svc-n">04</span>
-        <span class="svc-name">Body Kits &amp; Aero</span>
-        <span class="svc-desc">German &amp; Japanese body kits. Custom wide-body, bumper replacements, splitters.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2v-4l3-4h14l3 4v4a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
+        <div class="svc-nm">Body Kits &amp; Aero</div>
+        <div class="svc-ds">BMW, Mercedes, Audi, Range Rover. 116 kits in our catalogue. Custom wide-body and bumper replacements.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6v12M2 12h20"/></svg>
-        <span class="svc-n">05</span>
-        <span class="svc-name">Custom Wraps &amp; Vinyl</span>
-        <span class="svc-desc">Full wraps, partial wraps, carbon vinyl, chrome delete. Any colour, any finish.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6v12M2 12h20"/></svg>
+        <div class="svc-nm">Custom Wraps &amp; Vinyl</div>
+        <div class="svc-ds">Full wraps, partial wraps, carbon vinyl, chrome delete. Any colour. Any finish.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
-        <span class="svc-n">06</span>
-        <span class="svc-name">Alloy Wheels</span>
-        <span class="svc-desc">OEM replacements, aftermarket upgrades, custom offsets for all makes.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
+        <div class="svc-nm">Alloy Wheels</div>
+        <div class="svc-ds">OEM replacements, aftermarket upgrades, custom offsets and refurbishment for all makes.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c5 0 5 4 10 4s5-4 10-4"/><path d="M3 14c5 0 5 4 10 4s5-4 10-4"/></svg>
-        <span class="svc-n">07</span>
-        <span class="svc-name">Performance Exhausts</span>
-        <span class="svc-desc">Sport and valvetronic exhaust systems. Stock, catback and custom setups.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c5 0 5 4 10 4s5-4 10-4"/><path d="M3 14c5 0 5 4 10 4s5-4 10-4"/></svg>
+        <div class="svc-nm">Performance Exhausts</div>
+        <div class="svc-ds">Sport and valvetronic exhaust systems. Stock, catback and fully custom setups.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="4"/></svg>
-        <span class="svc-n">08</span>
-        <span class="svc-name">Suspension Modifications</span>
-        <span class="svc-desc">Ride height, stance, coilovers, airbag suspension and performance upgrades.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="4"/></svg>
+        <div class="svc-nm">Suspension Mods</div>
+        <div class="svc-ds">Ride height, stance, coilovers, airbag suspension and performance handling upgrades.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 8 4 13 4 16a8 8 0 0016 0c0-3-2-8-8-14z"/></svg>
-        <span class="svc-n">09</span>
-        <span class="svc-name">Hydro Dipping</span>
-        <span class="svc-desc">Unique hydrographic pattern finishes on interior trims, wheels and car parts.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 8 4 13 4 16a8 8 0 0016 0c0-3-2-8-8-14z"/></svg>
+        <div class="svc-nm">Window Tinting</div>
+        <div class="svc-ds">Premium ceramic window tints. UV protection, heat rejection, enhanced privacy and aesthetics.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v5H3zM9 5h3a2 2 0 012 2v1"/><rect x="8" y="11" width="8" height="10" rx="1"/><path d="M11 11V8"/></svg>
-        <span class="svc-n">10</span>
-        <span class="svc-name">Deep Interior Cleaning</span>
-        <span class="svc-desc">₹5K–₹7K · Steam-clean, shampoo and ozone treatment. Done in 1–2 hours.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v5H3zM9 5h3a2 2 0 012 2v1"/><rect x="8" y="11" width="8" height="10" rx="1"/><path d="M11 11V8"/></svg>
+        <div class="svc-nm">Deep Interior Detailing</div>
+        <div class="svc-ds">Steam-clean, shampoo and ozone treatment. ₹5K–₹7K. Done in 1–2 hours.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        <span class="svc-n">11</span>
-        <span class="svc-name">Infotainment Upgrades</span>
-        <span class="svc-desc">Apple CarPlay, Android Auto and full AV system upgrades for every make.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <div class="svc-nm">Infotainment Upgrades</div>
+        <div class="svc-ds">Apple CarPlay, Android Auto and full AV system upgrades for every make and model.</div>
+        <div class="svc-arr">→</div>
       </div>
-      <div class="svc-row reveal">
-        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v5M5.1 7.5l4.3 2.5M18.9 7.5l-4.3 2.5"/></svg>
-        <span class="svc-n">12</span>
-        <span class="svc-name">Custom Steering Wheels</span>
-        <span class="svc-desc">OEM replacement and aftermarket steering wheels. Browse our catalogue.</span>
+      <div class="svc-c" data-rv="up">
+        <svg class="svc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v5M5.1 7.5l4.3 2.5M18.9 7.5l-4.3 2.5"/></svg>
+        <div class="svc-nm">Custom Steering Wheels</div>
+        <div class="svc-ds">OEM replacement and premium aftermarket steering wheels. Browse our 12-wheel catalogue.</div>
+        <div class="svc-arr">→</div>
       </div>
     </div>
-    <p class="svc-more reveal"><strong>Can't find your modification?</strong> The 12 services above are just where we <em>start</em>. From custom roll cages to track-day prep — we do it all. <a href="https://wa.me/918019065252" target="_blank" rel="noopener" style="color:var(--red)">Tell us your idea →</a></p>
+    <p class="svc-more" data-rv="up"><strong>Can't find your modification?</strong> The 12 above are just where we <em>start</em>. From custom roll cages to track-day prep — we do it all. <a href="https://wa.me/918019065252" target="_blank" rel="noopener">Tell us your idea →</a></p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     CATALOGUE PREVIEW
-═══════════════════════════════════════ -->
-<section id="catalogue">
+<!-- ═══ BRAND SHOWCASE ═══ -->
+<section id="brands">
   <div class="wrap">
-    <div class="cat-top reveal">
-      <div>
-        <div class="cat-eyebrow">
-          <span class="label red-label">03</span>
-          <span class="label">Browse &amp; Enquire</span>
-        </div>
-        <h2 class="cat-heading">Our <span>Catalogue</span></h2>
-        <p class="cat-sub">116 body kits and steering wheels across BMW, Mercedes-Benz, Audi, Range Rover and more. Filter by brand and model, enquire directly on WhatsApp.</p>
-      </div>
-      <a href="catalogue.html" class="cat-view-all">
-        View all 116 kits
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
+    <div class="br-intro">
+      <div class="eyebrow" data-rv="up"><span class="ey-n">02</span><span class="ey-t">Browse By Marque</span></div>
+      <h2 class="s-head" data-rv="up">Select Your <span class="gold">Brand</span></h2>
+      <p class="s-sub" data-rv="up">116 premium kits across BMW, Mercedes-Benz, Audi, Range Rover and more. Browse, select, enquire — delivered on WhatsApp in seconds.</p>
     </div>
+  </div>
+  <div class="br-panels">
 
-    <!-- Featured preview cards -->
-    <div class="cat-track reveal">
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
+    <!-- BMW -->
+    <div class="bp bp-bmw" data-rv="left">
+      <div class="bp-bg"></div>
+      <div class="bp-glow"></div>
+      <div class="bp-glare"></div>
+      <div class="bp-ov"></div>
+      <div class="bp-in">
+        <div class="bp-top">
+          <div class="bp-label">Bavarian Motor Works</div>
+          <div class="bp-cnt"><div class="n">50</div><div class="l">Body Kits</div></div>
         </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">BMW</div>
-          <div class="pcard-name">7 Series F02 M760i Full Body Kit</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20BMW%207%20Series%20F02%20M760i%20Full%20Body%20Kit.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
-        </div>
-      </div>
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">BMW</div>
-          <div class="pcard-name">M4 F82 Competition Full Kit</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20BMW%20M4%20F82%20Competition%20Full%20Kit.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
-        </div>
-      </div>
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">Mercedes-Benz</div>
-          <div class="pcard-name">S-Class W222 Maybach Full Body Kit</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20Mercedes-Benz%20S-Class%20W222%20Maybach%20Full%20Body%20Kit.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
-        </div>
-      </div>
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">Mercedes-Benz</div>
-          <div class="pcard-name">G63 AMG Full Body Transformation</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20Mercedes-Benz%20G63%20AMG%20Full%20Body%20Transformation.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
-        </div>
-      </div>
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">Range Rover</div>
-          <div class="pcard-name">Vogue Autobiography Full Kit</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20Range%20Rover%20Vogue%20Autobiography%20Full%20Kit.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.598-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
-        </div>
-      </div>
-      <div class="pcard">
-        <div class="pcard-img">
-          <div class="pcard-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 014 0v2"/><circle cx="12" cy="13" r="2"/></svg>
-            <span>No image yet</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-brand">Audi</div>
-          <div class="pcard-name">A6 C8 Facelift RS6 Style Full Kit</div>
-          <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20the%20Audi%20A6%20C8%20Facelift%20RS6%20Style%20Full%20Kit.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="pcard-wa">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enquire
-          </a>
+        <div class="bp-bot">
+          <div class="bp-name">BMW</div>
+          <div class="bp-type">Premium Body Kits</div>
+          <div class="bp-models">7 Series · 6 Series GT · 5 Series · 3 Series · X7 · X5 · X3 · X1</div>
+          <div class="bp-quote">"Bavarian precision,<br>redefined."</div>
+          <a href="catalogue.html" class="bp-cta">Browse BMW Kits →</a>
         </div>
       </div>
     </div>
 
-    <a href="catalogue.html" class="cat-cta reveal">
-      <div class="cat-cta-txt">Browse the full catalogue — <span>116 kits</span></div>
-      <span class="cat-cta-btn">View All Kits →</span>
-    </a>
+    <!-- Mercedes-Benz -->
+    <div class="bp bp-merc" data-rv="right">
+      <div class="bp-bg"></div>
+      <div class="bp-glow"></div>
+      <div class="bp-glare"></div>
+      <div class="bp-ov"></div>
+      <div class="bp-in">
+        <div class="bp-top">
+          <div class="bp-label">Das Beste oder Nichts</div>
+          <div class="bp-cnt"><div class="n">31</div><div class="l">Body Kits</div></div>
+        </div>
+        <div class="bp-bot">
+          <div class="bp-name">Mercedes</div>
+          <div class="bp-type">Premium Body Kits</div>
+          <div class="bp-models">S Class · E Class · C Class · A Class · GLE · GLS · GLC · CLA · ML</div>
+          <div class="bp-quote">"Nothing but the best,<br>elevated."</div>
+          <a href="catalogue.html" class="bp-cta">Browse Mercedes Kits →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audi -->
+    <div class="bp bp-audi" data-rv="left">
+      <div class="bp-bg"></div>
+      <div class="bp-glow"></div>
+      <div class="bp-glare"></div>
+      <div class="bp-ov"></div>
+      <div class="bp-in">
+        <div class="bp-top">
+          <div class="bp-label">Vorsprung Durch Technik</div>
+          <div class="bp-cnt"><div class="n">14</div><div class="l">Body Kits</div></div>
+        </div>
+        <div class="bp-bot">
+          <div class="bp-name">Audi</div>
+          <div class="bp-type">Premium Body Kits</div>
+          <div class="bp-models">A3 · A4 · A5 · A6 · A7 · TT</div>
+          <div class="bp-quote">"Progress through<br>technology."</div>
+          <a href="catalogue.html" class="bp-cta">Browse Audi Kits →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Range Rover -->
+    <div class="bp bp-rr" data-rv="right">
+      <div class="bp-bg"></div>
+      <div class="bp-glow"></div>
+      <div class="bp-glare"></div>
+      <div class="bp-ov"></div>
+      <div class="bp-in">
+        <div class="bp-top">
+          <div class="bp-label">Above &amp; Beyond</div>
+          <div class="bp-cnt"><div class="n">7</div><div class="l">Body Kits</div></div>
+        </div>
+        <div class="bp-bot">
+          <div class="bp-name">Range Rover</div>
+          <div class="bp-type">Premium Body Kits</div>
+          <div class="bp-models">Defender · Defender 110 · Vogue · Sport · Velar · Discovery Sport</div>
+          <div class="bp-quote">"Commanding presence,<br>commanding roads."</div>
+          <a href="catalogue.html" class="bp-cta">Browse Range Rover Kits →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="br-cta-row">
+    <a href="catalogue.html" class="btn-out" data-rv="up" style="margin:0 auto;display:inline-flex">View All 116 Kits →</a>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     PHOTO DIVIDER
-═══════════════════════════════════════ -->
-<div class="photo-div">
-  <div class="photo-div-bg" id="lamboBg"></div>
-  <div class="photo-div-ov">
-    <div class="photo-div-txt reveal">
-      <p class="photo-div-pre">Every car. Every modification.</p>
-      <h2 class="photo-div-heading">Done To <span class="red">Perfection</span></h2>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     RECLINERS
-═══════════════════════════════════════ -->
+<!-- ═══ RECLINERS ═══ -->
 <section id="recliners">
+  <div class="rec-ghost">RECLINERS</div>
   <div class="wrap">
     <div class="rec-grid">
-      <div class="rec-left reveal">
-        <div class="rec-eyebrow">
-          <span class="label red-label">04</span>
-          <span class="label">Star Service</span>
+      <div>
+        <div class="eyebrow" data-rv="up"><span class="ey-n">03</span><span class="ey-t">Signature Service</span></div>
+        <h2 class="s-head" data-rv="up">The Recliner<br/><span class="gold">Experience</span></h2>
+        <p class="s-sub" style="margin-top:20px" data-rv="up">Our most iconic service. We install luxury recliners in India's most premium SUVs — turning your vehicle into a first-class cabin on wheels.</p>
+        <div class="rec-feats" data-rv="up">
+          <div class="rec-feat"><div class="rec-dot"></div><div class="rec-ft"><strong>Memory foam &amp; premium leather</strong> — sourced from top-tier global suppliers</div></div>
+          <div class="rec-feat"><div class="rec-dot"></div><div class="rec-ft"><strong>Custom stitching &amp; piping</strong> — match any interior colour theme</div></div>
+          <div class="rec-feat"><div class="rec-dot"></div><div class="rec-ft"><strong>OEM-precision fit</strong> — no cutting, no modification to vehicle body</div></div>
+          <div class="rec-feat"><div class="rec-dot"></div><div class="rec-ft"><strong>Fully reversible</strong> — restore to factory stock in hours</div></div>
         </div>
-        <h2 class="rec-heading">The <span class="red">Recliner</span><br>Experience</h2>
-        <p class="rec-text">Our most iconic and most requested service. We install luxury recliners in India's most premium SUVs — turning your vehicle into a first-class cabin on wheels. Custom stitching, powered adjustment, ambient lighting and full premium upholstery.</p>
-        <div class="rec-vehicles">
-          <span class="vpill">Toyota Innova Crysta</span>
-          <span class="vpill">Toyota Fortuner</span>
-          <span class="vpill">Toyota Hi-Cross</span>
+        <div class="vpills" data-rv="up">
+          <span class="vpill">Innova Crysta</span>
+          <span class="vpill">Fortuner</span>
+          <span class="vpill">Hi-Cross</span>
           <span class="vpill">Land Cruiser</span>
-          <span class="vpill">Land Rover Defender</span>
-          <span class="vpill">Toyota Vellfire</span>
-          <span class="vpill">Kia Carnival</span>
+          <span class="vpill">Defender</span>
+          <span class="vpill">Vellfire</span>
+          <span class="vpill">Carnival</span>
           <span class="vpill">Mercedes GLS</span>
           <span class="vpill">BMW X7</span>
-          <span class="vpill">Mercedes V-Class</span>
-          <span class="vpill">Hyundai Alcazar</span>
+          <span class="vpill">V-Class</span>
           <span class="vpill">MG Gloster</span>
-          <span class="vpill">Mahindra Thar</span>
+          <span class="vpill">Thar</span>
         </div>
-        <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20luxury%20recliner%20installation.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="btn-red" style="display:inline-flex;width:fit-content">
-          Enquire on WhatsApp →
-        </a>
+        <a href="https://wa.me/918019065252?text=Hi%21%20I%27m%20interested%20in%20luxury%20recliner%20installation.%20Please%20share%20details%20and%20pricing." class="btn-red" target="_blank" rel="noopener" data-rv="up">Get a Quote on WhatsApp →</a>
       </div>
-      <div class="rec-right reveal reveal-delay-2">
-        <div class="rec-visual">
-          <div class="rec-ring"></div>
-          <div class="rec-ring2"></div>
-          🪑
-        </div>
+      <div data-rv="right">
+        <div class="rec-vis"><div class="rec-vis-ph">Photo Coming Soon</div></div>
       </div>
-    </div>
-  </div>
-  <div class="marquee-wrap">
-    <div class="marquee-inner">
-      <span>Toyota Innova</span><span class="dot">·</span>
-      <span>Land Rover Defender</span><span class="dot">·</span>
-      <span>Vellfire</span><span class="dot">·</span>
-      <span>BMW X7</span><span class="dot">·</span>
-      <span>Kia Carnival</span><span class="dot">·</span>
-      <span>Mercedes V-Class</span><span class="dot">·</span>
-      <span>Land Cruiser</span><span class="dot">·</span>
-      <span>MG Gloster</span><span class="dot">·</span>
-      <span>Fortuner</span><span class="dot">·</span>
-      <span>Hyundai Alcazar</span><span class="dot">·</span>
-      <span>Toyota Innova</span><span class="dot">·</span>
-      <span>Land Rover Defender</span><span class="dot">·</span>
-      <span>Vellfire</span><span class="dot">·</span>
-      <span>BMW X7</span><span class="dot">·</span>
-      <span>Kia Carnival</span><span class="dot">·</span>
-      <span>Mercedes V-Class</span><span class="dot">·</span>
-      <span>Land Cruiser</span><span class="dot">·</span>
-      <span>MG Gloster</span><span class="dot">·</span>
-      <span>Fortuner</span><span class="dot">·</span>
-      <span>Hyundai Alcazar</span><span class="dot">·</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     WHY
-═══════════════════════════════════════ -->
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="wrap">
+    <div class="ab-grid">
+      <div>
+        <div class="eyebrow" data-rv="up"><span class="ey-n">04</span><span class="ey-t">Our Legacy</span></div>
+        <h2 class="s-head" data-rv="up">15+ Years of<br/><span class="gold">Excellence</span></h2>
+        <p class="s-sub" style="margin-top:20px" data-rv="up">Fasttracks Car Care is India's most trusted and connected car modification studio. Based in Jubilee Hills, Hyderabad — we've built the highest network base of vendors, clients, and Tollywood's finest.</p>
+        <div class="stats-g">
+          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="10000">0</span><span class="stat-u">+</span></div><div class="stat-l">Cars Transformed</div></div>
+          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="50000">0</span><span class="stat-u"> Sq Ft</span></div><div class="stat-l">Studio Space</div></div>
+          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="15">0</span><span class="stat-u">+</span></div><div class="stat-l">Years of Excellence</div></div>
+          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="500">0</span><span class="stat-u">+</span></div><div class="stat-l">5-Star Reviews</div></div>
+        </div>
+      </div>
+      <div data-rv="right">
+        <div class="founder-c">
+          <img src="rakesh.jpg" alt="Rakesh Kumar — Founder, Fasttracks Car Care" class="founder-img"/>
+          <div class="founder-cap">
+            <div class="founder-name">Rakesh Kumar</div>
+            <div class="founder-role">Founder &amp; Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY ═══ -->
 <section id="why">
   <div class="wrap">
-    <div class="why-top reveal">
-      <div class="why-eyebrow">
-        <span class="label red-label">05</span>
-        <span class="label">Why Choose Us</span>
-      </div>
-      <h2 class="why-heading">Why Fasttracks<br>Stands <span class="red">Apart</span></h2>
-    </div>
+    <div class="eyebrow" data-rv="up"><span class="ey-n">05</span><span class="ey-t">Why Fasttracks</span></div>
+    <h2 class="s-head" data-rv="up">The Fasttracks<br/>Difference</h2>
     <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-card-n">01</div>
-        <div class="why-card-title">India's Biggest Network</div>
-        <p class="why-card-desc">Access to the widest network of vendors, parts and specialists in India. What takes others weeks, we deliver in days.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-1">
-        <div class="why-card-n">02</div>
-        <div class="why-card-title">Instant Turnaround</div>
-        <p class="why-card-desc">Most modifications completed same-day or within 24 hours. No long waits, no follow-ups, no excuses.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-2">
-        <div class="why-card-n">03</div>
-        <div class="why-card-title">All Certified Technicians</div>
-        <p class="why-card-desc">Every technician is trained and certified. Your car is in expert hands from drop-off to pick-up.</p>
-      </div>
-      <div class="why-card reveal reveal-delay-3">
-        <div class="why-card-n">04</div>
-        <div class="why-card-title">Open 365 Days</div>
-        <p class="why-card-desc">We're open every single day of the year. Weekends, holidays, festival days — we're always here when you need us.</p>
-      </div>
+      <div class="why-i" data-rv="up"><div class="why-n">01</div><div class="why-t">50,000 Sq Ft Studio</div><div class="why-d">India's largest single-location car modification studio. Everything under one roof — no outsourcing, no delays.</div></div>
+      <div class="why-i" data-rv="up"><div class="why-n">02</div><div class="why-t">15+ Years Experience</div><div class="why-d">Since 2009, we've transformed over 10,000 vehicles. Our team has seen every car, solved every challenge.</div></div>
+      <div class="why-i" data-rv="up"><div class="why-n">03</div><div class="why-t">Premium Sourcing</div><div class="why-d">Direct partnerships with top-tier kit manufacturers. Every body kit, every leather piece — authenticated and certified.</div></div>
+      <div class="why-i" data-rv="up"><div class="why-n">04</div><div class="why-t">Same-Day Estimates</div><div class="why-d">WhatsApp us now and get a personalised quote within the hour. No waiting, no runaround — ever.</div></div>
+      <div class="why-i" data-rv="up"><div class="why-n">05</div><div class="why-t">Celebrity Clientele</div><div class="why-d">The preferred studio for Tollywood's finest. Discretion, quality, and absolute trust — always delivered.</div></div>
+      <div class="why-i" data-rv="up"><div class="why-n">06</div><div class="why-t">Fully Reversible</div><div class="why-d">Every modification we offer can be reversed to factory condition. Your car, your choice, forever.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     BOOK
-═══════════════════════════════════════ -->
+<!-- ═══ BOOK ═══ -->
 <section id="book">
   <div class="wrap">
-    <div class="book-header reveal">
-      <div class="book-eyebrow">
-        <span class="label red-label">06</span>
-        <span class="label">How It Works</span>
+    <div class="book-in">
+      <div class="eyebrow" style="justify-content:center" data-rv="up"><span class="ey-n">06</span><span class="ey-t">Get Started</span></div>
+      <h2 class="s-head" data-rv="up">Book in<br/>4 Steps</h2>
+      <div class="book-steps">
+        <div class="bk-s" data-rv="up"><div class="bk-n">01</div><div class="bk-t">WhatsApp Us</div><div class="bk-d">Tell us your car and the modification you have in mind. We respond within the hour.</div></div>
+        <div class="bk-s" data-rv="up"><div class="bk-n">02</div><div class="bk-t">Get a Quote</div><div class="bk-d">Receive a detailed price breakdown and timeline — transparent, no hidden costs.</div></div>
+        <div class="bk-s" data-rv="up"><div class="bk-n">03</div><div class="bk-t">Drop Your Car</div><div class="bk-d">Bring your car to Road No. 36, Jubilee Hills. We handle everything from there.</div></div>
+        <div class="bk-s" data-rv="up"><div class="bk-n">04</div><div class="bk-t">Drive It Home</div><div class="bk-d">Collect your transformed car. Every modification verified and approved by you personally.</div></div>
       </div>
-      <h2 class="book-heading">Book In<br><span class="red">3 Steps</span></h2>
-    </div>
-    <div class="book-steps reveal">
-      <div class="book-step">
-        <div class="book-step-n">01</div>
-        <div class="book-step-title">WhatsApp Us</div>
-        <p class="book-step-desc">Send us a message on +91 80190 65252. We're available 7 days a week.</p>
+      <div class="bk-ctas" data-rv="up">
+        <a href="https://wa.me/918019065252" class="btn-red" target="_blank" rel="noopener">Start on WhatsApp →</a>
+        <a href="tel:+918019065252" class="btn-out">Call +91 80190 65252</a>
       </div>
-      <div class="book-step">
-        <div class="book-step-n">02</div>
-        <div class="book-step-title">Tell Us Your Car &amp; Service</div>
-        <p class="book-step-desc">Share your car model and the service you're interested in. We'll guide you with options and pricing.</p>
-      </div>
-      <div class="book-step">
-        <div class="book-step-n">03</div>
-        <div class="book-step-title">Come In. We Advise.</div>
-        <p class="book-step-desc">Drive in to Jubilee Hills or let us advise you remotely. Transparent quote and timeline, always.</p>
-      </div>
-    </div>
-    <div class="book-cta reveal">
-      <a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="btn-red" style="display:inline-flex">Start Your Booking →</a>
-      <p class="book-note">We encourage advance booking. <strong>Recliner installs require 1 week notice.</strong> · Walk-ins welcome for most services.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     CONTACT
-═══════════════════════════════════════ -->
+<!-- ═══ CONTACT ═══ -->
 <section id="contact">
   <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-left reveal">
-        <div class="contact-eyebrow">
-          <span class="label red-label">07</span>
-          <span class="label">Find Us</span>
-        </div>
-        <h2 class="contact-heading">Get In <span class="red">Touch</span></h2>
-        <div class="cinfo">
-          <div class="cinfo-item">
-            <svg class="cinfo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div>
-              <div class="cinfo-lbl">Address</div>
-              <div class="cinfo-val">1355/F, Road No. 45, Nandagiri Hills<br>Jubilee Hills, Hyderabad — 500033</div>
-              <div class="cinfo-note"><a href="https://maps.google.com" target="_blank" rel="noopener" style="color:var(--red)">View on Google Maps →</a></div>
-            </div>
-          </div>
-          <div class="cinfo-item">
-            <svg class="cinfo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 10a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17l.19-.08z"/></svg>
-            <div>
-              <div class="cinfo-lbl">Phone / WhatsApp</div>
-              <div class="cinfo-val"><a href="tel:+918019065252">+91 80190 65252</a></div>
-            </div>
-          </div>
-          <div class="cinfo-item">
-            <svg class="cinfo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <div>
-              <div class="cinfo-lbl">Working Hours</div>
-              <div class="cinfo-val">Mon–Sat: 10:00 AM – 9:00 PM<br>Sunday: 10:00 AM – 7:00 PM</div>
-              <div class="cinfo-note" style="color:var(--red)">Open 365 Days a Year</div>
-            </div>
-          </div>
-          <div class="cinfo-item">
-            <svg class="cinfo-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            <div>
-              <div class="cinfo-lbl">Instagram</div>
-              <div class="cinfo-val"><a href="https://www.instagram.com/fasttracks_car_care" target="_blank" rel="noopener">@fasttracks_car_care</a></div>
-              <div class="cinfo-note">157K+ Followers</div>
-            </div>
+    <div class="eyebrow" data-rv="up"><span class="ey-n">07</span><span class="ey-t">Find Us</span></div>
+    <h2 class="s-head" data-rv="up">Visit the<br/>Studio</h2>
+    <div class="ct-grid">
+      <div>
+        <div class="ci-list">
+          <div class="ci-row" data-rv="up"><div class="ci-l">Address</div><div class="ci-v">Road No. 36, Jubilee Hills<br/>Hyderabad, Telangana 500033</div></div>
+          <div class="ci-row" data-rv="up"><div class="ci-l">Phone &amp; WhatsApp</div><div class="ci-v"><a href="tel:+918019065252">+91 80190 65252</a></div></div>
+          <div class="ci-row" data-rv="up"><div class="ci-l">Hours</div><div class="ci-v">Mon–Sat: 9:00 AM – 8:00 PM<br/>Sunday: 10:00 AM – 6:00 PM</div></div>
+          <div class="ci-row" data-rv="up">
+            <div class="ci-l">WhatsApp</div>
+            <a href="https://wa.me/918019065252" class="btn-red" target="_blank" rel="noopener" style="margin-top:10px;display:inline-flex">Open WhatsApp →</a>
           </div>
         </div>
       </div>
-      <div class="contact-right reveal reveal-delay-2">
-        <div class="cwa-card">
-          <h3 class="cwa-heading">Ready to Transform<br>Your Car?</h3>
-          <p class="cwa-sub">Drop us a message and we'll get back to you instantly. No wait times. No call centres. Real people, real answers.</p>
-          <div class="cwa-num">+91 80190 65252</div>
-          <a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="btn-red" style="display:inline-flex;width:100%;justify-content:center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat on WhatsApp
-          </a>
-        </div>
+      <div class="map-wrap" data-rv="right">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3!2d78.3972!3d17.4315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97b06c5b2d0b%3A0x1!2sFasttracks+Car+Care%2C+Jubilee+Hills%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1686000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fasttracks Car Care Location"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════ -->
-<div class="prestige-bar">
-  <div class="prestige-inner">
-    <span>Performance</span><i>◆</i>
-    <span>Luxury</span><i>◆</i>
-    <span>Precision</span><i>◆</i>
-    <span>Excellence</span><i>◆</i>
-    <span>Performance</span><i>◆</i>
-    <span>Luxury</span><i>◆</i>
-    <span>Precision</span><i>◆</i>
-    <span>Excellence</span>
+<!-- PRESTIGE BAR -->
+<div class="pr-bar">
+  <div class="pr-track">
+    <div class="pr-item"><em>Performance</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Luxury</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Precision</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Excellence</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Performance</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Luxury</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Precision</em></div><div class="pr-item">·</div>
+    <div class="pr-item"><em>Excellence</em></div><div class="pr-item">·</div>
   </div>
 </div>
+
+<!-- FOOTER -->
 <footer>
-  <div class="ft-inner">
+  <div class="ft">
     <div class="ft-top">
-      <a href="#home"><img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" class="ft-wm" /></a>
-      <nav class="ft-nav">
-        <a href="#home">Home</a>
+      <a href="#home"><img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" class="ft-wm"/></a>
+      <nav class="ft-links">
         <a href="#services">Services</a>
         <a href="catalogue.html">Catalogue</a>
         <a href="#recliners">Recliners</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-      <div class="ft-socials">
-        <a href="https://www.instagram.com/fasttracks_car_care" target="_blank" rel="noopener" class="ft-social" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@fasttrackscarcare" target="_blank" rel="noopener" class="ft-social" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="ft-social" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/fasttrackscarcare" target="_blank" rel="noopener" class="ft-social" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-      </div>
     </div>
-    <div class="ft-bottom">
-      <span class="ft-copy">© 2025 Fasttracks Car Care. All Rights Reserved. · Jubilee Hills, Hyderabad</span>
-      <span class="ft-tagline">India's Biggest Instant Car Modification Studio</span>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2025 Fasttracks Car Care · Jubilee Hills, Hyderabad · India's Biggest Instant Car Modification Studio</span>
+      <a href="tel:+918019065252" class="ft-num">+91 80190 65252</a>
     </div>
   </div>
 </footer>
 
 <script>
-// ── NAVBAR SCROLL ─────────────────────────────
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, {passive: true});
+/* ── LOADER ─────────────────────────── */
+(function(){
+  const loader=document.getElementById('loader');
+  const bar=document.getElementById('ldBar');
+  let w=0;
+  const t=setInterval(()=>{w+=Math.random()*16+6;if(w>=100){w=100;clearInterval(t);}bar.style.width=w+'%';},70);
+  window.addEventListener('load',()=>setTimeout(()=>loader.classList.add('out'),300));
+})();
 
-// ── MOBILE NAV ────────────────────────────────
-const mobNav = document.getElementById('mob-nav');
-const burger = document.getElementById('burger');
-function toggleMob() {
-  burger.classList.toggle('open');
-  mobNav.classList.toggle('open');
-  document.body.style.overflow = mobNav.classList.contains('open') ? 'hidden' : '';
-}
-function closeMob() {
-  burger.classList.remove('open');
-  mobNav.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// ── THEME TOGGLE ──────────────────────────────
-function toggleTheme() {
-  document.body.classList.toggle('light');
-  localStorage.setItem('ft-theme', document.body.classList.contains('light') ? 'light' : 'dark');
-}
-if (localStorage.getItem('ft-theme') === 'light') document.body.classList.add('light');
-
-// ── HERO PARALLAX ─────────────────────────────
-const heroBg = document.getElementById('heroBg');
-const lamboBg = document.getElementById('lamboBg');
-window.addEventListener('scroll', () => {
-  const sy = window.scrollY;
-  if (heroBg && sy < window.innerHeight * 1.5) {
-    heroBg.style.transform = `translateY(${sy * 0.35}px)`;
+/* ── CURSOR ──────────────────────────── */
+(function(){
+  const d=document.getElementById('cur-d');
+  const r=document.getElementById('cur-r');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  function loop(){
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    d.style.left=mx+'px'; d.style.top=my+'px';
+    r.style.left=rx+'px'; r.style.top=ry+'px';
+    requestAnimationFrame(loop);
   }
-}, {passive: true});
-
-// ── REVEAL ON SCROLL ──────────────────────────
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('vis');
-      io.unobserve(e.target);
-    }
+  loop();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
   });
-}, {threshold: 0.12});
-reveals.forEach(el => io.observe(el));
+})();
 
-// ── ACTIVE NAV LINK ───────────────────────────
-const sections = document.querySelectorAll('section[id]');
-const navAs = document.querySelectorAll('.nav-links a');
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navAs.forEach(a => a.style.color = '');
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (active) active.style.color = 'var(--txt)';
-    }
+/* ── SCROLL PROGRESS ────────────────── */
+(function(){
+  const p=document.getElementById('sprog');
+  window.addEventListener('scroll',()=>{
+    p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  },{passive:true});
+})();
+
+/* ── NAV ─────────────────────────────── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+
+/* ── MOBILE NAV ──────────────────────── */
+const mob=document.getElementById('mob');
+const burger=document.getElementById('burger');
+function toggleMob(){burger.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':'';}
+function closeMob(){burger.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';}
+
+/* ── HERO CANVAS PARTICLES ───────────── */
+(function(){
+  const c=document.getElementById('hero-c');
+  const ctx=c.getContext('2d');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+  const pts=Array.from({length:100},()=>mkPt(true));
+  function mkPt(init){
+    const h=c.height;
+    return{
+      x:Math.random()*c.width,
+      y:init?Math.random()*h:h+8,
+      r:Math.random()*1.6+.35,
+      vx:(Math.random()-.5)*.3,
+      vy:-(Math.random()*.55+.18),
+      o:Math.random()*.45+.08,
+      isRed:Math.random()<.07
+    };
+  }
+  function frame(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.o-=.0007;
+      if(p.y<-10||p.o<=0)Object.assign(p,mkPt(false));
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=(p.isRed?'rgba(232,0,13,':'rgba(201,151,63,')+p.o+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ── HERO PARALLAX ───────────────────── */
+const hGhost=document.querySelector('.h-ghost');
+window.addEventListener('scroll',()=>{
+  if(hGhost)hGhost.style.transform=`translateX(-50%) translateY(${window.scrollY*.28}px)`;
+},{passive:true});
+
+/* ── REVEAL ──────────────────────────── */
+(function(){
+  const els=document.querySelectorAll('[data-rv]');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+  els.forEach(el=>{
+    const sibs=[...el.closest('section,div')?.querySelectorAll('[data-rv]')||[]];
+    const idx=sibs.indexOf(el);
+    el.style.transitionDelay=Math.min(idx*.09,.45)+'s';
+    io.observe(el);
   });
-}, {threshold: 0.4});
-sections.forEach(s => sectionObserver.observe(s));
+})();
+
+/* ── STAT COUNTERS ───────────────────── */
+(function(){
+  const els=document.querySelectorAll('[data-count]');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target;
+      const target=+el.dataset.count;
+      const dur=1900;
+      const t0=performance.now();
+      function step(now){
+        const t=Math.min((now-t0)/dur,1);
+        const ease=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+        el.textContent=Math.floor(ease*target).toLocaleString('en-IN');
+        if(t<1)requestAnimationFrame(step);
+        else el.textContent=target.toLocaleString('en-IN');
+      }
+      requestAnimationFrame(step);
+      io.unobserve(el);
+    });
+  },{threshold:.6});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ── SERVICE CARD SPOTLIGHT ──────────── */
+document.querySelectorAll('.svc-c').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+
+/* ── BRAND PANEL GLARE ───────────────── */
+document.querySelectorAll('.bp').forEach(p=>{
+  p.addEventListener('mousemove',e=>{
+    const r=p.getBoundingClientRect();
+    p.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    p.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
 </script>
 </body>
 </html>
