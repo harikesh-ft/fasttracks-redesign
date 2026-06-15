@@ -168,6 +168,20 @@ body.light .icon-sun{display:block}
   letter-spacing:5px;text-transform:uppercase;
   color:rgba(255,255,255,.5);
 }
+.hero-gold-bar{
+  display:flex;align-items:center;gap:14px;
+  margin:4px 0;
+}
+.hero-gold-bar span{
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  max-width:100px;
+}
+.hero-gold-bar i{
+  font-style:normal;font-size:12px;
+  color:var(--gold);letter-spacing:6px;
+  font-weight:400;
+}
 .hero-wm{
   width:min(640px,82vw);
 }
@@ -268,7 +282,7 @@ body.light .icon-sun{display:block}
 .stat:last-child{border-right:none}
 .stat-n{
   font-family:'Bebas Neue',sans-serif;
-  font-size:40px;color:var(--txt);
+  font-size:40px;color:var(--gold);
   line-height:1;margin-bottom:6px;
 }
 .stat-n em{color:var(--red);font-style:normal}
@@ -392,6 +406,33 @@ body.light .icon-sun{display:block}
 }
 .svc-tag.pop{color:var(--red);border-color:var(--red)}
 .svc-tag.gold{color:var(--gold);border-color:var(--gold)}
+.svc-icon{
+  width:28px;height:28px;
+  color:var(--gold);opacity:.7;
+  margin-bottom:8px;flex-shrink:0;
+  transition:opacity .25s;
+}
+.svc-row:hover .svc-icon{opacity:1}
+/* ── PRESTIGE BAR ─────────────────────────────── */
+.prestige-bar{
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:20px 0;overflow:hidden;
+}
+.prestige-inner{
+  display:flex;align-items:center;justify-content:center;
+  gap:32px;flex-wrap:nowrap;overflow:hidden;
+}
+.prestige-inner span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:8px;
+  color:var(--gold);opacity:.75;
+}
+.prestige-inner i{
+  font-style:normal;color:var(--red);
+  font-size:6px;line-height:1;
+}
 .svc-more{
   font-size:13px;color:var(--dim);line-height:1.8;
 }
@@ -926,6 +967,7 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
 
   <div class="hero-content">
     <span class="hero-eyebrow">Jubilee Hills · Hyderabad · Est. 1999</span>
+    <div class="hero-gold-bar"><span></span><i>✦</i><span></span></div>
     <div class="hero-wm">
       <img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" />
     </div>
@@ -1015,64 +1057,76 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
     </div>
     <div class="svc-list">
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M3 14h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/><path d="M8 20v1M16 20v1"/></svg>
         <span class="svc-n">01</span>
         <span class="svc-name">Luxury Recliners</span>
         <span class="svc-desc">Custom recliners in India's most premium SUVs. The definition of in-car luxury.</span>
         <span class="svc-tag pop">Most Popular</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
         <span class="svc-n">02</span>
         <span class="svc-name">Paint Protection Film (PPF)</span>
         <span class="svc-desc">Full body from ₹1L–₹2L · Military-grade film against chips, scratches &amp; UV.</span>
         <span class="svc-tag gold">Premium</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5H18l-3.75 2.7 1.5 4.5L12 12l-3.75 2.7 1.5-4.5L6 7.5h4.5z"/><circle cx="12" cy="12" r="9" stroke-dasharray="2 2"/></svg>
         <span class="svc-n">03</span>
         <span class="svc-name">Ceramic Coating</span>
         <span class="svc-desc">Nano-ceramic protection with deep gloss. From ₹15K–₹60K.</span>
         <span class="svc-tag gold">Premium</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2v-4l3-4h14l3 4v4a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
         <span class="svc-n">04</span>
         <span class="svc-name">Body Kits &amp; Aero</span>
         <span class="svc-desc">German &amp; Japanese body kits. Custom wide-body, bumper replacements, splitters.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6v12M2 12h20"/></svg>
         <span class="svc-n">05</span>
         <span class="svc-name">Custom Wraps &amp; Vinyl</span>
         <span class="svc-desc">Full wraps, partial wraps, carbon vinyl, chrome delete. Any colour, any finish.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
         <span class="svc-n">06</span>
         <span class="svc-name">Alloy Wheels</span>
         <span class="svc-desc">OEM replacements, aftermarket upgrades, custom offsets for all makes.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c5 0 5 4 10 4s5-4 10-4"/><path d="M3 14c5 0 5 4 10 4s5-4 10-4"/></svg>
         <span class="svc-n">07</span>
         <span class="svc-name">Performance Exhausts</span>
         <span class="svc-desc">Sport and valvetronic exhaust systems. Stock, catback and custom setups.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="4"/></svg>
         <span class="svc-n">08</span>
         <span class="svc-name">Suspension Modifications</span>
         <span class="svc-desc">Ride height, stance, coilovers, airbag suspension and performance upgrades.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 8 4 13 4 16a8 8 0 0016 0c0-3-2-8-8-14z"/></svg>
         <span class="svc-n">09</span>
         <span class="svc-name">Hydro Dipping</span>
         <span class="svc-desc">Unique hydrographic pattern finishes on interior trims, wheels and car parts.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h6v5H3zM9 5h3a2 2 0 012 2v1"/><rect x="8" y="11" width="8" height="10" rx="1"/><path d="M11 11V8"/></svg>
         <span class="svc-n">10</span>
         <span class="svc-name">Deep Interior Cleaning</span>
         <span class="svc-desc">₹5K–₹7K · Steam-clean, shampoo and ozone treatment. Done in 1–2 hours.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         <span class="svc-n">11</span>
         <span class="svc-name">Infotainment Upgrades</span>
         <span class="svc-desc">Apple CarPlay, Android Auto and full AV system upgrades for every make.</span>
       </div>
       <div class="svc-row reveal">
+        <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v5M5.1 7.5l4.3 2.5M18.9 7.5l-4.3 2.5"/></svg>
         <span class="svc-n">12</span>
         <span class="svc-name">Custom Steering Wheels</span>
         <span class="svc-desc">OEM replacement and aftermarket steering wheels. Browse our catalogue.</span>
@@ -1426,6 +1480,18 @@ body.light .ft-bottom,.body.light footer{border-color:rgba(0,0,0,.08)}
 <!-- ═══════════════════════════════════════
      FOOTER
 ═══════════════════════════════════════ -->
+<div class="prestige-bar">
+  <div class="prestige-inner">
+    <span>Performance</span><i>◆</i>
+    <span>Luxury</span><i>◆</i>
+    <span>Precision</span><i>◆</i>
+    <span>Excellence</span><i>◆</i>
+    <span>Performance</span><i>◆</i>
+    <span>Luxury</span><i>◆</i>
+    <span>Precision</span><i>◆</i>
+    <span>Excellence</span>
+  </div>
+</div>
 <footer>
   <div class="ft-inner">
     <div class="ft-top">
