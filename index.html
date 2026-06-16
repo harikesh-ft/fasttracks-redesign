@@ -72,7 +72,8 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 /* ── NAV ─────────────────────────────── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s}
 #nav.scrolled{padding:14px var(--pad);background:rgba(5,5,5,.96);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(10px)}
-.nav-logo{height:28px;filter:brightness(1.3) saturate(1.1);transition:filter .3s}
+.nav-logo{height:36px;filter:brightness(2) saturate(1.1);transition:filter .3s}
+.h-wordmark{width:clamp(300px,62vw,860px);filter:brightness(2.5) saturate(1.2);pointer-events:none;display:block;margin:0 auto}
 .nav-links{display:flex;align-items:center;gap:clamp(18px,3vw,40px)}
 .nav-links a{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(240,240,240,.6);transition:color .25s;position:relative}
 .nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--red);transition:width .3s cubic-bezier(.4,0,.2,1)}
@@ -343,7 +344,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 
 <!-- NAV -->
 <header id="nav">
-  <a href="#home"><img class="nav-logo" src="fasttracks_wordmark.png" alt="Fasttracks"/></a>
+  <a href="#home"><img class="nav-logo" src="fasttracks_icon.png" alt="Fasttracks"/></a>
   <nav class="nav-links">
     <a href="#services">Services</a>
     <a href="catalogue.html">Catalogue</a>
@@ -377,9 +378,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 
   <div class="h-content">
     <div class="h-eyebrow"><span class="h-eyebrow-in">Jubilee Hills · Hyderabad · Est. 2009</span></div>
-    <h1 class="h-title" aria-label="FASTTRACKS">
-      <span class="hc">F</span><span class="hc">A</span><span class="hc">S</span><span class="hc">T</span><span class="hc">T</span><span class="hc">R</span><span class="hc">A</span><span class="hc">C</span><span class="hc">K</span><span class="hc">S</span>
-    </h1>
+    <img class="h-wordmark" src="fasttracks_wordmark.png" alt="FASTTRACKS"/>
     <div class="h-sub"><span class="h-sub-in">Car Care</span></div>
     <div class="h-tagline"><span class="h-tagline-in">India's Biggest Instant Car Modification Studio &nbsp;·&nbsp; 50,000 Sq Ft</span></div>
     <div class="h-ctas">
@@ -883,8 +882,8 @@ lenis.on('scroll',({scroll})=>{
 function heroIn(){
   const tl=gsap.timeline();
   tl.fromTo('.h-eyebrow-in',{y:'120%',opacity:0},{y:'0%',opacity:1,duration:.7,ease:'power3.out'})
-    .fromTo('.hc',{y:'115%',opacity:0},{y:'0%',opacity:1,stagger:.045,duration:.9,ease:'power3.out'},'<.15')
-    .fromTo('.h-sub-in',{y:'110%',opacity:0},{y:'0%',opacity:1,duration:.7,ease:'power2.out'},'<.3')
+    .fromTo('.h-wordmark',{y:36,opacity:0,scale:.96},{y:0,opacity:1,scale:1,duration:1,ease:'power3.out'},'<.1')
+    .fromTo('.h-sub-in',{y:'110%',opacity:0},{y:'0%',opacity:1,duration:.7,ease:'power2.out'},'<.4')
     .fromTo('.h-tagline-in',{y:'110%',opacity:0},{y:'0%',opacity:1,duration:.6,ease:'power2.out'},'<.15')
     .fromTo('.h-ctas',{y:20,opacity:0},{y:0,opacity:1,duration:.6,ease:'power2.out'},'<.1')
     .fromTo('.h-year',{opacity:0},{opacity:1,duration:1.2,ease:'power2.out'},'<.2');
