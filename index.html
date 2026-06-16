@@ -36,7 +36,7 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 /* ── LOADER ─────────────────────────── */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .8s .15s,visibility .8s .15s}
 #loader.out{opacity:0;visibility:hidden}
-.ld-icon{height:40px;filter:brightness(0) invert(1)}
+.ld-icon{height:40px;filter:brightness(1.3) saturate(1.1)}
 .ld-pct{font-family:'Bebas Neue',sans-serif;font-size:84px;line-height:1;color:var(--txt);letter-spacing:4px;min-width:3ch;text-align:center}
 .ld-track{width:200px;height:1px;background:var(--mute);overflow:hidden;position:relative}
 .ld-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red));transition:width .05s linear}
@@ -72,7 +72,7 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 /* ── NAV ─────────────────────────────── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .4s,border-color .4s}
 #nav.scrolled{padding:14px var(--pad);background:rgba(5,5,5,.96);border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(10px)}
-.nav-logo{height:28px;filter:brightness(0) invert(1);transition:filter .3s}
+.nav-logo{height:28px;filter:brightness(1.3) saturate(1.1);transition:filter .3s}
 .nav-links{display:flex;align-items:center;gap:clamp(18px,3vw,40px)}
 .nav-links a{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(240,240,240,.6);transition:color .25s;position:relative}
 .nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--red);transition:width .3s cubic-bezier(.4,0,.2,1)}
@@ -294,7 +294,7 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 footer{background:#050505;border-top:1px solid var(--line)}
 .ft{max-width:var(--max);margin:0 auto;padding:40px var(--pad) 28px}
 .ft-top{display:flex;justify-content:space-between;align-items:center;gap:32px;padding-bottom:28px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.ft-wm{height:26px;filter:brightness(0) invert(1);opacity:.7;transition:opacity .3s}
+.ft-wm{height:26px;filter:brightness(1.3) saturate(1.1);opacity:.85;transition:opacity .3s}
 .ft-wm:hover{opacity:1}
 .ft-links{display:flex;gap:28px;flex-wrap:wrap}
 .ft-links a{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);transition:color .25s}
