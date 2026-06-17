@@ -311,6 +311,37 @@ footer{background:#050505;border-top:1px solid var(--line)}
 
 /* ── GRAIN OVERLAY ───────────────────── */
 body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;opacity:.038;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── LATEST DROP ──────────────────────── */
+.drop-btn{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:5000;background:var(--red);padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:right .25s ease;border-radius:4px 0 0 4px;border:1px solid rgba(255,255,255,.12);border-right:none}
+.drop-btn:hover{right:3px}
+.drop-dot{width:8px;height:8px;border-radius:50%;background:#fff;flex-shrink:0;animation:dpulse 1.6s ease-in-out infinite}
+@keyframes dpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.75)}55%{box-shadow:0 0 0 7px rgba(255,255,255,0)}}
+.drop-btn-lbl{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:#fff;writing-mode:vertical-lr;transform:rotate(180deg)}
+.drop-ov{position:fixed;inset:0;z-index:8000;background:rgba(5,5,5,.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.drop-ov.is-open{opacity:1;pointer-events:all}
+.drop-modal{background:var(--bg2);border:1px solid rgba(201,151,63,.22);max-width:520px;width:100%;position:relative;transform:scale(.95) translateY(20px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-height:92vh;overflow-y:auto}
+.drop-ov.is-open .drop-modal{transform:scale(1) translateY(0)}
+.drop-x{position:absolute;top:12px;right:12px;z-index:10;width:32px;height:32px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);background:var(--bg);transition:color .2s,border-color .2s}
+.drop-x:hover{color:var(--txt);border-color:rgba(255,255,255,.35)}
+.drop-tags{display:flex;gap:8px;padding:16px 18px 0}
+.drop-tag{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 11px;background:var(--red);color:#fff}
+.drop-tag-g{background:transparent;border:1px solid rgba(201,151,63,.45);color:var(--gold)}
+.drop-img-box{width:100%;overflow:hidden;min-height:180px;position:relative;margin-top:12px;background:linear-gradient(135deg,#1a0505 0%,#0d0d0d 40%,#0a0605 100%)}
+.drop-img-box img{width:100%;display:block;position:relative;z-index:1;transition:transform .55s}
+.drop-img-box:hover img{transform:scale(1.03)}
+.drop-body{padding:22px 24px 26px}
+.drop-eyebrow{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.drop-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,58px);line-height:.9;letter-spacing:1px;color:var(--txt);margin-bottom:6px}
+.drop-h .red{color:var(--red)}
+.drop-st{font-size:12px;color:var(--dim);margin-bottom:18px;line-height:1.7}
+.drop-feats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:22px}
+.drop-feat{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 12px;border:1px solid var(--line);color:var(--dim);display:flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
+.drop-feat:hover{border-color:rgba(201,151,63,.3);color:var(--txt)}
+.drop-feat svg{flex-shrink:0;color:var(--gold);width:13px;height:13px}
+.drop-cta-btn{display:block;width:100%;text-align:center;padding:16px;background:var(--red);color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;margin-bottom:12px}
+.drop-cta-btn:hover{background:#c8000b}
+.drop-fine{text-align:center;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -1080,6 +1111,70 @@ gsap.utils.toArray('.why-i').forEach((el,i)=>{
     scrollTrigger:{trigger:el,start:'top 88%',once:true}
   });
 });
+
+/* ── LATEST DROP POPUP ───────────────────────────────────────── */
+function openDrop(){
+  document.getElementById('dropOv').classList.add('is-open');
+  document.body.style.overflow='hidden';
+}
+function closeDrop(e){
+  const ov=document.getElementById('dropOv');
+  if(!e||e.target===ov){
+    ov.classList.remove('is-open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrop()});
 </script>
+
+<!-- ═══ LATEST DROP TRIGGER ═══ -->
+<div class="drop-btn" id="dropBtn" onclick="openDrop()" title="See our latest drop">
+  <span class="drop-dot"></span>
+  <span class="drop-btn-lbl">NEW DROP</span>
+</div>
+
+<!-- ═══ LATEST DROP MODAL ═══ -->
+<div class="drop-ov" id="dropOv" onclick="closeDrop(event)">
+  <div class="drop-modal" id="dropModal">
+    <button class="drop-x" onclick="closeDrop()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="drop-tags">
+      <span class="drop-tag">NEW DROP</span>
+      <span class="drop-tag drop-tag-g">India Exclusive</span>
+    </div>
+    <div class="drop-img-box">
+      <img src="travo-bodykit.jpg" alt="Travo Bodykit — Hilux &amp; Fortuner" onerror="this.style.display='none'" />
+    </div>
+    <div class="drop-body">
+      <div class="drop-eyebrow">Fasttracks Presents</div>
+      <div class="drop-h">TRAVO<br><span class="red">BODYKIT</span></div>
+      <div class="drop-st">India's exclusive Hilux &amp; Fortuner Travo destination — only at Fasttracks, Jubilee Hills, Hyderabad.</div>
+      <div class="drop-feats">
+        <div class="drop-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Expert Installation
+        </div>
+        <div class="drop-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Priority Booking
+        </div>
+        <div class="drop-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Premium Certified
+        </div>
+        <div class="drop-feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          Warranty Assured
+        </div>
+      </div>
+      <a href="https://wa.me/918019065252?text=Hi!%20I'm%20interested%20in%20the%20Travo%20Bodykit%20for%20Hilux%20%26%20Fortuner.%20Please%20share%20details%20and%20pricing." target="_blank" rel="noopener" class="drop-cta-btn">
+        Book on WhatsApp →
+      </a>
+      <div class="drop-fine">Redefine · Conquer · Lead · <span style="color:var(--gold)">Fasttracks</span></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
