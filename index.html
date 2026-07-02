@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="fasttracks_icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
 /* ── TOKENS ─────────────────────────── */
 :root{
@@ -362,6 +362,65 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 .drop-cta-btn{display:block;width:100%;text-align:center;padding:16px;background:var(--red);color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;margin-bottom:12px}
 .drop-cta-btn:hover{background:#c8000b}
 .drop-fine{text-align:center;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.2);text-transform:uppercase}
+
+/* ── CINEMA SYSTEM (hero scrub) ─────────── */
+.cine-bar{position:absolute;left:0;right:0;height:7.5vh;background:#000;z-index:6;pointer-events:none;transform:scaleY(0)}
+.cine-bar.top{top:0;transform-origin:top}
+.cine-bar.bot{bottom:0;transform-origin:bottom}
+.cine-hud{position:absolute;top:calc(7.5vh + 18px);right:clamp(16px,3.5vw,56px);z-index:6;display:flex;align-items:center;gap:14px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.55);opacity:0;pointer-events:none}
+.cine-rec{display:flex;align-items:center;gap:7px;color:#ff3540}
+.cine-rec i{width:9px;height:9px;border-radius:50%;background:#ff2130;animation:recblink 1.1s steps(1) infinite}
+@keyframes recblink{50%{opacity:.25}}
+.cine-tc{font-variant-numeric:tabular-nums;color:rgba(255,255,255,.75)}
+.cine-4k{color:var(--gold)}
+.cine-corner{position:absolute;width:26px;height:26px;z-index:6;opacity:0;pointer-events:none}
+.cine-corner::before,.cine-corner::after{content:'';position:absolute;background:rgba(255,255,255,.4)}
+.cine-corner::before{width:100%;height:1px}
+.cine-corner::after{width:1px;height:100%}
+.cc-tl{top:calc(7.5vh + 20px);left:clamp(16px,3.5vw,56px)}
+.cc-tr{top:calc(7.5vh + 20px);right:clamp(16px,3.5vw,56px);transform:scaleX(-1)}
+.cc-bl{bottom:calc(7.5vh + 20px);left:clamp(16px,3.5vw,56px);transform:scaleY(-1)}
+.cc-br{bottom:calc(7.5vh + 20px);right:clamp(16px,3.5vw,56px);transform:scale(-1)}
+.cine-chap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:min(92vw,980px);text-align:center;opacity:0;pointer-events:none;will-change:opacity,transform,filter}
+.cine-chap .cc-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9.5vw,150px);line-height:.92;letter-spacing:5px;color:var(--txt);text-shadow:0 4px 60px rgba(0,0,0,.8)}
+.cine-chap .cc-big em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);letter-spacing:1px;text-transform:none;font-size:.94em}
+.cine-chap .cc-sub{margin-top:16px;font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(15px,2.2vw,24px);color:rgba(240,240,240,.68);letter-spacing:.5px}
+.cine-chap .cc-rule{width:56px;height:1px;background:linear-gradient(90deg,var(--red),var(--gold));margin:22px auto 0}
+.cine-chap .cc-cta{margin-top:30px;pointer-events:auto;display:inline-flex}
+.cine-rail{position:absolute;right:clamp(14px,3vw,48px);top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;pointer-events:none}
+.cine-rail-line{width:1px;height:150px;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
+.cine-rail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--red),var(--gold))}
+.cine-rail-lbl{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.4);writing-mode:vertical-lr}
+
+/* ── SPLIT HEADINGS ─────────────────────── */
+.s-head em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);letter-spacing:1px;text-transform:none;font-size:.95em}
+.sh-m{display:inline-block;overflow:hidden;vertical-align:bottom}
+.sh-c{display:inline-block;transform:translateY(120%);will-change:transform}
+
+/* ── SERVICES PIN MODE (desktop) ────────── */
+@media(min-width:901px){
+  #services{height:100svh;padding:100px 0 30px;display:flex;flex-direction:column;justify-content:center;gap:30px}
+  #services .svc-hd{margin-bottom:0}
+  .svc-slide.t-tall{height:min(540px,56svh)}
+  .svc-slide.t-wide{height:min(390px,40svh)}
+  .svc-slide.t-std{height:min(460px,48svh)}
+  .svc-nav{display:none}
+  .svc-more{margin-top:0}
+}
+
+/* ── FOOTER GIANT TYPE ──────────────────── */
+.ft-giant{overflow:hidden;padding:64px var(--pad) 0}
+.ft-giant a{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,14vw,225px);line-height:.9;letter-spacing:8px;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.16);background:linear-gradient(90deg,var(--red),#ff4433,var(--gold));-webkit-background-clip:text;background-clip:text;background-size:0% 100%;background-repeat:no-repeat;transition:background-size .9s cubic-bezier(.4,0,.2,1)}
+.ft-giant a:hover{background-size:100% 100%}
+
+/* ── VELOCITY SKEW ──────────────────────── */
+.mq,.pr-bar{will-change:transform}
+
+/* ── TOUCH DEVICES ──────────────────────── */
+@media(hover:none){
+  body,button,a{cursor:auto!important}
+  #cur-d,#cur-r,#trail-c{display:none}
+}
 </style>
 </head>
 <body>
@@ -458,6 +517,46 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     <span>Scroll</span>
     <div class="h-scroll-line"></div>
   </div>
+
+  <!-- CINEMA SYSTEM -->
+  <div class="cine-bar top" id="cbTop"></div>
+  <div class="cine-bar bot" id="cbBot"></div>
+  <div class="cine-hud" id="cineHud">
+    <span class="cine-rec"><i></i>REC</span>
+    <span class="cine-tc" id="cineTc">00:00:00:00</span>
+    <span class="cine-4k">4K · CINEMA</span>
+  </div>
+  <div class="cine-corner cc-tl" id="ccTl"></div>
+  <div class="cine-corner cc-tr" id="ccTr"></div>
+  <div class="cine-corner cc-bl" id="ccBl"></div>
+  <div class="cine-corner cc-br" id="ccBr"></div>
+
+  <div class="cine-chap" id="chap1">
+    <div class="cc-big">50,000 <em>sq ft</em></div>
+    <div class="cc-rule"></div>
+    <div class="cc-sub">India's biggest instant car modification studio</div>
+  </div>
+  <div class="cine-chap" id="chap2">
+    <div class="cc-big">EVERY MOD.<br/><em>One roof.</em></div>
+    <div class="cc-rule"></div>
+    <div class="cc-sub">Body kits · PPF · Recliners · Audio · Wraps · Wheels</div>
+  </div>
+  <div class="cine-chap" id="chap3">
+    <div class="cc-big">SINCE <em>2009</em></div>
+    <div class="cc-rule"></div>
+    <div class="cc-sub">25+ years · 10,000+ cars transformed · Tollywood's finest</div>
+  </div>
+  <div class="cine-chap" id="chap4">
+    <div class="cc-big">YOUR CAR.<br/><em>Reimagined.</em></div>
+    <div class="cc-rule"></div>
+    <div class="cc-sub">Keep scrolling — or skip the line</div>
+    <a href="https://wa.me/918019065252" target="_blank" rel="noopener" class="btn-red cc-cta">Book on WhatsApp →</a>
+  </div>
+
+  <div class="cine-rail" id="cineRail">
+    <span class="cine-rail-lbl" id="cineSeq">SEQ 01 / 04</span>
+    <div class="cine-rail-line"><div class="cine-rail-fill" id="cineFill"></div></div>
+  </div>
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
@@ -516,7 +615,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     <div class="svc-hd">
       <div>
         <div class="eyebrow" data-rv="up"><span class="ey-n">01</span><span class="ey-t">What We Do</span></div>
-        <h2 class="s-head" data-rv="up">Our<br/>Services</h2>
+        <h2 class="s-head">Our<br/><em>Services</em></h2>
       </div>
       <p class="s-sub" data-rv="right">From factory floor to show stopper — every modification under one roof, 365 days a year.</p>
     </div>
@@ -652,7 +751,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     <div class="cp-hd">
       <div>
         <div class="eyebrow" data-rv="up"><span class="ey-n">02</span><span class="ey-t">Featured Kits</span></div>
-        <h2 class="s-head" data-rv="up">Browse Our<br/><span class="gold">Catalogue</span></h2>
+        <h2 class="s-head">Browse the<br/><em>Catalogue</em></h2>
       </div>
       <p class="s-sub" data-rv="right">116 premium body kits across BMW, Mercedes-Benz and Audi. Click any kit to explore.</p>
     </div>
@@ -670,7 +769,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     <div class="rec-grid">
       <div>
         <div class="eyebrow" data-rv="up"><span class="ey-n">03</span><span class="ey-t">Signature Service</span></div>
-        <h2 class="s-head" data-rv="up">The Recliner<br/><span class="gold">Experience</span></h2>
+        <h2 class="s-head">The Recliner<br/><em>Experience</em></h2>
         <p class="s-sub" style="margin-top:20px" data-rv="up">Our most iconic service. We install luxury recliners in India's most premium SUVs — turning your vehicle into a first-class cabin on wheels.</p>
         <div class="rec-feats" data-rv="up">
           <div class="rec-feat"><div class="rec-dot"></div><div class="rec-ft"><strong>Memory foam &amp; premium leather</strong> — sourced from top-tier global suppliers</div></div>
@@ -707,7 +806,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
     <div class="ab-grid">
       <div>
         <div class="eyebrow" data-rv="up"><span class="ey-n">04</span><span class="ey-t">Our Legacy</span></div>
-        <h2 class="s-head" data-rv="up">25+ Years of<br/><span class="gold">Excellence</span></h2>
+        <h2 class="s-head">25+ Years of<br/><em>Excellence</em></h2>
         <p class="s-sub" style="margin-top:20px" data-rv="up">Fasttracks Car Care is India's most trusted and connected car modification studio. Based in Jubilee Hills, Hyderabad — we've built the highest network base of vendors, clients, and Tollywood's finest.</p>
         <div class="stats-g">
           <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="10000">0</span><span class="stat-u">+</span></div><div class="stat-l">Cars Transformed</div></div>
@@ -718,10 +817,10 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
       </div>
       <div data-rv="right">
         <div class="founder-c">
-          <img src="rakesh.jpg" alt="Rakesh Kumar — Founder, Fasttracks Car Care" class="founder-img"/>
+          <img src="rakesh.jpg" alt="Rakesh Kurapati — Founder, Fasttracks Car Care" class="founder-img"/>
           <div class="founder-cap">
-            <div class="founder-name">Rakesh Kumar</div>
-            <div class="founder-role">Founder &amp; Director</div>
+            <div class="founder-name">Rakesh Kurapati</div>
+            <div class="founder-role">Founder &amp; CEO</div>
           </div>
         </div>
       </div>
@@ -733,7 +832,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 <section id="why">
   <div class="wrap">
     <div class="eyebrow" data-rv="up"><span class="ey-n">05</span><span class="ey-t">Why Fasttracks</span></div>
-    <h2 class="s-head" data-rv="up">The Fasttracks<br/>Difference</h2>
+    <h2 class="s-head">The Fasttracks<br/><em>Difference</em></h2>
     <div class="why-grid">
       <div class="why-i" data-rv="up"><div class="why-n">01</div><div class="why-t">50,000 Sq Ft Studio</div><div class="why-d">India's largest single-location car modification studio. Everything under one roof — no outsourcing, no delays.</div></div>
       <div class="why-i" data-rv="up"><div class="why-n">02</div><div class="why-t">25+ Years Experience</div><div class="why-d">Since 2009, we've transformed over 10,000 vehicles. Our team has seen every car, solved every challenge.</div></div>
@@ -750,7 +849,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
   <div class="wrap">
     <div class="book-in">
       <div class="eyebrow" style="justify-content:center" data-rv="up"><span class="ey-n">06</span><span class="ey-t">Get Started</span></div>
-      <h2 class="s-head" data-rv="up">Book in<br/>4 Steps</h2>
+      <h2 class="s-head">Book in<br/><em>Four Steps</em></h2>
       <div class="book-steps" id="bookSteps">
         <div class="bk-s" data-rv="up"><div class="bk-n">01</div><div class="bk-t">WhatsApp Us</div><div class="bk-d">Tell us your car and the modification you have in mind. We respond within the hour.</div></div>
         <div class="bk-s" data-rv="up"><div class="bk-n">02</div><div class="bk-t">Get a Quote</div><div class="bk-d">Receive a detailed price breakdown and timeline — transparent, no hidden costs.</div></div>
@@ -769,7 +868,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 <section id="contact">
   <div class="wrap">
     <div class="eyebrow" data-rv="up"><span class="ey-n">07</span><span class="ey-t">Find Us</span></div>
-    <h2 class="s-head" data-rv="up">Visit the<br/>Studio</h2>
+    <h2 class="s-head">Visit the<br/><em>Studio</em></h2>
     <div class="ct-grid">
       <div>
         <div class="ci-list">
@@ -805,6 +904,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 
 <!-- FOOTER -->
 <footer>
+  <div class="ft-giant" data-rv="up"><a href="#home" aria-label="Back to top">FASTTRACKS</a></div>
   <div class="ft">
     <div class="ft-top">
       <a href="#home"><img src="fasttracks_wordmark.png" alt="Fasttracks Car Care" class="ft-wm"/></a>
@@ -880,11 +980,43 @@ gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll',ScrollTrigger.update);
 gsap.ticker.lagSmoothing(0);
 
-/* ── SCROLL-DRIVEN VIDEO ─────────────────────────────────────── */
+/* ── CINEMATIC SCROLL ENGINE ─────────────────────────────────── */
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){
   const vid=document.getElementById('hero-vid');
   if(!vid)return;
+
+  if(RM){ /* reduced motion: gentle autoplay loop, no pin */
+    vid.loop=true;vid.autoplay=true;vid.play().catch(()=>{});
+    return;
+  }
   vid.pause();
+  vid.load();
+
+  const hContent=document.querySelector('.h-content');
+  const hHint=document.querySelector('.h-scroll-hint');
+  const hStreaks=document.querySelector('.h-streaks');
+  const cbTop=document.getElementById('cbTop');
+  const cbBot=document.getElementById('cbBot');
+  const hud=document.getElementById('cineHud');
+  const tc=document.getElementById('cineTc');
+  const corners=[...document.querySelectorAll('.cine-corner')];
+  const rail=document.getElementById('cineRail');
+  const railFill=document.getElementById('cineFill');
+  const seqLbl=document.getElementById('cineSeq');
+  const CHAPS=[
+    {el:document.getElementById('chap1'),a:.10,b:.30},
+    {el:document.getElementById('chap2'),a:.34,b:.54},
+    {el:document.getElementById('chap3'),a:.58,b:.76},
+    {el:document.getElementById('chap4'),a:.80,b:.97},
+  ];
+  const clamp01=v=>Math.max(0,Math.min(1,v));
+  /* window envelope: fade in first 22%, out last 22% */
+  function cw(p,a,b){
+    if(p<=a||p>=b)return 0;
+    const t=(p-a)/(b-a);
+    return Math.min(1,t/.22,(1-t)/.22);
+  }
 
   function initScrub(){
     const dur=vid.duration;
@@ -896,9 +1028,42 @@ gsap.ticker.lagSmoothing(0);
       pin:true,
       pinSpacing:true,
       onUpdate(self){
-        vid.currentTime=self.progress*dur;
+        const p=self.progress;
+        /* video scrub (skip micro-seeks) */
+        const t=p*dur;
+        if(Math.abs(vid.currentTime-t)>0.02)vid.currentTime=t;
+        /* hero content exits in first 12% */
+        const out=clamp01(p/.12);
+        hContent.style.opacity=1-out;
+        hContent.style.transform=`translateY(${out*-46}px) scale(${1-out*.05})`;
+        if(hHint)hHint.style.opacity=(1-out)*.4;
+        if(hStreaks)hStreaks.style.opacity=1-out;
+        /* letterbox + HUD live while scrubbing, exit at very end */
+        const lb=clamp01(p/.05)*(1-clamp01((p-.96)/.04));
+        cbTop.style.transform=`scaleY(${lb})`;
+        cbBot.style.transform=`scaleY(${lb})`;
+        hud.style.opacity=lb*.95;
+        rail.style.opacity=lb;
+        corners.forEach(c=>c.style.opacity=lb*.8);
+        /* timecode (24fps) */
+        const s=Math.floor(t),f=Math.floor((t-s)*24);
+        tc.textContent='00:'+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+':'+String(f).padStart(2,'0');
+        /* rail progress + sequence label */
+        railFill.style.height=(p*100)+'%';
+        let seq=1;
+        CHAPS.forEach((c,i)=>{if(p>=c.a)seq=i+1;});
+        seqLbl.textContent='SEQ 0'+seq+' / 04';
+        /* chapters: rack-focus in/out */
+        CHAPS.forEach(({el,a,b})=>{
+          const w=cw(p,a,b);
+          el.style.opacity=w;
+          el.style.filter=`blur(${(1-w)*10}px)`;
+          el.style.transform=`translate(-50%,-50%) translateY(${(1-w)*26}px) scale(${.97+w*.03})`;
+        });
       }
     });
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
   }
 
   if(vid.readyState>=1) initScrub();
@@ -1159,6 +1324,8 @@ function scrambleCount(el,target,dur){
   const prev=document.getElementById('svcPrev');
   const next=document.getElementById('svcNext');
   if(!track)return;
+  /* desktop uses scroll-pinned horizontal scrub instead */
+  if(window.matchMedia('(min-width:901px)').matches&&!RM)return;
   const slides=Array.from(track.querySelectorAll('.svc-slide'));
   const n=slides.length;
   let cur=0,pad0=0;
@@ -1244,6 +1411,10 @@ ScrollTrigger.create({
         c.innerHTML=`<div class="cp-img-wrap"><img src="${kit.image}" alt="${kit.kitName}" loading="lazy"/></div><div class="cp-ov"><div class="cp-brand">${kit.brand}</div><div class="cp-name">${kit.kitName}</div></div>`;
         c.onclick=()=>{window.location.href='catalogue.html?cat=body-kits&brand='+encodeURIComponent(kit.brand);};
         grid.appendChild(c);
+        /* inner image parallax */
+        const pimg=c.querySelector('img');
+        if(pimg&&!RM)gsap.fromTo(pimg,{yPercent:-7},{yPercent:7,ease:'none',
+          scrollTrigger:{trigger:c,start:'top bottom',end:'bottom top',scrub:1}});
         /* stagger reveal */
         ScrollTrigger.create({
           trigger:c,start:'top 90%',once:true,
@@ -1277,6 +1448,84 @@ gsap.utils.toArray('.why-i').forEach((el,i)=>{
     scrollTrigger:{trigger:el,start:'top 88%',once:true}
   });
 });
+
+/* ── SPLIT HEADINGS — char reveal ────────────────────────────── */
+(function(){
+  if(RM)return;
+  document.querySelectorAll('.s-head').forEach(head=>{
+    /* walk nodes, wrap each char in a masked span (keeps <br> and <em>) */
+    function splitNode(node){
+      if(node.nodeType===3){
+        const frag=document.createDocumentFragment();
+        node.textContent.split('').forEach(ch=>{
+          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
+          const m=document.createElement('span');m.className='sh-m';
+          const c=document.createElement('span');c.className='sh-c';c.textContent=ch;
+          m.appendChild(c);frag.appendChild(m);
+        });
+        node.parentNode.replaceChild(frag,node);
+      } else if(node.nodeType===1&&node.tagName!=='BR'){
+        [...node.childNodes].forEach(splitNode);
+      }
+    }
+    [...head.childNodes].forEach(splitNode);
+    gsap.to(head.querySelectorAll('.sh-c'),{
+      y:0,duration:.9,stagger:.022,ease:'power3.out',
+      scrollTrigger:{trigger:head,start:'top 86%',once:true}
+    });
+  });
+})();
+
+/* ── NAV LINK SCRAMBLE ───────────────────────────────────────── */
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  const orig=a.textContent;
+  let iv=null;
+  a.addEventListener('mouseenter',()=>{
+    let f=0;clearInterval(iv);
+    iv=setInterval(()=>{
+      a.textContent=orig.split('').map((c,i)=>i<f?c:String.fromCharCode(65+(Math.random()*26|0))).join('');
+      if(f++>=orig.length){a.textContent=orig;clearInterval(iv);}
+    },26);
+  });
+});
+
+/* ── VELOCITY-REACTIVE MARQUEES ──────────────────────────────── */
+(function(){
+  if(RM)return;
+  const mq=document.querySelector('.mq');
+  const pr=document.querySelector('.pr-bar');
+  let skew=0,target=0;
+  lenis.on('scroll',(e)=>{target=Math.max(-7,Math.min(7,(e.velocity||0)*.32));});
+  (function loop(){
+    skew+=(target-skew)*.1;
+    target*=.94;
+    const t=`skewX(${skew.toFixed(3)}deg)`;
+    if(mq)mq.style.transform=t;
+    if(pr)pr.style.transform=t;
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ── SERVICES — HORIZONTAL SCROLL SCRUB (desktop) ────────────── */
+(function(){
+  if(RM||!window.matchMedia('(min-width:901px)').matches)return;
+  const track=document.getElementById('svcTrack');
+  if(!track)return;
+  track.style.transition='none';
+  const dist=()=>Math.max(0,track.scrollWidth-window.innerWidth+80);
+  gsap.to(track,{
+    x:()=>-dist(),
+    ease:'none',
+    scrollTrigger:{
+      trigger:'#services',
+      start:'top top',
+      end:()=>'+='+dist(),
+      pin:true,
+      scrub:1,
+      invalidateOnRefresh:true
+    }
+  });
+})();
 
 /* ── LATEST DROP POPUP ───────────────────────────────────────── */
 function openDrop(){
