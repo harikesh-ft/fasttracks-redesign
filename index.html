@@ -461,6 +461,26 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
   .svc-more{margin-top:0}
 }
 
+/* ── ANTIGRAVITY CARDS ──────────────────── */
+@media (prefers-reduced-motion:no-preference){
+  #svcTrack.ag-ready .svc-slide{opacity:0}
+  #svcTrack.ag-ready .svc-slide.fly{opacity:1;animation:bumpIn .9s cubic-bezier(.34,1.56,.64,1) var(--bd,0s) both,floatY var(--fd,5.6s) ease-in-out calc(var(--bd,0s) + .95s) infinite alternate}
+  @keyframes bumpIn{0%{translate:0 120px;opacity:0}62%{translate:0 -16px;opacity:1}82%{translate:0 7px}100%{translate:0 0;opacity:1}}
+  @keyframes floatY{from{translate:0 0}to{translate:0 var(--fa,-9px)}}
+  .svc-slide:nth-child(1){--bd:0s;--fd:5.2s;--fa:-8px}
+  .svc-slide:nth-child(2){--bd:.07s;--fd:6.3s;--fa:-13px}
+  .svc-slide:nth-child(3){--bd:.14s;--fd:4.7s;--fa:-7px}
+  .svc-slide:nth-child(4){--bd:.21s;--fd:6.8s;--fa:-11px}
+  .svc-slide:nth-child(5){--bd:.28s;--fd:5.5s;--fa:-9px}
+  .svc-slide:nth-child(6){--bd:.35s;--fd:6.1s;--fa:-12px}
+  .svc-slide:nth-child(7){--bd:.42s;--fd:4.9s;--fa:-8px}
+  .svc-slide:nth-child(8){--bd:.49s;--fd:6.6s;--fa:-10px}
+  .svc-slide:nth-child(9){--bd:.56s;--fd:5.3s;--fa:-13px}
+  .svc-slide:nth-child(10){--bd:.63s;--fd:6.0s;--fa:-7px}
+  .svc-slide:nth-child(11){--bd:.7s;--fd:5.7s;--fa:-11px}
+  .svc-slide:nth-child(12){--bd:.77s;--fd:6.4s;--fa:-9px}
+}
+
 /* ── SERVICES AURORA BACKGROUND ─────────── */
 .svc-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;will-change:transform}
 .svc-blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform}
@@ -1708,6 +1728,17 @@ gsap.utils.toArray('.why-i').forEach((el,i)=>{
     scrollTrigger:{trigger:el,start:'top 88%',once:true}
   });
 });
+
+/* ── ANTIGRAVITY CARD LAUNCH ─────────────────────────────────── */
+(function(){
+  const track=document.getElementById('svcTrack');
+  if(!track||RM)return;
+  track.classList.add('ag-ready');
+  const launch=()=>track.querySelectorAll('.svc-slide').forEach(s=>s.classList.add('fly'));
+  ScrollTrigger.create({trigger:'#services',start:'top 78%',once:true,onEnter:launch});
+  /* safety: never leave cards hidden */
+  setTimeout(launch,7000);
+})();
 
 /* ── AURORA MOUSE PARALLAX (desktop) ─────────────────────────── */
 (function(){
