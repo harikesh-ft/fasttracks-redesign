@@ -1194,17 +1194,23 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
   const vid=document.getElementById('hero-vid');
   if(!vid)return;
 
-  /* device-matched sources; multiple clips alternate per visit.
-     To add the 2nd clip: drop files in and append filenames below.
+  /* device-matched sources; clips alternate on every visit/refresh.
+     Video 1: daytime street race · Video 2: night rain city.
      Light-mode variants slot into the `light` arrays when provided. */
   const VIDEO_SETS={
-    dark:{desktop:['hero-scroll.mp4'],mobile:['hero-scroll-mobile.mp4']},
-    light:{desktop:[],mobile:[]}
+    dark:{
+      desktop:['hero-scroll.mp4','hero-scroll-2.mp4'],
+      mobile:['hero-scroll-mobile.mp4','hero-scroll-2-mobile.mp4'],
+      poster:['hero-poster.jpg','hero-poster-2.jpg']
+    },
+    light:{desktop:[],mobile:[],poster:[]}
   };
   const mode='dark'; /* switches when light-mode assets arrive */
-  const list=(VIDEO_SETS[mode][IS_MOBILE?'mobile':'desktop'].length?VIDEO_SETS[mode]:VIDEO_SETS.dark)[IS_MOBILE?'mobile':'desktop'];
+  const set=(VIDEO_SETS[mode].desktop.length?VIDEO_SETS[mode]:VIDEO_SETS.dark);
+  const list=set[IS_MOBILE?'mobile':'desktop'];
   let vi=0;
   try{vi=(+localStorage.getItem('ftVid')||0)%list.length;localStorage.setItem('ftVid',String((vi+1)%list.length));}catch(e){}
+  if(set.poster[vi])vid.poster=set.poster[vi];
   vid.src=list[vi];
 
   if(RM){ /* reduced motion: gentle autoplay loop, no pin */
