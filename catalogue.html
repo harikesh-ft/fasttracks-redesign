@@ -8,7 +8,9 @@
 <link rel="icon" type="image/png" href="fasttracks_icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script>/* theme pre-paint: share saved light mode with homepage (no flash) */
+(function(){try{if(localStorage.getItem('ftTheme')==='light')document.documentElement.classList.add('light')}catch(e){}})();</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -538,6 +540,92 @@ body{
   cursor:pointer;transition:opacity .2s;background:none;border:none;
 }
 .result-back-btn:hover{opacity:.7}
+
+/* ═══ VIBE UPGRADE ═══════════════════════════════════════════ */
+/* film grain */
+body::after{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* serif accent in step titles */
+.step-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);text-transform:none;letter-spacing:1px;font-size:.96em}
+/* aurora behind the category step */
+#step-category{position:relative;overflow:hidden}
+.cat-aurora{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.cat-aurora i{position:absolute;border-radius:50%;filter:blur(90px)}
+.cat-aurora i:nth-child(1){left:-12%;top:-20%;width:44vw;height:44vw;background:radial-gradient(circle,rgba(232,0,13,.12),transparent 65%);animation:cauA 24s ease-in-out infinite alternate}
+.cat-aurora i:nth-child(2){right:-14%;bottom:-24%;width:42vw;height:42vw;background:radial-gradient(circle,rgba(201,151,63,.1),transparent 65%);animation:cauB 29s ease-in-out infinite alternate}
+@keyframes cauA{to{transform:translate(8vw,6vh) scale(1.18)}}
+@keyframes cauB{to{transform:translate(-7vw,-6vh) scale(1.12)}}
+.cat-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:34px 34px;animation:cdots 44s linear infinite;-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%)}
+@keyframes cdots{to{background-position:340px 170px}}
+
+/* ── PREMIUM CATEGORY CARDS (real product photography) ── */
+.cat-grid{gap:26px}
+.cat-card{
+  height:clamp(340px,40vw,480px);
+  border:1px solid var(--line);border-radius:4px;
+  background:#0b0b0b;
+  align-items:flex-start;justify-content:flex-end;
+  padding:26px 28px;
+  transition:border-color .35s,transform .5s cubic-bezier(.25,.46,.45,.94),box-shadow .5s;
+  box-shadow:0 16px 40px rgba(0,0,0,.4);
+}
+.cat-card:hover{border-color:var(--gold);transform:translateY(-8px);box-shadow:0 34px 74px rgba(0,0,0,.6),0 0 0 1px rgba(201,151,63,.25)}
+.cat-photo{position:absolute;inset:0;background-size:cover;filter:grayscale(.2) brightness(.52) contrast(1.06);transition:transform .9s cubic-bezier(.25,.46,.45,.94),filter .5s;z-index:0}
+.cat-card:hover .cat-photo{transform:scale(1.06);filter:grayscale(0) brightness(.66) contrast(1.04)}
+.cat-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.9) 0%,rgba(5,5,5,.35) 40%,rgba(5,5,5,.15) 100%);z-index:1;pointer-events:none}
+.cat-shine{position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);transform:skewX(-20deg);transition:left .8s cubic-bezier(.4,0,.2,1);z-index:2;pointer-events:none}
+.cat-card:hover .cat-shine{left:150%}
+.cat-chip{position:absolute;top:18px;left:20px;z-index:3;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,151,63,.4);padding:6px 12px;border-radius:100px;background:rgba(5,5,5,.5);backdrop-filter:blur(6px)}
+.cat-fan{position:absolute;top:16px;right:20px;z-index:3;display:flex}
+.cat-fan img{width:52px;height:66px;object-fit:cover;border:1px solid rgba(255,255,255,.28);border-radius:3px;box-shadow:0 8px 20px rgba(0,0,0,.55);margin-left:-14px;transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.cat-fan img:nth-child(1){transform:rotate(-8deg)}
+.cat-fan img:nth-child(2){transform:rotate(3deg)}
+.cat-fan img:nth-child(3){transform:rotate(10deg)}
+.cat-card:hover .cat-fan img:nth-child(1){transform:rotate(-14deg) translate(-6px,-4px)}
+.cat-card:hover .cat-fan img:nth-child(2){transform:rotate(-1deg) translateY(-7px)}
+.cat-card:hover .cat-fan img:nth-child(3){transform:rotate(15deg) translate(6px,-4px)}
+.cat-name{position:relative;z-index:3;font-size:clamp(34px,5.4vw,60px);line-height:.95}
+.cat-count{position:relative;z-index:3;margin-top:8px}
+.cat-cta{position:relative;z-index:3;margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;background:var(--red);padding:10px 20px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));opacity:0;transform:translateY(8px);transition:opacity .35s,transform .45s cubic-bezier(.25,.46,.45,.94)}
+.cat-card:hover .cat-cta{opacity:1;transform:translateY(0)}
+.cat-arrow{z-index:3}
+/* float + entrance */
+@media (prefers-reduced-motion:no-preference){
+  .cat-card{animation:catIn .8s cubic-bezier(.34,1.56,.64,1) both,catFloat var(--cf,6.4s) ease-in-out 1s infinite alternate}
+  .cat-card:nth-child(1){--cf:6.2s;animation-delay:.1s,1s}
+  .cat-card:nth-child(2){--cf:7.1s;animation-delay:.25s,1.2s}
+  @keyframes catIn{from{opacity:0;translate:0 60px;filter:blur(8px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+  @keyframes catFloat{from{translate:0 0}to{translate:0 -9px}}
+}
+@media(max-width:640px){.cat-grid{gap:18px}.cat-card{height:300px}}
+
+/* ── THEME TOGGLE (shared with homepage) ── */
+.theme-tgl{width:32px;height:32px;border:1px solid rgba(255,255,255,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--txt);flex-shrink:0;cursor:pointer;transition:border-color .3s,color .3s,transform .6s cubic-bezier(.34,1.56,.64,1)}
+.theme-tgl:hover{border-color:var(--gold);color:var(--gold);transform:rotate(40deg)}
+.theme-tgl .ic-sun{display:none}
+html.light .theme-tgl .ic-sun{display:block}
+html.light .theme-tgl .ic-moon{display:none}
+
+/* ═══ LIGHT MODE (catalogue) ═══ */
+html.light{
+  --bg:#F3F0EA; --bg2:#EAE6DE; --bg3:#DFDACF;
+  --txt:#171511; --dim:#6B675E; --mute:#CFC9BC;
+  --line:rgba(20,18,14,.10); --gold:#9C7420;
+}
+html.light #nav{background:rgba(243,240,234,.97);border-bottom-color:rgba(20,18,14,.08)}
+html.light .nav-icon{filter:none}
+html.light .mob-menu-btn span{background:var(--txt)}
+html.light #mob-menu{background:rgba(243,240,234,.98)}
+html.light body::after{opacity:.05}
+html.light .cat-card{background:#E9E4DA;box-shadow:0 16px 40px rgba(60,50,30,.15)}
+html.light .cat-scrim{background:linear-gradient(to top,rgba(20,18,14,.72) 0%,rgba(20,18,14,.25) 40%,rgba(20,18,14,.08) 100%)}
+html.light .cat-name{color:#fff}
+html.light .cat-count{color:rgba(255,255,255,.75)}
+html.light .cat-dots{background-image:radial-gradient(rgba(20,18,14,.1) 1px,transparent 1px)}
+html.light .cat-chip{background:rgba(243,240,234,.55);color:#7a5a14;border-color:rgba(122,90,20,.45)}
+html.light #breadcrumb{background:rgba(243,240,234,.94);border-bottom:1px solid rgba(20,18,14,.08)}
+html.light .kit-card{background:#F7F4EE}
+html.light .kit-card-overlay{background:linear-gradient(to bottom,rgba(243,240,234,.9) 0%,rgba(243,240,234,.5) 20%,transparent 38%),linear-gradient(to top,rgba(243,240,234,.94) 0%,rgba(243,240,234,.55) 35%,transparent 58%)}
+html.light .kit-card:hover .kit-card-overlay{background:linear-gradient(to bottom,rgba(243,240,234,.94) 0%,rgba(243,240,234,.6) 22%,transparent 40%),linear-gradient(to top,rgba(243,240,234,.97) 0%,rgba(243,240,234,.65) 40%,rgba(243,240,234,.12) 62%)}
 </style>
 </head>
 <body>
@@ -569,7 +657,7 @@ body{
 </div>
 
 <!-- WhatsApp float -->
-<a class="wa-float" href="https://wa.me/918019065252?text=Hi%2C%20I%20want%20to%20enquire%20about%20modifications" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="wa-float" href="https://wa.me/917352525252?text=Hi%2C%20I%20want%20to%20enquire%20about%20modifications" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 32 32" fill="#fff"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.77A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5a11.45 11.45 0 01-5.84-1.6l-.42-.25-4.46 1.05 1.06-4.34-.27-.45A11.5 11.5 0 1116 27.5zm6.3-8.6c-.34-.17-2.02-1-2.34-1.1-.32-.12-.55-.17-.78.17-.23.34-.9 1.1-1.1 1.33-.2.23-.4.26-.74.09-.34-.18-1.43-.53-2.72-1.68-1.01-.9-1.69-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.12-.23.06-.43-.03-.6-.09-.18-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59H9.7c-.2 0-.54.07-.82.37-.28.29-1.08 1.05-1.08 2.57 0 1.52 1.1 2.99 1.26 3.2.16.2 2.17 3.32 5.26 4.65.74.32 1.31.5 1.76.64.74.23 1.41.2 1.94.12.59-.09 1.82-.74 2.08-1.46.25-.72.25-1.34.18-1.47-.08-.12-.3-.2-.63-.37z"/></svg>
 </a>
 
@@ -586,11 +674,15 @@ body{
     <a href="index.html#contact">Contact</a>
   </div>
   <div class="nav-right">
+    <button class="theme-tgl" id="themeTgl" aria-label="Toggle light mode">
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
     <a class="nav-back" href="index.html">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to Home
     </a>
-    <a class="nav-book" href="https://wa.me/918019065252?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener">Book Now</a>
+    <a class="nav-book" href="https://wa.me/917352525252?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener">Book Now</a>
   </div>
   <button class="mob-menu-btn" id="mob-btn" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -622,9 +714,10 @@ body{
 
   <!-- STEP 1: Category -->
   <div class="step active" id="step-category">
+    <div class="cat-aurora" aria-hidden="true"><i></i><i></i><span class="cat-dots"></span></div>
     <div style="padding:40px 0 48px">
       <div class="step-label">FASTTRACKS CATALOGUE</div>
-      <div class="step-title">WHAT ARE YOU<br>UPGRADING TODAY?</div>
+      <div class="step-title">WHAT ARE YOU<br>UPGRADING <em>today?</em></div>
       <div class="step-sub">Select a category to begin</div>
     </div>
     <div class="cat-grid" id="cat-grid"></div>
@@ -674,7 +767,7 @@ body{
 </div>
 
 <script>
-const WA = 'https://wa.me/918019065252?text=';
+const WA = 'https://wa.me/917352525252?text=';
 const BRAND_STYLES = {
   'BMW':         {color:'#1C69D4', glow:'radial-gradient(ellipse at 50% 100%,rgba(28,105,212,.14) 0%,transparent 70%)', tag:'German Luxury'},
   'Mercedes-Benz':{color:'#B0B4B8', glow:'radial-gradient(ellipse at 50% 100%,rgba(176,180,184,.12) 0%,transparent 70%)', tag:'German Prestige'},
@@ -814,36 +907,34 @@ function buildCategoryStep(){
   const grid = document.getElementById('cat-grid');
   grid.innerHTML = `
     <div class="cat-card" onclick="selectCategory('body-kits')">
+      <div class="cat-photo" style="background-image:url('catalogue/body-kits/bk-43.jpg');background-position:57% 68%"></div>
+      <div class="cat-scrim"></div>
+      <div class="cat-shine"></div>
       <div class="cat-bg"></div>
-      <svg class="cat-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="6" y="22" width="52" height="24" rx="6"/>
-        <ellipse cx="18" cy="46" rx="7" ry="7"/>
-        <ellipse cx="46" cy="46" rx="7" ry="7"/>
-        <path d="M11 22 L18 10 h28 L47 22"/>
-        <line x1="25" y1="10" x2="25" y2="22"/>
-        <line x1="39" y1="10" x2="39" y2="22"/>
-      </svg>
+      <div class="cat-chip">Aero · Bumpers · Conversions</div>
+      <div class="cat-fan" aria-hidden="true">
+        <img src="catalogue/body-kits/bk-53.jpg" alt="" style="object-position:58% 67%" loading="lazy"/>
+        <img src="catalogue/body-kits/bk-89.jpg" alt="" style="object-position:71% 67%" loading="lazy"/>
+        <img src="catalogue/body-kits/bk-36.jpg" alt="" style="object-position:71% 74%" loading="lazy"/>
+      </div>
       <div class="cat-name">BODY KITS</div>
       <div class="cat-count">${bkCount} Kits Available</div>
-      <div class="cat-arrow">→</div>
+      <span class="cat-cta">Explore Kits →</span>
     </div>
     <div class="cat-card" onclick="selectCategory('steering-wheels')">
+      <div class="cat-photo" style="background-image:url('catalogue/steering-wheels/sw-01.jpg');background-position:center 62%"></div>
+      <div class="cat-scrim"></div>
+      <div class="cat-shine"></div>
       <div class="cat-bg"></div>
-      <svg class="cat-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="32" cy="32" r="26"/>
-        <circle cx="32" cy="32" r="8"/>
-        <line x1="32" y1="6" x2="32" y2="24"/>
-        <line x1="32" y1="40" x2="32" y2="58"/>
-        <line x1="6" y1="32" x2="24" y2="32"/>
-        <line x1="40" y1="32" x2="58" y2="32"/>
-        <path d="M10 17 Q20 24 24 32"/>
-        <path d="M54 17 Q44 24 40 32"/>
-        <path d="M10 47 Q20 40 24 32"/>
-        <path d="M54 47 Q44 40 40 32"/>
-      </svg>
+      <div class="cat-chip">Carbon · Alcantara · Custom</div>
+      <div class="cat-fan" aria-hidden="true">
+        <img src="catalogue/steering-wheels/sw-03.jpg" alt="" style="object-position:center 60%" loading="lazy"/>
+        <img src="catalogue/steering-wheels/sw-06.jpg" alt="" style="object-position:center 60%" loading="lazy"/>
+        <img src="catalogue/steering-wheels/sw-09.jpg" alt="" style="object-position:center 60%" loading="lazy"/>
+      </div>
       <div class="cat-name">STEERING WHEELS</div>
       <div class="cat-count">${swCount} Options Available</div>
-      <div class="cat-arrow">→</div>
+      <span class="cat-cta">Explore Wheels →</span>
     </div>
   `;
 }
@@ -1068,6 +1159,13 @@ function observeCards(){
 const stepObserver = new MutationObserver(()=>observeCards());
 document.querySelectorAll('.step').forEach(s=>stepObserver.observe(s,{childList:true,subtree:true}));
 observeCards();
+
+/* ── THEME TOGGLE (shared ftTheme key with homepage) ── */
+document.getElementById('themeTgl')?.addEventListener('click',function(){
+  const toLight=!document.documentElement.classList.contains('light');
+  document.documentElement.classList.toggle('light',toLight);
+  try{localStorage.setItem('ftTheme',toLight?'light':'dark')}catch(e){}
+});
 </script>
 </body>
 </html>

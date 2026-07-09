@@ -333,17 +333,38 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 .bk-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
 /* ── CONTACT ─────────────────────────── */
-#contact{padding:110px 0;background:var(--bg)}
+#contact{padding:110px 0;background:var(--bg);position:relative;overflow:hidden}
+.ct-ghost{position:absolute;right:-2%;top:6%;font-family:'Bebas Neue',sans-serif;font-size:clamp(90px,16vw,240px);color:rgba(232,0,13,.035);letter-spacing:10px;line-height:1;z-index:0;pointer-events:none;user-select:none;white-space:nowrap}
+#contact .wrap{position:relative;z-index:1}
+.ct-live{display:inline-flex;align-items:center;gap:12px;margin-top:20px;padding:10px 18px;border:1px solid var(--line);border-radius:100px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;font-size:12px}
+.ct-live i{width:8px;height:8px;border-radius:50%;background:#23d160;box-shadow:0 0 10px rgba(35,209,96,.9);animation:dpulse 1.8s ease-in-out infinite;flex-shrink:0}
+.ct-live.closed i{background:var(--red);box-shadow:0 0 10px rgba(232,0,13,.9)}
+.ct-live b{color:var(--gold)}
+.ct-live span{color:var(--txt);font-variant-numeric:tabular-nums}
 .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px}
 @media(max-width:760px){.ct-grid{grid-template-columns:1fr}}
 .ci-list{display:flex;flex-direction:column;gap:0}
-.ci-row{padding:20px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.ci-row{padding:20px 0 20px 34px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px;position:relative;transition:padding-left .35s cubic-bezier(.25,.46,.45,.94)}
+.ci-row:hover{padding-left:42px}
+.ci-row::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:1px;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .5s cubic-bezier(.4,0,.2,1)}
+.ci-row:hover::after{width:100%}
+.ci-ic{position:absolute;left:0;top:23px;width:18px;height:18px;color:var(--gold);opacity:.8}
+.ci-ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8}
 .ci-l{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
 .ci-v{font-size:15px;line-height:1.7;color:rgba(240,240,240,.7)}
+html.light .ci-v{color:rgba(23,21,17,.75)}
 .ci-v a{color:var(--txt);transition:color .2s}
 .ci-v a:hover{color:var(--red)}
-.map-wrap{overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
-.map-wrap iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(.85) contrast(.9)}
+.ct-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.map-wrap{overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;position:relative}
+.map-wrap iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(.85) contrast(.9);transition:filter .6s ease}
+.map-wrap:hover iframe{filter:grayscale(.1) invert(0) contrast(1)}
+html.light .map-wrap iframe{filter:grayscale(1)}
+html.light .map-wrap:hover iframe{filter:grayscale(.05)}
+.map-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2}
+.map-pin::before{content:'';display:block;width:13px;height:13px;border-radius:50%;background:var(--red);box-shadow:0 0 14px rgba(232,0,13,.95)}
+.map-pin::after{content:'';position:absolute;inset:-13px;border-radius:50%;border:2px solid rgba(232,0,13,.5);animation:pinPulse 2s ease-out infinite}
+@keyframes pinPulse{0%{transform:scale(.35);opacity:1}100%{transform:scale(1.35);opacity:0}}
 
 /* ── PRESTIGE BAR ────────────────────── */
 .pr-bar{background:#080808;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;overflow:hidden}
@@ -1191,23 +1212,43 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
 
 <!-- ═══ CONTACT ═══ -->
 <section id="contact">
+  <div class="svc-bg" aria-hidden="true">
+    <div class="svc-blob b2"></div>
+    <div class="svc-grid-dots"></div>
+  </div>
+  <div class="ct-ghost" aria-hidden="true">FIND US</div>
   <div class="wrap">
     <div class="eyebrow" data-rv="up"><span class="ey-n">07</span><span class="ey-t">Find Us</span></div>
     <h2 class="s-head">Visit the<br/><em>Studio</em></h2>
+    <div class="ct-live" id="ctLive" data-rv="up">
+      <i></i>
+      <span id="ctClock">--:--</span>
+      <b id="ctStatus">HYDERABAD</b>
+    </div>
     <div class="ct-grid">
       <div>
         <div class="ci-list">
-          <div class="ci-row" data-rv="up"><div class="ci-l">Address</div><div class="ci-v">Road No. 36, Jubilee Hills<br/>Hyderabad, Telangana 500033</div></div>
-          <div class="ci-row" data-rv="up"><div class="ci-l">Phone &amp; WhatsApp</div><div class="ci-v"><a href="tel:+917352525252">+91 73525 25252</a></div></div>
-          <div class="ci-row" data-rv="up"><div class="ci-l">Hours</div><div class="ci-v">Every Day: 9:00 AM – 10:00 PM</div></div>
           <div class="ci-row" data-rv="up">
-            <div class="ci-l">WhatsApp</div>
-            <a href="https://wa.me/917352525252" class="btn-red" target="_blank" rel="noopener" style="margin-top:10px;display:inline-flex">Open WhatsApp →</a>
+            <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div class="ci-l">Address</div><div class="ci-v">Road No. 36, Jubilee Hills<br/>Hyderabad, Telangana 500033</div>
           </div>
+          <div class="ci-row" data-rv="up">
+            <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <div class="ci-l">Phone &amp; WhatsApp</div><div class="ci-v"><a href="tel:+917352525252">+91 73525 25252</a></div>
+          </div>
+          <div class="ci-row" data-rv="up">
+            <span class="ci-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <div class="ci-l">Hours</div><div class="ci-v">Every Day: 9:00 AM – 10:00 PM · 365 Days</div>
+          </div>
+        </div>
+        <div class="ct-ctas" data-rv="up">
+          <a href="https://wa.me/917352525252" class="btn-red" target="_blank" rel="noopener">Open WhatsApp →</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Fasttracks+Car+Care,+Road+No.+36,+Jubilee+Hills,+Hyderabad" class="btn-out" target="_blank" rel="noopener">Get Directions ↗</a>
         </div>
       </div>
       <div class="map-wrap" data-rv="right">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3!2d78.3972!3d17.4315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97b06c5b2d0b%3A0x1!2sFasttracks+Car+Care%2C+Jubilee+Hills%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1686000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fasttracks Car Care Location"></iframe>
+        <div class="map-pin" aria-hidden="true"></div>
       </div>
     </div>
   </div>
@@ -1972,13 +2013,25 @@ gsap.utils.toArray('.why-i').forEach((el,i)=>{
   const el=document.getElementById('hStatus');
   const txt=document.getElementById('hStatusTxt');
   if(!el||!txt)return;
+  const live=document.getElementById('ctLive');
+  const clock=document.getElementById('ctClock');
+  const stat=document.getElementById('ctStatus');
   function tick(){
     const ist=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000);
     const h=ist.getHours();
-    if(h>=9&&h<22){el.classList.remove('closed');txt.textContent='Studio Open Now · Closes 10 PM';}
+    const open=h>=9&&h<22;
+    if(open){el.classList.remove('closed');txt.textContent='Studio Open Now · Closes 10 PM';}
     else{el.classList.add('closed');txt.textContent='Studio Opens 9 AM · 365 Days';}
+    /* contact live widget */
+    if(clock){
+      const m=String(ist.getMinutes()).padStart(2,'0');
+      const h12=((h+11)%12)+1;
+      clock.textContent='HYDERABAD · '+h12+':'+m+' '+(h<12?'AM':'PM');
+    }
+    if(stat)stat.textContent=open?'STUDIO OPEN':'OPENS 9 AM';
+    if(live)live.classList.toggle('closed',!open);
   }
-  tick();setInterval(tick,60000);
+  tick();setInterval(tick,30000);
 })();
 
 /* ── FOUNDER IMAGE WIPE REVEAL ───────────────────────────────── */
