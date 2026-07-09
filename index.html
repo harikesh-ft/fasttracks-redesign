@@ -276,9 +276,15 @@ button{cursor:none;background:none;border:none;font-family:inherit}
 .vpills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .vpill{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid var(--mute);color:var(--dim);transition:border-color .25s,color .25s}
 .vpill:hover{border-color:var(--gold);color:var(--gold)}
-.rec-vis{aspect-ratio:4/5;background:var(--bg3);border:1px solid var(--line);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+.rec-vis{aspect-ratio:4/5;background:var(--bg3);border:1px solid var(--line);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .rec-vis-ph{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.12)}
-.rec-vis img{width:100%;height:100%;object-fit:cover}
+.rec-vis img{width:100%;height:100%;object-fit:cover;object-position:center 62%;transition:transform .8s cubic-bezier(.25,.46,.45,.94)}
+@media (prefers-reduced-motion:no-preference){.rec-vis img{animation:recKen 18s ease-in-out infinite alternate}}
+@keyframes recKen{from{scale:1;object-position:center 66%}to{scale:1.08;object-position:center 52%}}
+.rec-vis:hover img{transform:scale(1.03)}
+.rec-vis::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.35),transparent 35%);pointer-events:none}
+.rec-vis-badge{position:absolute;top:16px;left:16px;z-index:2;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,151,63,.45);padding:6px 13px;border-radius:100px;background:rgba(5,5,5,.55);backdrop-filter:blur(6px)}
+html.light .rec-vis{box-shadow:0 24px 60px rgba(60,50,30,.2)}
 
 /* ── ABOUT ───────────────────────────── */
 #about{padding:110px 0;background:var(--bg2);position:relative}
@@ -1133,7 +1139,10 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
         <a href="https://wa.me/917352525252?text=Hi!%20I%27m%20interested%20in%20luxury%20recliner%20installation.%20Please%20share%20details%20and%20pricing." class="btn-red" target="_blank" rel="noopener" data-rv="up">Get a Quote on WhatsApp →</a>
       </div>
       <div data-rv="right">
-        <div class="rec-vis"><div class="rec-vis-ph">Photo Coming Soon</div></div>
+        <div class="rec-vis">
+          <img src="recliner-hero.jpg" alt="Fasttracks luxury recliner — diamond-quilted leather with star embroidery"/>
+          <div class="rec-vis-badge">Signature Build</div>
+        </div>
       </div>
     </div>
   </div>
