@@ -7,7 +7,13 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/fasttracks_icon.png", "/fasttracks_wordmark.png", "/rakesh.jpg", "/*.png", "/*.jpg", "/*.jpeg", "/*.gif", "/*.svg", "/*.ico", "/*.webp"]
+    "exclude": ["/fasttracks_icon.png", "/fasttracks_wordmark.png", "/rakesh.jpg", "/*.png", "/*.jpg", "/*.jpeg", "/*.gif", "/*.svg", "/*.ico", "/*.webp", "/*.mp4", "/*.webm", "/fonts/*"]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html",
+      "statusCode": 404
+    }
   },
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",

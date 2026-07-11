@@ -5,13 +5,48 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Fasttracks Car Care — India's Biggest Instant Car Modification Studio</title>
 <meta name="description" content="Premium body kits, luxury recliners, PPF, ceramic coating and 12+ services. 50,000 sq ft studio, Jubilee Hills Hyderabad."/>
+<link rel="canonical" href="https://fasttrackscarcare.in/"/>
+<!-- Social share (WhatsApp / OG / Twitter) -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Fasttracks Car Care"/>
+<meta property="og:title" content="Fasttracks Car Care — India's Biggest Instant Car Modification Studio"/>
+<meta property="og:description" content="Body kits · Luxury recliners · PPF · 50,000 sq ft studio in Jubilee Hills, Hyderabad. Open 365 days."/>
+<meta property="og:url" content="https://fasttrackscarcare.in/"/>
+<meta property="og:image" content="https://fasttrackscarcare.in/og-card.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Fasttracks Car Care — India's Biggest Instant Car Modification Studio"/>
+<meta name="twitter:image" content="https://fasttrackscarcare.in/og-card.jpg"/>
+<!-- Local business rich result -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AutoRepair",
+  "name":"Fasttracks Car Care",
+  "description":"India's biggest instant car modification studio — body kits, luxury recliners, PPF, ceramic coating, custom audio and more.",
+  "url":"https://fasttrackscarcare.in",
+  "telephone":"+917352525252",
+  "image":"https://fasttrackscarcare.in/og-card.jpg",
+  "priceRange":"₹₹₹",
+  "address":{"@type":"PostalAddress","streetAddress":"Road No. 36, Jubilee Hills","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500033","addressCountry":"IN"},
+  "geo":{"@type":"GeoCoordinates","latitude":17.4315,"longitude":78.3972},
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"22:00"},
+  "sameAs":["https://instagram.com/fasttrackscarcare","https://facebook.com/fasttrackscarcare","https://youtube.com/@fasttrackscarcare"]
+}
+</script>
 <link rel="icon" type="image/png" href="fasttracks_icon.png"/>
 <link rel="apple-touch-icon" href="fasttracks_icon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<link rel="preload" href="fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="fonts/fonts.css"/>
 <script>/* theme pre-paint: apply saved light mode before first render (no flash) */
-(function(){try{if(localStorage.getItem('ftTheme')==='light')document.documentElement.classList.add('light')}catch(e){}})();</script>
+(function(){try{if(localStorage.getItem('ftTheme')==='light')document.documentElement.classList.add('light');
+/* arriving via page transition? keep the wipe covering until reveal */
+if(sessionStorage.getItem('ftWipe')==='1')document.documentElement.classList.add('wipe-in');
+/* returning visitor? skip the long loader */
+if(localStorage.getItem('ftSeen')==='1')document.documentElement.classList.add('seen');
+}catch(e){}})();</script>
 <style>
 /* ── TOKENS ─────────────────────────── */
 :root{
@@ -727,9 +762,97 @@ html.light .drop-st{color:var(--dim)}
 html.light .drop-feat{border-color:var(--line);color:var(--dim)}
 html.light .drop-fine{color:rgba(20,18,14,.35)}
 html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40%,#EFEAE0 100%)}
+
+/* ── PAGE TRANSITION WIPE ───────────────── */
+#pgwipe{position:fixed;inset:0;z-index:99990;background:var(--red);display:flex;align-items:center;justify-content:center;transform:translateY(101%);pointer-events:none}
+#pgwipe img{height:64px;filter:brightness(0) invert(1);opacity:.95}
+#pgwipe.leave{transition:transform .45s cubic-bezier(.76,0,.24,1);transform:translateY(0)}
+html.wipe-in #pgwipe{transform:translateY(0)}
+html.wipe-in.wipe-out #pgwipe{transition:transform .55s cubic-bezier(.76,0,.24,1) .1s;transform:translateY(-101%)}
+/* arriving via wipe: skip the loader entirely */
+html.wipe-in #loader{display:none}
+
+/* ── SMART LOADER (returning visitors) ──── */
+html.seen .ld-track,html.seen .ld-txt{display:none}
+html.seen .ld-pct{font-size:42px}
+
+/* ── FILM SPLICE FLASH ──────────────────── */
+#splice{position:absolute;inset:0;background:#fff;opacity:0;z-index:7;pointer-events:none}
+
+/* ── CHAPTER 4 QUICK CHIPS ──────────────── */
+.cc-chips{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;pointer-events:auto}
+.cc-chip{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--txt);padding:10px 20px;border:1px solid rgba(255,255,255,.28);border-radius:100px;background:rgba(5,5,5,.4);backdrop-filter:blur(8px);cursor:pointer;transition:border-color .3s,background .3s,transform .3s}
+.cc-chip:hover{border-color:var(--gold);background:rgba(201,151,63,.15);transform:translateY(-3px)}
+
+/* ── BEFORE / AFTER SLIDER ──────────────── */
+#ba{padding:110px 0;background:var(--bg);position:relative;overflow:hidden}
+.ba-box{position:relative;aspect-ratio:16/9;max-width:980px;margin:48px auto 0;overflow:hidden;border:1px solid var(--line);cursor:ew-resize;user-select:none;touch-action:pan-y;--ba:50%}
+.ba-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-top{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--ba)) 0 0);pointer-events:none}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--ba);width:2px;background:linear-gradient(var(--red),var(--gold));pointer-events:none;z-index:3}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;letter-spacing:1px;box-shadow:0 6px 24px rgba(232,0,13,.5);white-space:nowrap}
+.ba-tag{position:absolute;top:16px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;padding:6px 14px;border-radius:100px;background:rgba(5,5,5,.6);backdrop-filter:blur(6px);color:#fff;z-index:2;pointer-events:none}
+.ba-tag-l{left:16px}
+.ba-tag-r{right:16px;color:var(--gold)}
+.ba-note{text-align:center;margin-top:18px;font-size:12px;color:var(--dim);letter-spacing:.5px}
+
+/* ── INSTAGRAM WALL ─────────────────────── */
+#insta{padding:90px 0 100px;background:var(--bg2);position:relative;overflow:hidden}
+.ig-head{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.ig-id{display:flex;align-items:center;gap:16px}
+.ig-glyph{width:46px;height:46px;border-radius:12px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ig-glyph svg{width:24px;height:24px;fill:#fff}
+.ig-handle{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,34px);letter-spacing:1px;line-height:1}
+.ig-followers{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
+.ig-strip{overflow:hidden;margin:0 calc(-1 * var(--pad))}
+.ig-track{display:flex;gap:14px;width:max-content;animation:mq-scroll 36s linear infinite;padding:4px var(--pad)}
+.ig-strip:hover .ig-track{animation-play-state:paused}
+.ig-tile{position:relative;width:clamp(180px,22vw,260px);aspect-ratio:1;overflow:hidden;border-radius:6px;flex-shrink:0}
+.ig-tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.ig-tile:hover img{transform:scale(1.07)}
+.ig-tile::after{content:'';position:absolute;inset:0;background:rgba(5,5,5,.25);opacity:0;transition:opacity .35s}
+.ig-tile:hover::after{opacity:1}
+.ig-tile svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.6);width:30px;height:30px;fill:#fff;opacity:0;transition:opacity .3s,transform .4s;z-index:2}
+.ig-tile:hover svg{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* ── WHATSAPP SMART BUBBLE ──────────────── */
+.wa-hint{position:fixed;bottom:94px;right:26px;z-index:899;background:var(--bg2);border:1px solid rgba(37,211,102,.4);border-radius:14px 14px 2px 14px;padding:13px 38px 13px 16px;max-width:230px;font-size:12.5px;line-height:1.5;color:var(--txt);box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(14px) scale(.95);transition:opacity .45s,transform .5s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+.wa-hint.show{opacity:1;transform:translateY(0) scale(1)}
+.wa-hint b{color:#25D366}
+.wa-hint-x{position:absolute;top:6px;right:8px;font-size:14px;color:var(--dim);padding:4px;cursor:pointer;line-height:1}
+html.light .wa-hint{background:#fff;box-shadow:0 12px 40px rgba(60,50,30,.25)}
+
+/* ── TAPPABLE / ACTIVE STATES (touch feel) ─ */
+.btn-red:active,.btn-out:active,.btn-ghost:active,.cc-chip:active,.theme-tgl:active{transform:scale(.96)!important;transition-duration:.08s}
+.cp-card:active,.svc-slide:active,.cat-card:active,.why-i:active,.ig-tile:active{transform:scale(.98);transition-duration:.1s}
+
+/* ── FOCUS VISIBILITY (keyboard users) ───── */
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+/* ── MOBILE SERVICES: NATIVE SNAP + PEEK ── */
+@media(max-width:900px){
+  .svc-track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-right:18vw;scrollbar-width:none;transition:none}
+  .svc-track::-webkit-scrollbar{display:none}
+  .svc-slide{scroll-snap-align:start}
+}
+
+/* ── MOBILE MICRO-TYPOGRAPHY ────────────── */
+@media(max-width:640px){
+  .s-head{letter-spacing:.5px}
+  .h-eyebrow{letter-spacing:3px}
+  .ab-quote{letter-spacing:1px}
+  .mq-item{font-size:11px;letter-spacing:2px;padding:0 22px}
+  .st-n{letter-spacing:1px}
+  .ba-knob{width:40px;height:40px}
+  .wa-hint{right:18px;bottom:90px;max-width:200px}
+  .cc-chip{padding:9px 16px;font-size:10px}
+}
 </style>
 </head>
 <body>
+
+<!-- PAGE TRANSITION WIPE -->
+<div id="pgwipe" aria-hidden="true"><img src="fasttracks_icon.png" alt=""/></div>
 
 <!-- LANDSCAPE BLOCKER -->
 <div id="rotate-blk" aria-hidden="true">
@@ -752,6 +875,12 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
 
 <!-- SCROLL PROGRESS -->
 <div id="sprog"></div>
+
+<!-- WHATSAPP SMART HINT -->
+<div class="wa-hint" id="waHint" role="button" aria-label="Chat on WhatsApp">
+  <span class="wa-hint-x" id="waHintX" aria-label="Dismiss">✕</span>
+  Planning an upgrade? <b>Get a quote in 5 minutes</b> on WhatsApp.
+</div>
 
 <!-- WHATSAPP FLOAT -->
 <a class="wa-float" href="https://wa.me/917352525252" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -868,7 +997,12 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
   <div class="cine-chap" id="chap4">
     <div class="cc-big">YOUR CAR.<br/><em>Reimagined.</em></div>
     <div class="cc-rule"></div>
-    <div class="cc-sub">Keep scrolling — or skip the line</div>
+    <div class="cc-sub">Keep scrolling — or jump straight in</div>
+    <div class="cc-chips">
+      <button class="cc-chip" onclick="openDrop()">Travo Kit</button>
+      <a class="cc-chip" href="catalogue.html">Body Kits</a>
+      <a class="cc-chip" href="#recliners">Recliners</a>
+    </div>
     <a href="https://wa.me/917352525252" target="_blank" rel="noopener" class="btn-red cc-cta">Book on WhatsApp →</a>
   </div>
 
@@ -876,6 +1010,7 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
     <span class="cine-rail-lbl" id="cineSeq">SEQ 01 / 04</span>
     <div class="cine-rail-line"><div class="cine-rail-fill" id="cineFill"></div></div>
   </div>
+  <div id="splice" aria-hidden="true"></div>
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
@@ -1102,6 +1237,22 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
   </div>
 </section>
 
+<!-- ═══ BEFORE / AFTER ═══ -->
+<section id="ba">
+  <div class="wrap">
+    <div class="eyebrow" data-rv="up"><span class="ey-n">02.5</span><span class="ey-t">The Proof</span></div>
+    <h2 class="s-head">Before /<br/><em>After</em></h2>
+    <div class="ba-box" id="baBox" data-rv="up">
+      <img src="travo-bodykit-3.jpg" alt="Before transformation"/>
+      <div class="ba-top"><img src="travo-bodykit-2.jpg" alt="After transformation"/></div>
+      <span class="ba-tag ba-tag-l">BEFORE</span>
+      <span class="ba-tag ba-tag-r">AFTER</span>
+      <div class="ba-handle"><div class="ba-knob">⟷</div></div>
+    </div>
+    <p class="ba-note">Drag the handle · Real studio transformation pairs landing here after the shoot</p>
+  </div>
+</section>
+
 <!-- ═══ RECLINERS ═══ -->
 <section id="recliners">
   <svg class="swirl" id="swirl-rec" viewBox="0 0 600 700" preserveAspectRatio="none" aria-hidden="true">
@@ -1167,7 +1318,7 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
           <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="10000">0</span><span class="stat-u">+</span></div><div class="stat-l">Cars Transformed</div></div>
           <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="50000">0</span><span class="stat-u"> Sq Ft</span></div><div class="stat-l">Studio Space</div></div>
           <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="25">0</span><span class="stat-u">+</span></div><div class="stat-l">Years of Excellence</div></div>
-          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="500">0</span><span class="stat-u">+</span></div><div class="stat-l">5-Star Reviews</div></div>
+          <div class="stat-b" data-rv="up"><div><span class="stat-n" data-count="164">0</span><span class="stat-u">K+</span></div><div class="stat-l">Instagram Followers</div></div>
         </div>
       </div>
       <div data-rv="right">
@@ -1263,6 +1414,25 @@ html.light .drop-img-box{background:linear-gradient(135deg,#F0E8E0 0%,#EDE9E1 40
   </div>
 </section>
 
+<!-- ═══ INSTAGRAM WALL ═══ -->
+<section id="insta">
+  <div class="wrap">
+    <div class="ig-head" data-rv="up">
+      <div class="ig-id">
+        <span class="ig-glyph"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></span>
+        <div>
+          <div class="ig-handle">@fasttrackscarcare</div>
+          <div class="ig-followers" id="igFollowers">164K+ Followers · Hyderabad</div>
+        </div>
+      </div>
+      <a href="https://instagram.com/fasttrackscarcare" target="_blank" rel="noopener" class="btn-red">Follow on Instagram →</a>
+    </div>
+  </div>
+  <div class="ig-strip" data-rv="up">
+    <div class="ig-track" id="igTrack"></div>
+  </div>
+</section>
+
 <!-- PRESTIGE BAR -->
 <div class="pr-bar">
   <div class="pr-track">
@@ -1333,11 +1503,26 @@ window.__CP_CURATED=[
   {brand:'Audi',kitName:'Audi TT RS Style Full Kit',image:'catalogue/body-kits/bk-82.jpg',objectPosition:'71% 73%',zoom:1.45}
 ];
 
-/* ── LOADER ─────────────────────────────────────────────────── */
+/* ── SMART LOADER ────────────────────────────────────────────── */
 (function(){
   const loader=document.getElementById('loader');
+  const root=document.documentElement;
+  const remember=()=>{try{localStorage.setItem('ftSeen','1')}catch(e){}};
+  if(root.classList.contains('wipe-in')){
+    /* arrived via page transition — the wipe reveal IS the entrance */
+    setTimeout(heroIn,650);
+    remember();
+    return;
+  }
   const bar=document.getElementById('ldBar');
   const pct=document.getElementById('ldPct');
+  if(root.classList.contains('seen')){
+    /* returning visitor: quick hello, no counter theatre */
+    pct.textContent='100';bar.style.width='100%';
+    setTimeout(()=>loader.classList.add('out'),250);
+    setTimeout(heroIn,620);
+    return;
+  }
   let w=0;
   const t=setInterval(()=>{
     w+=Math.random()*14+5;
@@ -1350,7 +1535,78 @@ window.__CP_CURATED=[
       bar.style.width='100%';pct.textContent='100';
       setTimeout(()=>loader.classList.add('out'),200);
       setTimeout(heroIn,700);
+      remember();
     },300);
+  });
+})();
+
+/* ── PAGE TRANSITION WIPE ────────────────────────────────────── */
+function pageGo(href){
+  try{sessionStorage.setItem('ftWipe','1')}catch(e){}
+  const w=document.getElementById('pgwipe');
+  if(w){w.classList.add('leave');setTimeout(()=>{location.href=href;},480);}
+  else location.href=href;
+}
+(function(){
+  const root=document.documentElement;
+  /* arrive: slide the wipe away */
+  if(root.classList.contains('wipe-in')){
+    try{sessionStorage.removeItem('ftWipe')}catch(e){}
+    const reveal=()=>{
+      root.classList.add('wipe-out');
+      setTimeout(()=>root.classList.remove('wipe-in','wipe-out'),900);
+    };
+    if(document.readyState==='complete')setTimeout(reveal,120);
+    else window.addEventListener('load',()=>setTimeout(reveal,120));
+    setTimeout(()=>{if(root.classList.contains('wipe-in'))reveal();},2000); /* safety */
+  }
+  /* leave: intercept internal page links */
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href]');
+    if(!a)return;
+    const href=a.getAttribute('href');
+    if(!href||a.target==='_blank'||href.startsWith('#')||href.startsWith('http')||href.startsWith('tel:')||href.startsWith('mailto:'))return;
+    e.preventDefault();
+    pageGo(href);
+  },true);
+})();
+
+/* ── BEFORE / AFTER DRAG ─────────────────────────────────────── */
+(function(){
+  const box=document.getElementById('baBox');
+  if(!box)return;
+  let drag=false;
+  function setP(x){
+    const r=box.getBoundingClientRect();
+    const p=Math.max(4,Math.min(96,(x-r.left)/r.width*100));
+    box.style.setProperty('--ba',p+'%');
+  }
+  box.addEventListener('pointerdown',e=>{drag=true;box.setPointerCapture(e.pointerId);setP(e.clientX);});
+  box.addEventListener('pointermove',e=>{if(drag)setP(e.clientX);});
+  box.addEventListener('pointerup',()=>{drag=false;});
+  box.addEventListener('pointercancel',()=>{drag=false;});
+})();
+
+/* ── INSTAGRAM STRIP ─────────────────────────────────────────── */
+(function(){
+  const t=document.getElementById('igTrack');
+  if(!t)return;
+  const IGP='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z';
+  const tiles=['recliner-hero.jpg','travo-bodykit.jpg','hero-poster.jpg','travo-bodykit-2.jpg','hero-poster-2.jpg','travo-bodykit-3.jpg'];
+  const mk=s=>`<a class="ig-tile" href="https://instagram.com/fasttrackscarcare" target="_blank" rel="noopener" aria-label="Fasttracks on Instagram"><img src="${s}" alt="" loading="lazy"/><svg viewBox="0 0 24 24"><path d="${IGP}"/></svg></a>`;
+  t.innerHTML=tiles.concat(tiles).map(mk).join('');
+})();
+
+/* ── WHATSAPP SMART HINT (30s dwell, once per session) ───────── */
+(function(){
+  const h=document.getElementById('waHint');
+  if(!h)return;
+  try{if(sessionStorage.getItem('ftWaHint'))return;}catch(e){}
+  setTimeout(()=>h.classList.add('show'),30000);
+  h.addEventListener('click',e=>{
+    h.classList.remove('show');
+    try{sessionStorage.setItem('ftWaHint','1')}catch(e2){}
+    if(e.target.id!=='waHintX')window.open('https://wa.me/917352525252?text=Hi!%20I%27d%20like%20a%20quick%20quote.','_blank','noopener');
   });
 })();
 
@@ -1395,7 +1651,11 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
   let vi=0;
   try{vi=(+localStorage.getItem('ftVid')||0)%list.length;localStorage.setItem('ftVid',String((vi+1)%list.length));}catch(e){}
   if(set.poster[vi])vid.poster=set.poster[vi];
-  vid.src=list[vi];
+  vid.preload=IS_MOBILE?'metadata':'auto'; /* lighter first paint on 4G */
+  /* desktop gets VP9 WebM (~25% lighter); mobile mp4s are already tiny */
+  let chosen=list[vi];
+  if(!IS_MOBILE&&vid.canPlayType('video/webm; codecs="vp9"'))chosen=chosen.replace('.mp4','.webm');
+  vid.src=chosen;
 
   if(RM){ /* reduced motion: gentle autoplay loop, no pin */
     vid.loop=true;vid.autoplay=true;vid.play().catch(()=>{});
@@ -1424,6 +1684,7 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
   const rail=document.getElementById('cineRail');
   const railFill=document.getElementById('cineFill');
   const seqLbl=document.getElementById('cineSeq');
+  const splice=document.getElementById('splice');
   const CHAPS=[
     {el:document.getElementById('chap1'),a:.10,b:.30},
     {el:document.getElementById('chap2'),a:.34,b:.54},
@@ -1476,6 +1737,11 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
         /* timecode (24fps) */
         const s=Math.floor(t),f=Math.floor((t-s)*24);
         tc.textContent='00:'+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+':'+String(f).padStart(2,'0');
+        /* film-splice flash at the cut out of the hero */
+        if(splice){
+          const q=p>.955?Math.sin(Math.min(1,(p-.955)/.045)*Math.PI)*.85:0;
+          splice.style.opacity=q.toFixed(3);
+        }
         /* rail progress + sequence label */
         railFill.style.height=(p*100)+'%';
         let seq=1;
@@ -1783,28 +2049,21 @@ function scrambleCount(el,target,dur){
   if(!track)return;
   /* desktop uses scroll-pinned horizontal scrub instead */
   if(window.matchMedia('(min-width:901px)').matches&&!RM)return;
+  /* mobile: native snap-scroll with peek; arrows nudge, progress follows scroll */
   const slides=Array.from(track.querySelectorAll('.svc-slide'));
   const n=slides.length;
-  let cur=0,pad0=0;
-  function init(){pad0=slides[0]?slides[0].offsetLeft:0;}
-  function go(idx){
-    cur=Math.max(0,Math.min(idx,n-1));
-    track.style.transform='translateX(-'+(slides[cur].offsetLeft-pad0)+'px)';
-    if(fill)fill.style.width=((cur/(n-1))*100)+'%';
-    if(counter)counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(n).padStart(2,'0');
+  function upd(){
+    const max=track.scrollWidth-track.clientWidth;
+    const p=max>0?track.scrollLeft/max:0;
+    if(fill)fill.style.width=(p*100)+'%';
+    const idx=Math.min(n-1,Math.max(0,Math.round(p*(n-1))));
+    if(counter)counter.textContent=String(idx+1).padStart(2,'0')+' / '+String(n).padStart(2,'0');
   }
-  if(prev)prev.addEventListener('click',()=>go(cur-1));
-  if(next)next.addEventListener('click',()=>go(cur+1));
-  let tx=null;
-  track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',e=>{
-    if(tx===null)return;
-    const d=tx-e.changedTouches[0].clientX;
-    if(Math.abs(d)>50)go(d>0?cur+1:cur-1);
-    tx=null;
-  },{passive:true});
-  window.addEventListener('resize',()=>{init();go(cur);},{passive:true});
-  init();go(0);
+  track.addEventListener('scroll',upd,{passive:true});
+  const step=()=>slides[1]?(slides[1].offsetLeft-slides[0].offsetLeft):280;
+  if(prev)prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
+  if(next)next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
+  upd();
 })();
 
 /* ── 3D CARD TILT ────────────────────────────────────────────── */
@@ -1885,7 +2144,7 @@ ScrollTrigger.create({
           `<div class="cp-idx">${String(i+1).padStart(2,'0')}</div>`+
           `<div class="cp-ov"><div class="cp-brand">${kit.brand}</div><div class="cp-name">${kit.kitName}</div></div>`+
           `<div class="cp-go">→</div><div class="cp-line"></div>`;
-        c.onclick=()=>{window.location.href='catalogue.html?cat=body-kits&brand='+encodeURIComponent(kit.brand);};
+        c.onclick=()=>pageGo('catalogue.html?cat=body-kits&brand='+encodeURIComponent(kit.brand));
         grid.appendChild(c);
         /* stagger reveal: blur→sharp drop, then spin-settle into CSS tilt */
         ScrollTrigger.create({
