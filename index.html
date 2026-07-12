@@ -776,25 +776,10 @@ html.wipe-in #loader{display:none}
 html.seen .ld-track,html.seen .ld-txt{display:none}
 html.seen .ld-pct{font-size:42px}
 
-/* ── FILM SPLICE FLASH ──────────────────── */
-#splice{position:absolute;inset:0;background:#fff;opacity:0;z-index:7;pointer-events:none}
-
 /* ── CHAPTER 4 QUICK CHIPS ──────────────── */
 .cc-chips{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;pointer-events:auto}
 .cc-chip{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--txt);padding:10px 20px;border:1px solid rgba(255,255,255,.28);border-radius:100px;background:rgba(5,5,5,.4);backdrop-filter:blur(8px);cursor:pointer;transition:border-color .3s,background .3s,transform .3s}
 .cc-chip:hover{border-color:var(--gold);background:rgba(201,151,63,.15);transform:translateY(-3px)}
-
-/* ── BEFORE / AFTER SLIDER ──────────────── */
-#ba{padding:110px 0;background:var(--bg);position:relative;overflow:hidden}
-.ba-box{position:relative;aspect-ratio:16/9;max-width:980px;margin:48px auto 0;overflow:hidden;border:1px solid var(--line);cursor:ew-resize;user-select:none;touch-action:pan-y;--ba:50%}
-.ba-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
-.ba-top{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--ba)) 0 0);pointer-events:none}
-.ba-handle{position:absolute;top:0;bottom:0;left:var(--ba);width:2px;background:linear-gradient(var(--red),var(--gold));pointer-events:none;z-index:3}
-.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;letter-spacing:1px;box-shadow:0 6px 24px rgba(232,0,13,.5);white-space:nowrap}
-.ba-tag{position:absolute;top:16px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;padding:6px 14px;border-radius:100px;background:rgba(5,5,5,.6);backdrop-filter:blur(6px);color:#fff;z-index:2;pointer-events:none}
-.ba-tag-l{left:16px}
-.ba-tag-r{right:16px;color:var(--gold)}
-.ba-note{text-align:center;margin-top:18px;font-size:12px;color:var(--dim);letter-spacing:.5px}
 
 /* ── INSTAGRAM WALL ─────────────────────── */
 #insta{padding:90px 0 100px;background:var(--bg2);position:relative;overflow:hidden}
@@ -1010,7 +995,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <span class="cine-rail-lbl" id="cineSeq">SEQ 01 / 04</span>
     <div class="cine-rail-line"><div class="cine-rail-fill" id="cineFill"></div></div>
   </div>
-  <div id="splice" aria-hidden="true"></div>
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
@@ -1234,22 +1218,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="cp-cta" data-rv="up">
       <a href="catalogue.html" class="btn-red">See All 116 Kits &#8594;</a>
     </div>
-  </div>
-</section>
-
-<!-- ═══ BEFORE / AFTER ═══ -->
-<section id="ba">
-  <div class="wrap">
-    <div class="eyebrow" data-rv="up"><span class="ey-n">02.5</span><span class="ey-t">The Proof</span></div>
-    <h2 class="s-head">Before /<br/><em>After</em></h2>
-    <div class="ba-box" id="baBox" data-rv="up">
-      <img src="travo-bodykit-3.jpg" alt="Before transformation"/>
-      <div class="ba-top"><img src="travo-bodykit-2.jpg" alt="After transformation"/></div>
-      <span class="ba-tag ba-tag-l">BEFORE</span>
-      <span class="ba-tag ba-tag-r">AFTER</span>
-      <div class="ba-handle"><div class="ba-knob">⟷</div></div>
-    </div>
-    <p class="ba-note">Drag the handle · Real studio transformation pairs landing here after the shoot</p>
   </div>
 </section>
 
@@ -1571,22 +1539,6 @@ function pageGo(href){
   },true);
 })();
 
-/* ── BEFORE / AFTER DRAG ─────────────────────────────────────── */
-(function(){
-  const box=document.getElementById('baBox');
-  if(!box)return;
-  let drag=false;
-  function setP(x){
-    const r=box.getBoundingClientRect();
-    const p=Math.max(4,Math.min(96,(x-r.left)/r.width*100));
-    box.style.setProperty('--ba',p+'%');
-  }
-  box.addEventListener('pointerdown',e=>{drag=true;box.setPointerCapture(e.pointerId);setP(e.clientX);});
-  box.addEventListener('pointermove',e=>{if(drag)setP(e.clientX);});
-  box.addEventListener('pointerup',()=>{drag=false;});
-  box.addEventListener('pointercancel',()=>{drag=false;});
-})();
-
 /* ── INSTAGRAM STRIP ─────────────────────────────────────────── */
 (function(){
   const t=document.getElementById('igTrack');
@@ -1684,7 +1636,6 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
   const rail=document.getElementById('cineRail');
   const railFill=document.getElementById('cineFill');
   const seqLbl=document.getElementById('cineSeq');
-  const splice=document.getElementById('splice');
   const CHAPS=[
     {el:document.getElementById('chap1'),a:.10,b:.30},
     {el:document.getElementById('chap2'),a:.34,b:.54},
@@ -1737,11 +1688,6 @@ const IS_MOBILE=window.matchMedia('(hover:none) and (pointer:coarse)').matches||
         /* timecode (24fps) */
         const s=Math.floor(t),f=Math.floor((t-s)*24);
         tc.textContent='00:'+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+':'+String(f).padStart(2,'0');
-        /* film-splice flash at the cut out of the hero */
-        if(splice){
-          const q=p>.955?Math.sin(Math.min(1,(p-.955)/.045)*Math.PI)*.85:0;
-          splice.style.opacity=q.toFixed(3);
-        }
         /* rail progress + sequence label */
         railFill.style.height=(p*100)+'%';
         let seq=1;
