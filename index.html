@@ -41,6 +41,7 @@
 <link rel="preload" href="fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="fonts/fonts.css"/>
 <script>/* theme pre-paint: apply saved light mode before first render (no flash) */
+document.documentElement.classList.add('js');
 (function(){try{if(localStorage.getItem('ftTheme')==='light')document.documentElement.classList.add('light');
 /* arriving via page transition? keep the wipe covering until reveal */
 if(sessionStorage.getItem('ftWipe')==='1')document.documentElement.classList.add('wipe-in');
@@ -498,6 +499,8 @@ body::after{content:'';position:fixed;inset:0;z-index:9993;pointer-events:none;o
 .s-head em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);letter-spacing:1px;text-transform:none;font-size:.95em}
 .sh-m{display:inline-block;overflow:hidden;vertical-align:bottom}
 .sh-c{display:inline-block;transform:translateY(120%);will-change:transform}
+/* hidden until SplitText/JS reveals (JS forces visible if it never runs) */
+.js .s-head{visibility:hidden}
 
 /* ── SERVICES PIN MODE (desktop, motion allowed) ── */
 @media(min-width:901px) and (prefers-reduced-motion:no-preference){
@@ -1456,8 +1459,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </footer>
 
 <!-- GSAP + ScrollTrigger + Lenis -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
 <script>
@@ -2177,29 +2181,38 @@ gsap.utils.toArray('.why-i').forEach((el,i)=>{
   });
 })();
 
-/* ── SPLIT HEADINGS — char reveal ────────────────────────────── */
+/* ── SPLIT HEADINGS — GSAP SplitText dramatic reveal ─────────── */
 (function(){
-  if(RM)return;
-  document.querySelectorAll('.s-head,.ft-giant a').forEach(head=>{
-    /* walk nodes, wrap each char in a masked span (keeps <br> and <em>) */
-    function splitNode(node){
-      if(node.nodeType===3){
-        const frag=document.createDocumentFragment();
-        node.textContent.split('').forEach(ch=>{
-          if(ch===' '){frag.appendChild(document.createTextNode(' '));return;}
-          const m=document.createElement('span');m.className='sh-m';
-          const c=document.createElement('span');c.className='sh-c';c.textContent=ch;
-          m.appendChild(c);frag.appendChild(m);
-        });
-        node.parentNode.replaceChild(frag,node);
-      } else if(node.nodeType===1&&node.tagName!=='BR'){
-        [...node.childNodes].forEach(splitNode);
-      }
-    }
-    [...head.childNodes].forEach(splitNode);
-    gsap.to(head.querySelectorAll('.sh-c'),{
-      y:0,duration:.9,stagger:.022,ease:'power3.out',
-      scrollTrigger:{trigger:head,start:'top 86%',once:true}
+  const heads=gsap.utils.toArray('.s-head');
+  const reveal=el=>gsap.set(el,{visibility:'visible'});
+  /* failsafe: never leave a heading hidden, whatever happens */
+  const failsafe=setTimeout(()=>heads.forEach(reveal),2600);
+
+  if(RM||typeof SplitText==='undefined'){
+    heads.forEach(h=>{reveal(h);if(!RM)gsap.from(h,{autoAlpha:0,y:30,duration:.8,ease:'power2.out',scrollTrigger:{trigger:h,start:'top 86%',once:true}});});
+    clearTimeout(failsafe);
+    return;
+  }
+  gsap.registerPlugin(SplitText);
+  document.fonts.ready.then(()=>{
+    clearTimeout(failsafe);
+    heads.forEach(head=>{
+      reveal(head);
+      const split=new SplitText(head,{type:'words,chars',mask:'words'});
+      gsap.from(split.chars,{
+        yPercent:118, opacity:0,
+        duration:.9, ease:'power4.out', stagger:{each:.018,from:'start'},
+        scrollTrigger:{trigger:head,start:'top 85%',once:true}
+      });
+    });
+    /* footer giant type: 3D flip-up per char */
+    document.querySelectorAll('.ft-giant a').forEach(el=>{
+      const s=new SplitText(el,{type:'chars'});
+      gsap.from(s.chars,{
+        yPercent:100, opacity:0, rotationX:-90, transformOrigin:'50% 100%',
+        duration:1, ease:'back.out(1.6)', stagger:.04,
+        scrollTrigger:{trigger:el,start:'top 92%',once:true}
+      });
     });
   });
 })();
